@@ -14,6 +14,10 @@ class Setting extends Model
      *
      * @var array
      */
+    public $incrementing = false;  // Menonaktifkan auto-incrementing
+
+    protected $primaryKey = null;  // Tidak ada primary key
+
     protected $fillable = ['key', 'value'];
 
     /**
