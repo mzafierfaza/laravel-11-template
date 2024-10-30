@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Produk",
+            "route_name": "produks.index",
+            "icon": "users",
+            "permission": "Produk",
+            "is_active_if_url_includes": "produks*"
+        }
+    ]
+}

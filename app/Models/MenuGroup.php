@@ -14,6 +14,8 @@ class MenuGroup extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     protected $fillable = [
         'group_name'
     ];

@@ -1,0 +1,18 @@
+Created migration file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/migrations/2024_10_30_171502_create_produk_table.php
+Created seeder file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/ProdukSeeder.php
+Created model file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Models/Produk.php
+Created controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/ProdukController.php
+Created api controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/Api/ProdukController.php
+Created repository file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Repositories/ProdukRepository.php
+Created request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/ProdukRequest.php
+Created api request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/Api/ProdukRequest.php
+Created export excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Exports/ProdukExport.php
+Created import excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Imports/ProdukImport.php
+Created view index file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/produks/index.blade.php
+Created view form file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/produks/form.blade.php
+Created view export pdf file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/produks/export-pdf.blade.php
+Created view export excel example file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/produks/export-excel-example.blade.php
+Created permission file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/permission-modules/produks.json
+Created routing file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/routes/modules/produk.php
+Created menu setting file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/menu-modules/produks.json
+Created 17 files

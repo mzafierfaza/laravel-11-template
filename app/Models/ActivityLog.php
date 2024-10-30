@@ -15,6 +15,8 @@ class ActivityLog extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     protected $fillable = [
         'title',
         'activity_type',

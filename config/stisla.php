@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'logo_kk' => "assets/images/logo_kk.png",
+    'logo_k' => "assets/images/logo_k.png",
     'menus' => [
         [
             'group_name' => 'Navigasi',
@@ -583,7 +585,7 @@ return [
     ],
 
     'settings' => [
-        ['key' => 'application_name', 'value' => 'Laravel 11 Template'],
+        ['key' => 'application_name', 'value' => 'Dashboard Internal LMS'],
         ['key' => 'application_version', 'value' => '1.0.0'],
         ['key' => 'app_description', 'value' => 'Deskripsi sistem tulis disini'],
         ['key' => 'city', 'value' => 'Jember'],

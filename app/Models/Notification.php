@@ -14,6 +14,8 @@ class Notification extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     protected $fillable = [
         'title',
         'content',

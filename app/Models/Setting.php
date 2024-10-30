@@ -14,6 +14,8 @@ class Setting extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     public $incrementing = false;  // Menonaktifkan auto-incrementing
 
     protected $primaryKey = null;  // Tidak ada primary key

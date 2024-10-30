@@ -15,6 +15,8 @@ class Menu extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     protected $fillable = [
         'menu_name',
         'route_name',

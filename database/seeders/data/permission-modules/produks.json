@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Produk",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    },
+    {
+        "name": "Produk Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    },
+    {
+        "name": "Produk Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    },
+    {
+        "name": "Produk Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    },
+    {
+        "name": "Produk Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    },
+    {
+        "name": "Produk Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Produk"
+    }
+]

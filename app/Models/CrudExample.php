@@ -14,6 +14,8 @@ class CrudExample extends Model
      *
      * @var array
      */
+    protected $connection = 'dashin';
+
     protected $fillable = [
         'text',
         'email',
