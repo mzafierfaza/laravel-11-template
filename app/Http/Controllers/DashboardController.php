@@ -44,110 +44,109 @@ class DashboardController extends StislaController
 
         if ($user->can('Contoh CRUD'))
             $widgets[] = (object)[
-                'title' => 'Contoh CRUD',
+                'title' => 'Storage',
                 'count' => CrudExample::count(),
                 'bg'    => 'primary',
-                'icon'  => 'atom',
                 'route' => route('crud-examples.index'),
             ];
         if ($user->can('Pengguna'))
             $widgets[] = (object)[
-                'title' => 'Pengguna',
+                'title' => 'Total Peserta',
                 'count' => User::count(),
                 'bg'    => 'danger',
-                'icon'  => 'users',
+                'icon'  => config('stisla.icon_total_peserta'),
                 'route' => route('user-management.users.index'),
             ];
         if ($user->can('Role'))
             $widgets[] = (object)[
-                'title' => 'Role',
+                'title' => 'Total Training',
                 'count' => Role::count(),
                 'bg'    => 'success',
-                'icon'  => 'lock',
+                'icon' => config('stisla.icon_total_training'),
                 'route' => route('user-management.roles.index')
             ];
         if ($user->can('Permission'))
             $widgets[] = (object)[
-                'title' => 'Permission',
+                'title' => 'Total Pengajar ',
                 'count' => Permission::count(),
                 'bg'    => 'info',
-                'icon'  => 'key',
+                'icon' => config('stisla.icon_total_pengajar'),
                 'route' => route('user-management.permissions.index')
             ];
-        if ($user->can('Group Permission'))
-            $widgets[] = (object)[
-                'title' => 'Group Permission',
-                'count' => PermissionGroup::count(),
-                'bg'    => 'info',
-                'icon'  => 'key',
-                'route' => route('user-management.permission-groups.index'),
-                'bg_color' => 'brown'
-            ];
-        if ($user->can('Menu'))
-            $widgets[] = (object)[
-                'title' => 'Menu',
-                'count' => Menu::count(),
-                'bg'    => 'primary',
-                'icon'  => 'bars',
-                'route' => route('menu-managements.index'),
-                'bg_color' => 'pink'
-            ];
-        if ($user->can('Grup Menu'))
-            $widgets[] = (object)[
-                'title' => 'Grup Menu',
-                'count' => MenuGroup::count(),
-                'bg'    => 'danger',
-                'icon'  => 'bars',
-                'route' => route('menu-managements.index'),
-                'bg_color' => 'orange'
-            ];
-        if ($user->can('Notifikasi')) {
-            $widgets[] = (object)[
-                'title' => 'Notifikasi',
-                'count' => Notification::where('user_id', $user->id)->count(),
-                'bg'    => 'info',
-                'icon'  => 'bell',
-                'route' => route('notifications.index'),
-                'bg_color' => 'navy'
-            ];
-        }
-        if ($user->can('Log Aktivitas'))
-            $widgets[] = (object)[
-                'title' => 'Log Aktivitas',
-                'count' => ActivityLog::count(),
-                'bg'    => 'success',
-                'icon'  => 'clock-rotate-left',
-                'route' => route('activity-logs.index'),
-                'bg_color' => 'black'
-            ];
-        if ($user->can('Log Request'))
-            $widgets[] = (object)[
-                'title' => 'Log Request',
-                'count' => LogRequest::count(),
-                'bg'    => 'success',
-                'icon'  => 'clock-rotate-left',
-                'route' => route('request-logs.index'),
-                'bg_color' => '#C88A65',
-            ];
-        if ($user->can('Pengaturan'))
-            $widgets[] = (object)[
-                'title' => 'Pengaturan',
-                'count' => '6',
-                'bg'    => 'success',
-                'icon'  => 'cogs',
-                'route' => route('settings.all'),
-                'bg_color' => '#E9D66B',
-            ];
-        if ($user->can('Backup Database')) {
-            $widgets[] = (object)[
-                'title' => 'Backup Database',
-                'count' => count((new DatabaseService)->getAllBackupMysql()),
-                'bg'    => 'primary',
-                'icon'  => 'database',
-                'route' => route('backup-databases.index'),
-                'bg_color' => 'purple',
-            ];
-        }
+        // if ($user->can('Group Permission'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Group Permission',
+        //         'count' => PermissionGroup::count(),
+        //         'bg'    => 'info',
+        //         'icon'  => 'key',
+        //         'route' => route('user-management.permission-groups.index'),
+        //         'bg_color' => 'brown'
+        //     ];
+        // if ($user->can('Menu'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Menu',
+        //         'count' => Menu::count(),
+        //         'bg'    => 'primary',
+        //         'icon'  => 'bars',
+        //         'route' => route('menu-managements.index'),
+        //         'bg_color' => 'pink'
+        //     ];
+        // if ($user->can('Grup Menu'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Grup Menu',
+        //         'count' => MenuGroup::count(),
+        //         'bg'    => 'danger',
+        //         'icon'  => 'bars',
+        //         'route' => route('menu-managements.index'),
+        //         'bg_color' => 'orange'
+        //     ];
+        // if ($user->can('Notifikasi')) {
+        //     $widgets[] = (object)[
+        //         'title' => 'Notifikasi',
+        //         'count' => Notification::where('user_id', $user->id)->count(),
+        //         'bg'    => 'info',
+        //         'icon'  => 'bell',
+        //         'route' => route('notifications.index'),
+        //         'bg_color' => 'navy'
+        //     ];
+        // }
+        // if ($user->can('Log Aktivitas'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Log Aktivitas',
+        //         'count' => ActivityLog::count(),
+        //         'bg'    => 'success',
+        //         'icon'  => 'clock-rotate-left',
+        //         'route' => route('activity-logs.index'),
+        //         'bg_color' => 'black'
+        //     ];
+        // if ($user->can('Log Request'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Log Request',
+        //         'count' => LogRequest::count(),
+        //         'bg'    => 'success',
+        //         'icon'  => 'clock-rotate-left',
+        //         'route' => route('request-logs.index'),
+        //         'bg_color' => '#C88A65',
+        //     ];
+        // if ($user->can('Pengaturan'))
+        //     $widgets[] = (object)[
+        //         'title' => 'Pengaturan',
+        //         'count' => '6',
+        //         'bg'    => 'success',
+        //         'icon'  => 'cogs',
+        //         'route' => route('settings.all'),
+        //         'bg_color' => '#E9D66B',
+        //     ];
+        // if ($user->can('Backup Database')) {
+        //     $widgets[] = (object)[
+        //         'title' => 'Backup Database',
+        //         'count' => count((new DatabaseService)->getAllBackupMysql()),
+        //         'bg'    => 'primary',
+        //         'icon'  => 'database',
+        //         'route' => route('backup-databases.index'),
+        //         'bg_color' => 'purple',
+        //     ];
+        // }
 
         $logs = $this->activityLogRepository->getMineLatest();
 

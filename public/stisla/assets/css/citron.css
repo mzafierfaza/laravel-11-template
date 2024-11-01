@@ -197,6 +197,7 @@ h4,
 h5,
 h6 {
   font-weight: 700;
+  color: #004465;
 }
 
 p,
@@ -2324,8 +2325,8 @@ h6 .badge {
   top: 0;
   left: 0;
   width: 100%;
-  height: 115px;
-  background-color: #9FA91F;
+  height: 80px;
+  background-color: transparent;
   z-index: -1;
 }
 
@@ -2475,12 +2476,14 @@ h6 .badge {
 
 .navbar .nav-link.nav-link-lg div {
   margin-top: 3px;
+  color: #004465;
 }
 
 .navbar .nav-link.nav-link-lg i {
   margin-left: 0 !important;
   font-size: 18px;
   line-height: 32px;
+  color: #004465;
 }
 
 .navbar .nav-link.nav-link-user {
@@ -3450,10 +3453,10 @@ pre {
 }
 
 .section .section-header {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-  background-color: #fff;
-  border-radius: 3px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); */
+  background-color: transparent;
+  border-radius: 13px;
   border: none;
   position: relative;
   margin-bottom: 30px;
@@ -3468,7 +3471,7 @@ pre {
   display: inline-block;
   font-size: 24px;
   margin-top: 3px;
-  color: #34395e;
+  color: #004465;
 }
 
 .section .section-header .section-header-back {
@@ -3921,6 +3924,7 @@ body.layout-3 .navbar.navbar-secondary .navbar-nav>.nav-item>.nav-link {
   margin-left: 15px;
   margin-right: 15px;
   position: relative;
+  background-color: #004465;
 }
 
 body.layout-3 .navbar.navbar-secondary .navbar-nav>.nav-item>.nav-link.has-dropdown {
@@ -4004,7 +4008,7 @@ body.layout-3 .navbar.navbar-secondary .navbar-nav>.nav-item .dropdown-menu .nav
 body.layout-3 .navbar.navbar-secondary .navbar-nav>.nav-item .dropdown-menu .nav-item.active>.nav-link,
 body.layout-3 .navbar.navbar-secondary .navbar-nav>.nav-item .dropdown-menu .nav-item .nav-link:focus {
   background-color: #9FA91F;
-  color: #fff;
+  color: #004465;
 }
 
 body.layout-3 .main-content {

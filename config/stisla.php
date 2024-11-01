@@ -3,6 +3,9 @@
 return [
     'logo_kk' => "assets/images/logo_kk.png",
     'logo_k' => "assets/images/logo_k.png",
+    'icon_total_pengajar' => "assets/icons/icon_total_pengajar.png",
+    'icon_total_peserta' => "assets/icons/icon_total_peserta.png",
+    'icon_total_training' => "assets/icons/icon_total_training.png",
     'menus' => [
         [
             'group_name' => 'Navigasi',

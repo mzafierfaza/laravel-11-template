@@ -11,7 +11,7 @@
     </div>
 
     <div class="sidebar-brand sidebar-brand-sm">
-      <img style="max-width: 50%;" src="{{ asset(config('stisla.logo_k')) }}"></a>
+      <img style="max-width: 60%;" src="{{ asset(config('stisla.logo_k')) }}"></a>
     </div>
 
     <ul class="sidebar-menu">
