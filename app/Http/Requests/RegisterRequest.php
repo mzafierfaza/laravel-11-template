@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
         if (Route::is('api.register')) {
             return [
                 'name'                  => 'required',
-                'email'                 => 'required|email|unique:users,email',
+                'email'                 => 'required|email|unique:dashin_users,email',
                 'password'              => 'required|min:4|confirmed',
                 'password_confirmation' => 'required|min:4',
                 'phone_number'          => 'nullable|numeric',
@@ -39,7 +39,7 @@ class RegisterRequest extends FormRequest
 
         return [
             'name'                  => 'required',
-            'email'                 => 'required|email|unique:users,email',
+            'email'                 => 'required|email|unique:dashin_users,email',
             'password'              => 'required|min:4|confirmed',
             'password_confirmation' => 'required|min:4',
             'g-recaptcha-response'  => $isGoogleCaptcha ? 'required|captcha' : 'nullable',

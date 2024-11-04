@@ -15,7 +15,7 @@ class RequestLog extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
 
     protected $fillable = [
         'uri',
@@ -37,7 +37,7 @@ class RequestLog extends Model
      *
      * @var string
      */
-    protected $table = 'log_requests';
+    protected $table = 'dashin_log_requests';
 
     /**
      * The attributes that should be cast to native types.

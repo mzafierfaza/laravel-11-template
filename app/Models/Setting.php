@@ -14,7 +14,8 @@ class Setting extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
+    protected $table = 'dashin_settings';
 
     public $incrementing = false;  // Menonaktifkan auto-incrementing
 

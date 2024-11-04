@@ -26,7 +26,9 @@ class MenuRepository extends Repository
      */
     public function getMenus()
     {
-        return MenuGroup::query()->with(['menus'])->get();
+        return MenuGroup::query()->with(['menus' => function ($query) {
+            $query->orderBy('sort_order', 'asc');
+        }])->orderBy('id', 'asc')->get();
     }
 
     /**

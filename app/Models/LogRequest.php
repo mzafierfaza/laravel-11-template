@@ -14,7 +14,8 @@ class LogRequest extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
+    protected $table = 'dashin_log_requests';
 
     protected $fillable = [
         'uri',

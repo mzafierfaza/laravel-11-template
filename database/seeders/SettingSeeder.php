@@ -19,7 +19,7 @@ class SettingSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-        DB::table('settings')->truncate();
+        DB::table('dashin_settings')->truncate();
         $settings = config('stisla.settings');
         // $settings = config('stisla.settings2');
 

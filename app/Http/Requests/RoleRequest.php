@@ -25,10 +25,10 @@ class RoleRequest extends FormRequest
     {
         if ($this->isMethod('put'))
             return [
-                'name' => 'required|unique:roles,name,' . $this->id . ',id'
+                'name' => 'required|unique:dashin_roles,name,' . $this->id . ',id'
             ];
         return [
-            'name' => 'required|unique:roles,name'
+            'name' => 'required|unique:dashin_roles,name'
         ];
     }
 }

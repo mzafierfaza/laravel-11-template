@@ -68,6 +68,7 @@
           @if ($_sub_menu_condition)
           <li @if (Request::is($_child_menu->is_active_if_url_includes)) class="active" @endif>
             <a class="nav-link" href="{{ $_child_menu->fix_url }}" @if ($_child_menu->is_blank) target="_blank" @endif>
+              <i class="{{ $_child_menu->icon }}"></i>
               {{ __($_child_menu->menu_name) }}
             </a>
           </li>

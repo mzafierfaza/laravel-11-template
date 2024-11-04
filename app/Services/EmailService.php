@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Mail\ConfirmPasswordMail;
 use App\Mail\ForgotPasswordMail;
 use App\Mail\TestingMail;
 use App\Mail\VerificationAccountMail;
@@ -18,9 +19,7 @@ class EmailService
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * prepare config
@@ -98,6 +97,14 @@ class EmailService
     {
         $this->prepare();
         Mail::to($to)->queue($mailable);
+    }
+
+    public function sendConfirmPassword(string $to, string $url)
+    {
+        $mail = new ConfirmPasswordMail($url);
+        $this->prepare();
+        $tes = Mail::to($to)->send($mail);
+        dd($tes);
     }
 
     /**

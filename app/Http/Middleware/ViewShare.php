@@ -75,6 +75,8 @@ class ViewShare
 
             view()->share('_my_notifications', (new \App\Repositories\NotificationRepository)->myUnReadNotif(20));
         }
+
+        // dd($request->all());)
         return $next($request);
     }
 }

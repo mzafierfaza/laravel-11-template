@@ -13,9 +13,9 @@ class ChangePermissionGroupTable extends Migration
      */
     public function up()
     {
-        Schema::table('permissions', function (Blueprint $table) {
+        Schema::table('dashin_permissions', function (Blueprint $table) {
             $table->unsignedTinyInteger('permission_group_id')->nullable();
-            $table->foreign('permission_group_id')->references('id')->on('permission_groups')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('permission_group_id')->references('id')->on('dashin_permission_groups')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,7 +26,7 @@ class ChangePermissionGroupTable extends Migration
      */
     public function down()
     {
-        Schema::table('permissions', function (Blueprint $table) {
+        Schema::table('dashin_permissions', function (Blueprint $table) {
             $table->dropForeign(['permission_group_id']);
             $table->dropColumn(['permission_group_id']);
         });

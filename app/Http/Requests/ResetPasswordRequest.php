@@ -29,9 +29,9 @@ class ResetPasswordRequest extends FormRequest
             return [
                 'new_password'              => 'required|min:6|confirmed',
                 'new_password_confirmation' => 'required|min:6',
-                "email"                     => 'required|exists:users,email',
-                "verification_code"         => 'required|exists:users,verification_code',
-                "verification_token"        => 'required|exists:users,email_token',
+                "email"                     => 'required|exists:dashin_users,email',
+                "verification_code"         => 'required|exists:dashin_users,verification_code',
+                "verification_token"        => 'required|exists:dashin_users,email_token',
             ];
         }
 

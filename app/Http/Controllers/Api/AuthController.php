@@ -75,6 +75,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        // dd($request->all());
         $user = $this->userRepository->findByEmail($request->email);
         if (Hash::check($request->password, $user->password)) {
             $loginMustVerified = $this->settingRepository->loginMustVerified();
@@ -102,7 +103,8 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ], $request->only(
             [
-                'name', 'email'
+                'name',
+                'email'
             ]
         ));
         $user = $this->userRepository->create($data);
@@ -154,6 +156,7 @@ class AuthController extends Controller
      */
     public function verify(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'email'             => 'required|email|exists:users,email',
             'verification_code' => 'required|min:6|max:6|exists:users,verification_code'

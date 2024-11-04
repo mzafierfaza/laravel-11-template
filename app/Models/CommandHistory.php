@@ -14,7 +14,7 @@ class CommandHistory extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
 
     protected $fillable = [
         'command',

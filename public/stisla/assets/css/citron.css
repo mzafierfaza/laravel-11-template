@@ -4167,7 +4167,7 @@ body.layout-3 .main-footer {
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
   color: #fff;
   height: 35px;
-  padding-left: 65px;
+  /* padding-left: 65px; */
   font-weight: 400;
   background-color: #004465;
 }
@@ -4178,7 +4178,7 @@ body.layout-3 .main-footer {
 }
 
 .main-sidebar .sidebar-menu li ul.dropdown-menu li.active>a {
-  color: #9FA91F;
+  color: #B1FE35;
   font-weight: 600;
 }
 

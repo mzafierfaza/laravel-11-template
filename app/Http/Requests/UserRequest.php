@@ -31,7 +31,9 @@ class UserRequest extends FormRequest
                 $user = (new UserRepository)->find($this->user->id ?? $this->user);
                 return [
                     'current_password'          => [
-                        'required', 'min:6', function ($attribute, $value, $fail) use ($user) {
+                        'required',
+                        'min:6',
+                        function ($attribute, $value, $fail) use ($user) {
                             if (!Hash::check($value, $user->password)) {
                                 $fail('Kata sandi yang dimasukkan salah.');
                             }
@@ -45,21 +47,21 @@ class UserRequest extends FormRequest
                 $user = (new UserRepository)->find($this->user->id ?? $this->user);
                 return [
                     'name'  => 'required',
-                    'email' => 'required|email|unique:users,email,' . ($user->id ?? null) . ',id',
+                    'email' => 'required|email|unique:dashin_users,email,' . ($user->id ?? null) . ',id',
                     'role'  => 'required',
                 ];
             }
             $user = (new UserRepository)->findByEmail($this->email);
             return [
                 'name'  => 'required',
-                'email' => 'required|email|unique:users,email,' . ($user->id ?? null) . ',id',
+                'email' => 'required|email|unique:dashin_users,email,' . ($user->id ?? null) . ',id',
                 'role'  => 'required'
             ];
         }
         if (Route::is('api.users.store')) {
             return [
                 'name'                  => 'required',
-                'email'                 => 'required|unique:users,email',
+                'email'                 => 'required|unique:dashin_users,email',
                 'role'                  => 'required',
                 'password'              => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
@@ -67,7 +69,7 @@ class UserRequest extends FormRequest
         }
         return [
             'name'  => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|unique:dashin_users,email',
             'role'  => 'required'
         ];
     }

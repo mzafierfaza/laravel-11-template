@@ -14,9 +14,9 @@ class Region extends Model
      *
      * @var string
      */
-    protected $connection = 'dashin';
 
-    protected $table = 'regions';
+
+    protected $table = 'dashin_regions';
 
     /**
      * The attributes that are mass assignable.

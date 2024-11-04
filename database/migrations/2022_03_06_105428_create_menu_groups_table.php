@@ -13,7 +13,7 @@ class CreateMenuGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_groups', function (Blueprint $table) {
+        Schema::create('dashin_menu_groups', function (Blueprint $table) {
             $table->id();
             $table->string('group_name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateMenuGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_groups');
+        Schema::dropIfExists('dashin_menu_groups');
     }
 }

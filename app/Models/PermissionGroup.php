@@ -15,7 +15,8 @@ class PermissionGroup extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
+    protected $table = 'dashin_permission_groups';
 
     protected $fillable = [
         'group_name',

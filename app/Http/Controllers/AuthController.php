@@ -80,7 +80,11 @@ class AuthController extends StislaController
             DB::beginTransaction();
             $data = $request->only(
                 [
-                    'name', 'email', 'phone_number', 'birth_date', 'address',
+                    'name',
+                    'email',
+                    'phone_number',
+                    'birth_date',
+                    'address',
                 ]
             );
             $data = array_merge([
@@ -138,6 +142,8 @@ class AuthController extends StislaController
      */
     public function login(LoginRequest $request)
     {
+        // dd($request);
+        // print($request->all());
         $user = $this->userRepository->findByEmail($request->email);
         if (Hash::check($request->password, $user->password)) {
             $loginMustVerified = $this->settingRepository->loginMustVerified();

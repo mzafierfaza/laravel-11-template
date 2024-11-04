@@ -26,7 +26,7 @@ class ForgotPasswordRequest extends FormRequest
     {
         $isGoogleCaptcha = SettingRepository::isGoogleCaptchaForgotPassword();
         return [
-            'email'                => 'required|email|exists:users',
+            'email'                => 'required|email|exists:dashin_users',
             'g-recaptcha-response' => $isGoogleCaptcha ? 'required|captcha' : 'nullable'
         ];
     }

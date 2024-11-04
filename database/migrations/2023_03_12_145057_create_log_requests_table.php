@@ -13,7 +13,7 @@ class CreateLogRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('log_requests', function (Blueprint $table) {
+        Schema::create('dashin_log_requests', function (Blueprint $table) {
             $table->id();
             $table->longText('uri');
             $table->longText('query_string')->nullable();
@@ -22,7 +22,7 @@ class CreateLogRequestsTable extends Migration
             $table->string('ip');
             $table->text('user_agent');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('dashin_users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('roles')->comment('history roles')->nullable();
             $table->string('browser')->nullable();
             $table->string('platform')->nullable();
@@ -39,6 +39,6 @@ class CreateLogRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_requests');
+        Schema::dropIfExists('dashin_log_requests');
     }
 }

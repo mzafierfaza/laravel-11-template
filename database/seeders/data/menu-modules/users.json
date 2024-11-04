@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Users",
+            "route_name": "users.index",
+            "icon": "users",
+            "permission": "Users",
+            "is_active_if_url_includes": "users*"
+        }
+    ]
+}

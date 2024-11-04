@@ -13,7 +13,7 @@ class CreateActivityLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('activity_logs', function (Blueprint $table) {
+        Schema::create('dashin_activity_logs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('activity_type');
@@ -23,7 +23,7 @@ class CreateActivityLogsTable extends Migration
             $table->string('ip');
             $table->text('user_agent');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('dashin_users')->onUpdate('cascade')->onDelete('cascade');
             // $table->unsignedBigInteger('role_id');
             // $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->string('roles')->comment('history roles')->default('[]');
@@ -41,6 +41,6 @@ class CreateActivityLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activity_logs');
+        Schema::dropIfExists('dashin_activity_logs');
     }
 }

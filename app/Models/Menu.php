@@ -15,7 +15,9 @@ class Menu extends Model
      *
      * @var array
      */
-    protected $connection = 'dashin';
+
+    protected $table = 'dashin_menu';
+
 
     protected $fillable = [
         'menu_name',
@@ -23,6 +25,7 @@ class Menu extends Model
         'icon',
         'parent_menu_id',
         'permission',
+        'sort_order',
         'is_active_if_url_includes',
         'is_blank',
         'uri',

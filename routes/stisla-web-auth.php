@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\BackupDatabaseController;
 use App\Http\Controllers\CrudExampleController;
 use App\Http\Controllers\DashboardController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ProdukController as ControllersProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestLogController;
 use App\Http\Controllers\RoleController;
@@ -18,6 +20,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\UbuntuController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Middleware\FileManagerPermission;
 use Illuminate\Support\Facades\Route;
@@ -44,8 +47,6 @@ Route::view('chart-js', 'stisla.examples.chart-js.index')->name('chart-js.index'
 Route::view('pricing', 'stisla.examples.pricing.index')->name('pricing.index');
 Route::view('invoice', 'stisla.examples.invoice.index')->name('invoice.index');
 
-# PENDUDUK
-Route::resource('persons', PersonController::class);
 
 # USER MANAGEMENT
 Route::prefix('user-management')->as('user-management.')->group(function () {
@@ -180,3 +181,21 @@ Route::get('testing/modal', [TestingController::class, 'modal']);
 Route::get('dropboxs', [DropboxController::class, 'index'])->name('dropboxs.index');
 Route::post('dropboxs', [DropboxController::class, 'upload'])->name('dropboxs.upload');
 Route::delete('dropboxs', [DropboxController::class, 'destroy'])->name('dropboxs.destroy');
+
+Route::resource('produks', ControllersProdukController::class);
+Route::get('produks/print', [ControllersProdukController::class, 'exportPrint'])->name('produks.print');
+Route::get('produks/pdf', [ControllersProdukController::class, 'pdf'])->name('produks.pdf');
+Route::get('produks/csv', [ControllersProdukController::class, 'csv'])->name('produks.csv');
+Route::get('produks/json', [ControllersProdukController::class, 'json'])->name('produks.json');
+Route::get('produks/excel', [ControllersProdukController::class, 'excel'])->name('produks.excel');
+Route::get('produks/import-excel-example', [ControllersProdukController::class, 'importExcelExample'])->name('produks.import-excel-example');
+Route::post('produks/import-excel', [ControllersProdukController::class, 'importExcel'])->name('produks.import-excel');
+
+Route::get('users/print', [UsersController::class, 'exportPrint'])->name('users.print');
+Route::get('users/pdf', [UsersController::class, 'pdf'])->name('users.pdf');
+Route::get('users/csv', [UsersController::class, 'csv'])->name('users.csv');
+Route::get('users/json', [UsersController::class, 'json'])->name('users.json');
+Route::get('users/excel', [UsersController::class, 'excel'])->name('users.excel');
+Route::get('users/import-excel-example', [UsersController::class, 'importExcelExample'])->name('users.import-excel-example');
+Route::post('users/import-excel', [UsersController::class, 'importExcel'])->name('users.import-excel');
+Route::resource('users', UsersController::class);

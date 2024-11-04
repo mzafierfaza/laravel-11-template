@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DASHIN_DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -31,35 +31,21 @@ return [
 
     'connections' => [
 
-        'dashin' => [
+        'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DASHIN_DB_URL'),
-            'host' => env('DASHIN_DB_HOST', '127.0.0.1'),
-            'port' => env('DASHIN_DB_PORT', '5432'),
-            'database' => env('DASHIN_DB_DATABASE', 'laravel'),
-            'username' => env('DASHIN_DB_USERNAME', 'root'),
-            'password' => env('DASHIN_DB_PASSWORD', ''),
-            'charset' => env('DASHIN_DB_CHARSET', 'utf8'),
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
 
-        'core' => [
-            'driver' => 'pgsql',
-            'url' => env('CORE_DB_URL'),
-            'host' => env('CORE_DB_HOST', '127.0.0.1'),
-            'port' => env('CORE_DB_PORT', '5432'),
-            'database' => env('CORE_DB_DATABASE', 'laravel'),
-            'username' => env('CORE_DB_USERNAME', 'root'),
-            'password' => env('CORE_DB_PASSWORD', ''),
-            'charset' => env('CORE_DB_CHARSET', 'utf8'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
 
     ],
 

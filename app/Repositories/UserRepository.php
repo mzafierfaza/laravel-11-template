@@ -53,6 +53,7 @@ class UserRepository extends Repository
      */
     public function findByEmail(string $email)
     {
+        // dd($email);
         return $this->model->where('email', $email)->first();
     }
 

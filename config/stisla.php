@@ -8,15 +8,49 @@ return [
     'icon_total_training' => "assets/icons/icon_total_training.png",
     'menus' => [
         [
-            'group_name' => 'Navigasi',
+            'group_name' => 'Menu Utama',
             'menus' => [
                 [
-                    'menu_name' => 'Beranda',
+                    'menu_name' => 'Dashboard',
                     'route_name' => 'dashboard.index',
                     'icon' => 'fas fa-fire',
                     'permission' => null,
                     'is_active_if_url_includes' => 'dashboard*'
                 ],
+                [
+                    'menu_name' => 'Monitoring',
+                    'route_name' => 'dashboard.index',
+                    'icon' => 'fas fa-signal',
+                    'permission' => null,
+                    'is_active_if_url_includes' => 'dashboard*'
+                ],
+                [
+                    'menu_name' => 'Peserta',
+                    'route_name' => 'dashboard.index',
+                    'icon' => 'fas fa-users',
+                    'permission' => null,
+                    'is_active_if_url_includes' => 'dashboard*'
+                ],
+                [
+                    'menu_name' => 'Pengajar',
+                    'route_name' => 'dashboard.index',
+                    'icon' => 'fas fa-user-tie',
+                    'permission' => null,
+                    'is_active_if_url_includes' => 'dashboard*'
+                ],
+                [
+                    'menu_name' => 'Training',
+                    'route_name' => 'dashboard.index',
+                    'icon' => 'fas fa-fire',
+                    'permission' => null,
+                    'is_active_if_url_includes' => 'dashboard*'
+                ],
+            ]
+        ],
+        [
+            'group_name' => 'Menu Lainnya',
+            'menus' => [
+
                 [
                     'menu_name' => 'Contoh CRUD',
                     'route_name' => 'crud-examples.index',
@@ -98,13 +132,7 @@ return [
                             'is_mockup' => true
                         ]
                     ]
-                ]
-            ]
-        ],
-
-        [
-            'group_name' => 'Menu Lainnya',
-            'menus' => [
+                ],
                 [
                     'menu_name' => 'Manajemen Pengguna',
                     'route_name' => null,

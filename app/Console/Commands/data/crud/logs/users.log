@@ -1,0 +1,18 @@
+Created migration file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/migrations/0001_01_01_000000_create_users_table.php
+Created seeder file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/UsersSeeder.php
+Created model file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Models/Users.php
+Created controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/UsersController.php
+Created api controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/Api/UsersController.php
+Created repository file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Repositories/UsersRepository.php
+Created request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/UsersRequest.php
+Created api request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/Api/UsersRequest.php
+Created export excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Exports/UsersExport.php
+Created import excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Imports/UsersImport.php
+Created view index file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/users/index.blade.php
+Created view form file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/users/form.blade.php
+Created view export pdf file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/users/export-pdf.blade.php
+Created view export excel example file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/users/export-excel-example.blade.php
+Created permission file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/permission-modules/users.json
+Created routing file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/routes/modules/user.php
+Created menu setting file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/menu-modules/users.json
+Created 17 files

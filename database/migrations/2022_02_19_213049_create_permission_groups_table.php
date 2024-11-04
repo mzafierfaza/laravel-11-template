@@ -13,7 +13,7 @@ class CreatePermissionGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_groups', function (Blueprint $table) {
+        Schema::create('dashin_permission_groups', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('group_name')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePermissionGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_groups');
+        Schema::dropIfExists('dashin_permission_groups');
     }
 }

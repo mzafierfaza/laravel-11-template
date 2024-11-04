@@ -13,7 +13,7 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('dashin_menu', function (Blueprint $table) {
             $table->id();
             $table->string('menu_name');
             $table->string('route_name')->nullable();
@@ -21,11 +21,12 @@ class CreateMenusTable extends Migration
             $table->boolean('is_blank')->default(false);
             $table->string('icon')->nullable();
             $table->string('permission')->nullable();
+            $table->integer('sort_order')->default(0);
             $table->text('is_active_if_url_includes')->nullable();
             $table->unsignedBigInteger('parent_menu_id')->nullable();
-            $table->foreign('parent_menu_id')->on('menus')->references('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('parent_menu_id')->on('dashin_menu')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('menu_group_id')->nullable();
-            $table->foreign('menu_group_id')->on('menu_groups')->references('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('menu_group_id')->on('dashin_menu_groups')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -37,6 +38,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('dashin_menu');
     }
 }

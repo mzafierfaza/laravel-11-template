@@ -20,8 +20,14 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $connection = 'dashin';
 
+    protected $table = 'dashin_users';
+
+
+    public function __construct()
+    {
+        // dd($this->getTable() . '::' . __FUNCTION__);
+    }
     protected $fillable = [
         'name',
         'email',
