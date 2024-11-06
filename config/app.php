@@ -65,6 +65,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'url_lms' => env('APP_URL_LMS', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------

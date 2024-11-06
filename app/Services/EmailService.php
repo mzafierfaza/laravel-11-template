@@ -104,7 +104,7 @@ class EmailService
         $mail = new ConfirmPasswordMail($url);
         $this->prepare();
         $tes = Mail::to($to)->send($mail);
-        dd($tes);
+        // dd($tes);
     }
 
     /**

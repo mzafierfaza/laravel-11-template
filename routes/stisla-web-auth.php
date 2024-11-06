@@ -198,4 +198,9 @@ Route::get('users/json', [UsersController::class, 'json'])->name('users.json');
 Route::get('users/excel', [UsersController::class, 'excel'])->name('users.excel');
 Route::get('users/import-excel-example', [UsersController::class, 'importExcelExample'])->name('users.import-excel-example');
 Route::post('users/import-excel', [UsersController::class, 'importExcel'])->name('users.import-excel');
-Route::resource('users', UsersController::class);
+
+// Route::get('users/:id/edit', [UsersController::class, 'edit'])->name('users.edit');
+Route::resource('users', UsersController::class)->parameters([
+    'users' => 'users'
+]);
+Route::get('users/{users}/resend-activation', [UsersController::class, 'sendActivation'])->name('users.resendActivation');

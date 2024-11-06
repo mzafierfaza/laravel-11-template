@@ -25,31 +25,30 @@ class UsersRequest extends FormRequest
     {
         if ($this->isMethod('put')) {
             return [
-				'firstname' => ["required"],
-				'lastname' => [],
-				'email' => ["required","email"],
-				'gender' => [],
-				'ktp' => [],
-				'npwp' => [],
-				'picture' => [],
-				'date_of_birth' => ["date"],
-				'region' => [],
-				'phone' => ["required"],
+                'first_name' => ["required"],
+                'last_name' => [],
+                'email' => ["required", "email"],
+                'gender' => [],
+                'ktp' => [],
+                'npwp' => [],
+                'picture' => [],
+                'date_of_birth' => ["date"],
+                'region' => [],
+                'phone' => ["required"],
 
             ];
         }
         return [
-			'firstname' => ["required"],
-			'lastname' => [],
-			'email' => ["required","email"],
-			'gender' => [],
-			'ktp' => [],
-			'npwp' => [],
-			'picture' => [],
-			'date_of_birth' => ["date"],
-			'region' => [],
-			'phone' => ["required"],
-
+            'first_name' => ["required"],
+            'last_name' => [],
+            'email' => ["required", "email"],
+            'gender' => [],
+            'ktp' => [],
+            'npwp' => [],
+            'picture' => [],
+            'date_of_birth' => ["date"],
+            'region' => [],
+            'phone' => ["required"],
         ];
     }
 }

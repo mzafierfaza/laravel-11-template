@@ -22,6 +22,7 @@ class Users extends Model
    * @var array
    */
   protected $fillable = [
+    'id',
     'first_name',
     'last_name',
     'email',
@@ -34,6 +35,7 @@ class Users extends Model
     'religion',
     'nik',
     'phone',
+    'verification_password_at',
   ];
 
   /**

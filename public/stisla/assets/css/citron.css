@@ -1803,10 +1803,10 @@ h6 .badge {
 
 .btn-secondary,
 .btn-secondary.disabled {
-  box-shadow: 0 2px 6px #e1e5e8;
-  background-color: #cdd3d8;
-  border-color: #cdd3d8;
-  color: #fff;
+  box-shadow: 0 2px 6px #67a208;
+  background-color: #B1FE35;
+  border-color: #B1FE35;
+  color: #171717;
 }
 
 .btn-secondary:hover,
@@ -2001,19 +2001,19 @@ h6 .badge {
 
 .btn-primary,
 .btn-primary.disabled {
-  box-shadow: 0 2px 6px #cfdb3a;
-  background-color: #9FA91F;
-  border-color: #9FA91F;
+  box-shadow: 0 2px 6px #042e43;
+  background-color: #004465;
+  border-color: #042e43;
 }
 
 .btn-primary:focus,
 .btn-primary.disabled:focus {
-  background-color: #767e17 !important;
+  background-color: #B1FE35 !important;
 }
 
 .btn-primary:focus:active,
 .btn-primary.disabled:focus:active {
-  background-color: #767e17 !important;
+  background-color: #B1FE35 !important;
 }
 
 .btn-primary:active,

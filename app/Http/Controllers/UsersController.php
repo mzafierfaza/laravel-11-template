@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UsersExport;
+use App\Helpers\Helper;
+use App\Helpers\StringHelper;
 use App\Http\Requests\UsersRequest;
 use App\Imports\UsersImport;
 use App\Models\Users;
 use App\Repositories\UsersRepository;
 use App\Repositories\NotificationRepository;
+use App\Repositories\RegisterLogRepository;
 use App\Repositories\UserRepository;
 use App\Services\EmailService;
 use App\Services\FileService;
@@ -16,6 +19,7 @@ use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -39,6 +43,8 @@ class UsersController extends Controller
      * @var UserRepository
      */
     private UserRepository $UserRepository;
+
+    private RegisterLogRepository $registerLogRepository;
 
     /**
      * file service
@@ -76,6 +82,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->usersRepository      = new UsersRepository;
+        $this->registerLogRepository = new RegisterLogRepository;
         $this->fileService            = new FileService;
         $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
@@ -123,26 +130,16 @@ class UsersController extends Controller
      */
     public function create()
     {
-
-        // read file json in public/assets/json
-        // Path to the JSON file
+        // dd('create');
+        // $d = new Users;
+        // dd($d);
         $filePath = public_path('assets/region.json');
-
-        // Read the file contents
         $jsonContent = file_get_contents($filePath);
-
-        // Decode the JSON content to array
         $data = json_decode($jsonContent, true); // true means array
-        // Extract religions data
+        $regions = collect($data)->pluck('alt_name', 'name')->toArray();
 
-        $regions = array_map(function ($region) {
-            return $region['name'];
-        }, $data);
-
-        // $regions = $data;
-
-        // dd($regions);
         return view('stisla.users.form', [
+            // 'd' => $d,
             'title'         => __('Peserta'),
             'fullTitle'     => __('Tambah Peserta'),
             'routeIndex'    => route('users.index'),
@@ -150,6 +147,8 @@ class UsersController extends Controller
             'regions'       => $regions
         ]);
     }
+
+
 
     /**
      * save new data to db
@@ -159,9 +158,12 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+        // dd($request->all());
+
+        // dd($request->region);
         $data = $request->only([
-            'firstname',
-            'lastname',
+            'first_name',
+            'last_name',
             'email',
             'gender',
             'ktp',
@@ -169,7 +171,7 @@ class UsersController extends Controller
             'date_of_birth',
             'region',
             'phone',
-            'regligion',
+            'religion',
         ]);
 
         // gunakan jika ada file
@@ -177,7 +179,7 @@ class UsersController extends Controller
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
 
-        $result = $this->usersRepository->create($data);
+        $users = $this->usersRepository->create($data);
 
         // use this if you want to create notification data
         // $title = 'Notify Title';
@@ -188,15 +190,60 @@ class UsersController extends Controller
         // $bgColor = 'primary'; // primary, danger, success, warning
         // $this->NotificationRepository->createNotif($title,  $content, $userId,  $notificationType, $icon, $bgColor);
 
-        // gunakan jika mau kirim email
-        $to = 'zafierfazamuhammad@gmail.com';
-        $url = 'http://hehehe.com';
-        $this->emailService->sendConfirmPassword($to, $url);
+        // $now = Carbon::now();
+        // $session_id = StringHelper::generateRandomString(length: 16);
+        // $url = config('app.url_lms') . '/confirm-password?session_id=' . $session_id;
 
-        logCreate("Users", $result);
+        // $registerLog = [
+        //     'user_id' => $users->id,
+        //     'email' => $users->email,
+        //     'session_id' => $session_id,
+        //     'session_expired_at' => $now->addMinutes(value: 30),
+        //     'session_url' => $url,
+        // ];
+        // $usersSession = $this->registerLogRepository->create($registerLog);
+        // $this->emailService->sendConfirmPassword($users->email, $url);
+        $request->merge(['new' => true]);
+        $this->sendActivation($users, $request);
+
+
+        logCreate("Users", $users);
+
 
         $successMessage = successMessageCreate("Peserta, \n Mohon Cek Email Peserta Untuk Mengaktifkan Akun");
         return redirect()->back()->with('successMessage', $successMessage);
+    }
+
+    public function sendActivation(Users $users, Request $request)
+    {
+
+        $new = $request->query('new', true);  // mengambil parameter new dari query string
+
+        $now = Carbon::now();
+        $session_id = StringHelper::generateRandomString(length: 16);
+        $url = config('app.url_lms') . '/confirm-password?session_id=' . $session_id;
+
+        $registerLog = [
+            'user_id' => $users->id,
+            'email' => $users->email,
+            'session_id' => $session_id,
+            'session_expired_at' => $now->addMinutes(value: 30),
+            'session_url' => $url,
+        ];
+
+        $resultSession = $this->registerLogRepository->create($registerLog);
+        // dd($resultSession);
+        $this->emailService->sendConfirmPassword($users->email, $url);
+
+        // dd($new);
+        if ($new) {
+            logCreate("Create Activation", $users);
+            $successMessage = successMessageCreate("Email telah dikirim");
+        } else {
+            logCreate("Resend Activation", $users);
+            $successMessage = successMessageUpdate("Email telah dikirim");
+            return redirect()->back()->with('successMessage', $successMessage);
+        }
     }
 
     /**
@@ -207,8 +254,17 @@ class UsersController extends Controller
      */
     public function edit(Users $users)
     {
+
+        $filePath = public_path('assets/region.json');
+        $jsonContent = file_get_contents($filePath);
+        $data = json_decode($jsonContent, true); // true means array
+        $regions = collect($data)->pluck('alt_name', 'name')->toArray();
+        $notyet = $users->verification_password_at == null ? true : false;
+
         return view('stisla.users.form', [
             'd'             => $users,
+            'notyet'        => $notyet,
+            'regions' => $regions,
             'title'         => __('Users'),
             'fullTitle'     => __('Ubah Users'),
             'routeIndex'    => route('users.index'),
@@ -226,8 +282,8 @@ class UsersController extends Controller
     public function update(UsersRequest $request, Users $users)
     {
         $data = $request->only([
-            'firstname',
-            'lastname',
+            'first_name',
+            'last_name',
             'email',
             'gender',
             'ktp',
