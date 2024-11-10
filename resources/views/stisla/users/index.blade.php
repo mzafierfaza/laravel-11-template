@@ -117,6 +117,7 @@
             <th class="text-center">{{ __('Email') }}</th>
             <th class="text-center">{{ __('NIK') }}</th>
             <th class="text-center">{{ __('Verifikasi') }}</th>
+            <th class="text-center">{{ __('Status') }}</th>
             <th>{{ __('Aksi') }}</th>
           </tr>
         </thead>
@@ -134,12 +135,25 @@
               <span class=" badge badge-success">Ya</span>
               @endif
             </td>
+            <td class="text-center">
+              @if ($item->approved_status == 0)
+              <span class=" badge badge-danger">Pending</span>
+              @elseif ($item->approved_status == 1)
+              <span class=" badge badge-success">Approved</span>
+              @else
+              <span class=" badge badge-danger">Rejected</span>
+              @endif
+            </td>
             <td>
               @if ($canUpdate)
               @include('stisla.includes.forms.buttons.btn-edit', ['link' => route('users.edit', [$item->id])])
               @endif
               @if ($canDelete)
               @include('stisla.includes.forms.buttons.btn-delete', ['link' => route('users.destroy', [$item->id])])
+              @endif
+              @if (($canApprove || $canBypass) && $item->approved_status == 0)
+              @include('stisla.includes.forms.buttons.btn-approve', ['link' => route('users.approve', ['users' => $item, 'approved_status' => 1])])
+              @include('stisla.includes.forms.buttons.btn-reject', ['link' => route('users.approve', ['users' => $item, 'approved_status' => 2])])
               @endif
             </td>
           </tr>
@@ -154,8 +168,7 @@
 @endif
 </div>
 
-</div>
-</div>
+
 @endsection
 
 @push('css')
@@ -166,7 +179,6 @@
 
 @push('scripts')
 <script>
-
 </script>
 @endpush
 

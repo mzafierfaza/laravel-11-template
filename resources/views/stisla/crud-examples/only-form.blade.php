@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     @isset($d)
-      @method('PUT')
+    @method('PUT')
     @endisset
 
     @csrf
@@ -23,49 +23,49 @@
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-currency', [
-        'required' => true,
-        'name' => 'currency',
-        'label' => 'Currency',
-        'id' => 'currency',
-        'currency_type' => 'default',
+    'required' => true,
+    'name' => 'currency',
+    'label' => 'Currency',
+    'id' => 'currency',
+    'currency_type' => 'default',
     ])
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-currency', [
-        'required' => true,
-        'name' => 'currency_idr',
-        'label' => 'Currency IDR',
-        'id' => 'currency_idr',
-        'currency_type' => 'rupiah',
-        'iconText' => 'IDR',
+    'required' => true,
+    'name' => 'currency_idr',
+    'label' => 'Currency IDR',
+    'id' => 'currency_idr',
+    'currency_type' => 'rupiah',
+    'iconText' => 'IDR',
     ])
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.selects.select', [
-        'id' => 'select',
-        'name' => 'select',
-        'options' => $selectOptions,
-        'label' => 'Select',
-        'required' => true,
+    'id' => 'select',
+    'name' => 'select',
+    'options' => $selectOptions,
+    'label' => 'Select',
+    'required' => true,
     ])
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.selects.select2', [
-        'id' => 'select2',
-        'name' => 'select2',
-        'options' => $selectOptions,
-        'label' => 'Select2',
-        'required' => true,
+    'id' => 'select2',
+    'name' => 'select2',
+    'options' => $selectOptions,
+    'label' => 'Select2',
+    'required' => true,
     ])
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.selects.select2', [
-        'id' => 'select2_multiple',
-        'name' => 'select2_multiple',
-        'options' => $selectOptions,
-        'label' => 'Select2 Multiple',
-        'required' => true,
-        'multiple' => true,
+    'id' => 'select2_multiple',
+    'name' => 'select2_multiple',
+    'options' => $selectOptions,
+    'label' => 'Select2 Multiple',
+    'required' => true,
+    'multiple' => true,
     ])
   </div>
   <div class="col-md-6">
@@ -73,27 +73,27 @@
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-radio-toggle', [
-        'required' => true,
-        'id' => 'radio',
-        'label' => 'Radio',
-        'options' => $radioOptions,
+    'required' => true,
+    'id' => 'radio',
+    'label' => 'Radio',
+    'options' => $radioOptions,
     ])
   </div>
 
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-checkbox-custom', [
-        'required' => true,
-        'id' => 'checkbox',
-        'label' => 'Checkbox',
-        'options' => $checkboxOptions,
+    'required' => true,
+    'id' => 'checkbox',
+    'label' => 'Checkbox',
+    'options' => $checkboxOptions,
     ])
   </div>
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-checkbox', [
-        'required' => false,
-        'id' => 'checkbox2',
-        'label' => 'Checkbox 2',
-        'options' => $checkboxOptions,
+    'required' => false,
+    'id' => 'checkbox2',
+    'label' => 'Checkbox 2',
+    'options' => $checkboxOptions,
     ])
   </div>
   <div class="col-md-6">
@@ -117,19 +117,19 @@
   </div>
   <div class="col-md-12">
     @include('stisla.includes.forms.editors.summernote', [
-        'required' => true,
-        'name' => 'summernote_simple',
-        'label' => 'Summernote Simple',
-        'simple' => true,
-        'id' => 'summernote_simple',
+    'required' => true,
+    'name' => 'summernote_simple',
+    'label' => 'Summernote Simple',
+    'simple' => true,
+    'id' => 'summernote_simple',
     ])
   </div>
   <div class="col-md-12">
     @include('stisla.includes.forms.editors.summernote', [
-        'required' => true,
-        'name' => 'summernote',
-        'label' => 'Summernote',
-        'id' => 'summernote',
+    'required' => true,
+    'name' => 'summernote',
+    'label' => 'Summernote',
+    'id' => 'summernote',
     ])
   </div>
 </div>

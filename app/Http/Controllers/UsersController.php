@@ -21,8 +21,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
+
 class UsersController extends Controller
 {
+
     /**
      * usersRepository
      *
@@ -104,8 +106,11 @@ class UsersController extends Controller
     public function index()
     {
         $user = auth()->user();
+        // dd($user->canApprove());
         return view('stisla.users.index', [
             'data'             => $this->usersRepository->getLatest(),
+            'canApprove'       => $user->canApprove(),
+            'canBypass'       => $user->canBypass(),
             'canCreate'        => $user->can('Users Tambah'),
             'canUpdate'        => $user->can('Users Ubah'),
             'canDelete'        => $user->can('Users Hapus'),
@@ -159,7 +164,7 @@ class UsersController extends Controller
     public function store(UsersRequest $request)
     {
         // dd($request->all());
-
+        //
         // dd($request->region);
         $data = $request->only([
             'first_name',
@@ -172,12 +177,15 @@ class UsersController extends Controller
             'region',
             'phone',
             'religion',
+            'created_by',
         ]);
 
         // gunakan jika ada file
         // if ($request->hasFile('file')) {
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
+        $data["created_by"] = auth()->user()->id;
+        $data["approved_status"] = 0;
 
         $users = $this->usersRepository->create($data);
 
@@ -190,23 +198,8 @@ class UsersController extends Controller
         // $bgColor = 'primary'; // primary, danger, success, warning
         // $this->NotificationRepository->createNotif($title,  $content, $userId,  $notificationType, $icon, $bgColor);
 
-        // $now = Carbon::now();
-        // $session_id = StringHelper::generateRandomString(length: 16);
-        // $url = config('app.url_lms') . '/confirm-password?session_id=' . $session_id;
-
-        // $registerLog = [
-        //     'user_id' => $users->id,
-        //     'email' => $users->email,
-        //     'session_id' => $session_id,
-        //     'session_expired_at' => $now->addMinutes(value: 30),
-        //     'session_url' => $url,
-        // ];
-        // $usersSession = $this->registerLogRepository->create($registerLog);
-        // $this->emailService->sendConfirmPassword($users->email, $url);
-        $request->merge(['new' => true]);
-        $this->sendActivation($users, $request);
-
-
+        // $request->merge(['new' => true]);
+        // $this->sendActivation($users, $request);
         logCreate("Users", $users);
 
 
@@ -279,6 +272,30 @@ class UsersController extends Controller
      * @param Users $users
      * @return Response
      */
+
+    public function approve(Users $users, Request $request)
+    {
+        $old = $users;
+        $users->approved_at = now();
+        $users->approved_status = $request->get('approved_status');
+        $users->approved_desc = $request->get('approved_desc');
+        $users->approved_by = auth()->user()->id;
+        $users->save();
+
+        $request->merge(['new' => true]);
+        $this->sendActivation($users, $request);
+        logUpdate("Approve Users", $old, $users);
+
+        $successMessage = successMessageUpdate("Approve Users");
+        return redirect()->back()->with('successMessage', $successMessage);
+    }
+    // public function reject(Users $users)
+    // {
+    //     $users->approved_at = now();
+    //     $users->approved_status = 2;
+    //     $users->save();
+    // }
+
     public function update(UsersRequest $request, Users $users)
     {
         $data = $request->only([
@@ -288,16 +305,18 @@ class UsersController extends Controller
             'gender',
             'ktp',
             'npwp',
-            'picture',
             'date_of_birth',
             'region',
             'phone',
+            'religion',
+            'created_by',
         ]);
 
         // gunakan jika ada file
         // if ($request->hasFile('file')) {
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
+        $data["approved_status"] = 0;
 
         $newData = $this->usersRepository->update($data, $users->id);
 

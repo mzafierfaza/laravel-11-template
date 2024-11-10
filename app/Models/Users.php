@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +11,7 @@ class Users extends Model
 {
   use HasFactory;
 
+  protected $needApproval = true;
   /**
    * The table associated with the model.
    *
@@ -36,6 +39,11 @@ class Users extends Model
     'nik',
     'phone',
     'verification_password_at',
+    'approved_at',
+    'approved_by',
+    'created_by',
+    'approved_status',
+    'approved_desc',
   ];
 
   /**

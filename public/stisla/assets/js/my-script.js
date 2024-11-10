@@ -699,12 +699,103 @@ function deleteGlobal(e, action_url) {
             } else {
               getData();
             }
-            successMsg(response.data.message).then(function () {});
+            successMsg(response.data.message).then(function () { });
           })
-          .catch(function (error) {});
+          .catch(function (error) { });
       } else {
         $('#formDeleteGlobal').attr('action', action_url);
         document.getElementById('formDeleteGlobal').submit();
+      }
+    } else {
+      swal('Info', 'Okay, tidak jadi', 'info');
+    }
+  });
+}
+function approveGlobal(e, action_url) {
+  e.preventDefault();
+  swal({
+    title: 'Anda yakin?',
+    text: 'Akan menyetujui data ini?',
+    icon: 'info',
+    buttons: true,
+    dangerMode: true,
+    buttons: {
+      cancel: {
+        text: 'Batal',
+        value: null,
+        visible: true,
+        className: '',
+        closeModal: true,
+      },
+      confirm: {
+        text: 'Lanjutkan',
+      },
+    },
+  }).then(function (willApprove) {
+    console.log(willApprove, "<< willApprove")
+    if (willApprove) {
+      if ($('#isAjax').val() == 1 || $('#isAjaxYajra').val() == 1) {
+        swal('Info', 'Sedang memproses...', 'info');
+        window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        window.axios
+          .delete(action_url)
+          .then(function (response) {
+            if ($('#isAjaxYajra').val() == 1) {
+              reloadDataTable();
+            } else {
+              getData();
+            }
+            successMsg(response.data.message).then(function () { });
+          })
+          .catch(function (error) { });
+      } else {
+        $('#formApproveGlobal').attr('action', action_url);
+        document.getElementById('formApproveGlobal').submit();
+      }
+    } else {
+      swal('Info', 'Okay, tidak jadi', 'info');
+    }
+  });
+}
+function rejectGlobal(e, action_url) {
+  e.preventDefault();
+  swal({
+    title: 'Anda yakin?',
+    text: 'Akan menolak data ini?',
+    icon: 'info',
+    buttons: true,
+    dangerMode: true,
+    buttons: {
+      cancel: {
+        text: 'Batal',
+        value: null,
+        visible: true,
+        className: '',
+        closeModal: true,
+      },
+      confirm: {
+        text: 'Lanjutkan',
+      },
+    },
+  }).then(function (willReject) {
+    if (willReject) {
+      if ($('#isAjax').val() == 1 || $('#isAjaxYajra').val() == 1) {
+        swal('Info', 'Sedang memproses...', 'info');
+        window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        window.axios
+          .delete(action_url)
+          .then(function (response) {
+            if ($('#isAjaxYajra').val() == 1) {
+              reloadDataTable();
+            } else {
+              getData();
+            }
+            successMsg(response.data.message).then(function () { });
+          })
+          .catch(function (error) { });
+      } else {
+        $('#formApproveGlobal').attr('action', action_url);
+        document.getElementById('formApproveGlobal').submit();
       }
     } else {
       swal('Info', 'Okay, tidak jadi', 'info');
@@ -783,7 +874,7 @@ function getData() {
       initDataTables();
       $('#modalForm').modal('hide');
     })
-    .catch(function (error) {});
+    .catch(function (error) { });
 }
 
 function onSubmitForm(e) {

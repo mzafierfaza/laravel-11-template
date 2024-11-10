@@ -104,9 +104,10 @@
                 @include('stisla.includes.forms.buttons.btn-save')
                 @include('stisla.includes.forms.buttons.btn-reset')
                 @isset($d)
-                @if ($notyet)
+                @if ($notyet && $d->approved_status == 1)
                 <a href="{{ route('users.resendActivation', ['users' => $d, 'new' => false]) }}" class="btn btn-secondary"><i class="fa fa-undo"></i> {{ __('Resend Email') }}</a>
                 @endif
+
                 @endisset
               </div>
             </div>
@@ -115,15 +116,16 @@
       </div>
 
     </div>
-
-
   </div>
-  @endsection
 
-  @push('css')
 
-  @endpush
+</div>
+@endsection
 
-  @push('js')
+@push('css')
 
-  @endpush
+@endpush
+
+@push('js')
+
+@endpush

@@ -117,4 +117,18 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function canApprove()
+    {
+        $roles = $this->roles;
+
+        return $roles->contains('can_approve', true);
+    }
+
+    public function canBypass()
+    {
+        $roles = $this->roles;
+
+        return $roles->contains('can_bypass', true);
+    }
 }

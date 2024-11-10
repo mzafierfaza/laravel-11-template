@@ -441,8 +441,9 @@ select.form-control:not([size]):not([multiple]) {
   font-size: 14px;
 }
 
+/* hehe */
 .selectgroup-input:checked+.selectgroup-button {
-  background-color: #9FA91F;
+  background-color: #004465;
   color: #fff;
   z-index: 1;
 }

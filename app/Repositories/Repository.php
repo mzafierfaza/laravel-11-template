@@ -32,6 +32,11 @@ class Repository extends RepositoryAbstract
         return $this->model->latest()->get();
     }
 
+    public function getApprovedLatest()
+    {
+        return $this->model->latest()->includeNotApprove()->get();
+    }
+
     /**
      * get all data order by created at desc
      *

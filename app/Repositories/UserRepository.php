@@ -249,8 +249,8 @@ class UserRepository extends Repository
      */
     public function getLatestPermissionJoinGroups()
     {
-        $permissions = Permission::select(['permissions.*', 'permission_groups.group_name'])
-            ->join('permission_groups', 'permissions.permission_group_id', '=', 'permission_groups.id')
+        $permissions = Permission::select(['dashin_permissions.*', 'dashin_permission_groups.group_name'])
+            ->join('dashin_permission_groups', 'dashin_permissions.permission_group_id', '=', 'dashin_permission_groups.id')
             ->latest()
             ->get();
         return $permissions;

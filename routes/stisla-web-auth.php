@@ -204,3 +204,4 @@ Route::resource('users', UsersController::class)->parameters([
     'users' => 'users'
 ]);
 Route::get('users/{users}/resend-activation', [UsersController::class, 'sendActivation'])->name('users.resendActivation');
+Route::put('users/{users}/approve', [UsersController::class, 'approve'])->name('users.approve');
