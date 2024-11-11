@@ -718,7 +718,7 @@ function approveGlobal(e, action_url) {
     text: 'Akan menyetujui data ini?',
     icon: 'info',
     buttons: true,
-    dangerMode: true,
+    dangerMode: false,
     buttons: {
       cancel: {
         text: 'Batal',
@@ -729,6 +729,7 @@ function approveGlobal(e, action_url) {
       },
       confirm: {
         text: 'Lanjutkan',
+        className: 'btn-blue',
       },
     },
   }).then(function (willApprove) {

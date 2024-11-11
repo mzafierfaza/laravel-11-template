@@ -18,7 +18,7 @@
     <div class="alert-body">
       <div class="alert-title">{{ __('Informasi') }}
       </div>
-      Pastikan email dan password yang anda masukkan benar
+      Pastikan email di input dengan benar untuk keperluan verifikasi dari peserta
     </div>
   </div>
 

@@ -67,7 +67,7 @@ class UsersController extends Controller
      *
      * @var bool
      */
-    private bool $exportable = false;
+    private bool $exportable = true;
 
     /**
      * importable
@@ -105,6 +105,7 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // dd($this->exportable);
         $user = auth()->user();
         // dd($user->canApprove());
         return view('stisla.users.index', [
@@ -114,8 +115,8 @@ class UsersController extends Controller
             'canCreate'        => $user->can('Users Tambah'),
             'canUpdate'        => $user->can('Users Ubah'),
             'canDelete'        => $user->can('Users Hapus'),
-            'canImportExcel'   => $user->can('Order Impor Excel') && $this->importable,
-            'canExport'        => $user->can('Order Ekspor') && $this->exportable,
+            'canImportExcel'   => $user->can('Users Impor Excel') && $this->importable,
+            'canExport'        => $user->can('Users Ekspor') && $this->exportable,
             'title'            => __('Peserta'),
             'routeCreate'      => route('users.create'),
             'routePdf'         => route('users.pdf'),
@@ -203,7 +204,7 @@ class UsersController extends Controller
         logCreate("Users", $users);
 
 
-        $successMessage = successMessageCreate("Peserta, \n Mohon Cek Email Peserta Untuk Mengaktifkan Akun");
+        $successMessage = successMessageCreate("Peserta, \n Segera Approve user terlebih dahulu");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
@@ -223,12 +224,9 @@ class UsersController extends Controller
             'session_expired_at' => $now->addMinutes(value: 30),
             'session_url' => $url,
         ];
-
         $resultSession = $this->registerLogRepository->create($registerLog);
-        // dd($resultSession);
-        $this->emailService->sendConfirmPassword($users->email, $url);
-
-        // dd($new);
+        $sent = $this->emailService->sendConfirmPassword($users->email, $url);
+        // dd($sent);
         if ($new) {
             logCreate("Create Activation", $users);
             $successMessage = successMessageCreate("Email telah dikirim");
@@ -281,12 +279,19 @@ class UsersController extends Controller
         $users->approved_desc = $request->get('approved_desc');
         $users->approved_by = auth()->user()->id;
         $users->save();
+        $successMessage = "Berhasil reject peserta";
 
-        $request->merge(['new' => true]);
-        $this->sendActivation($users, $request);
+        if ($request->get('approved_status') == 1) {
+            $successMessage = "Berhasil approve user ";
+        }
+
+        if ($request->get('approved_status') == 1 && $users->verification_password_at == null) {
+            $request->merge(['new' => true]);
+            $this->sendActivation($users, $request);
+            $successMessage = "Berhasil approve user \n Email ke peserta telah dikirim";
+        }
+
         logUpdate("Approve Users", $old, $users);
-
-        $successMessage = successMessageUpdate("Approve Users");
         return redirect()->back()->with('successMessage', $successMessage);
     }
     // public function reject(Users $users)
@@ -332,9 +337,9 @@ class UsersController extends Controller
         // gunakan jika mau kirim email
         // $this->emailService->methodName($newData);
 
-        logUpdate("Users", $users, $newData);
+        logUpdate("Update Perserta", $users, $newData);
 
-        $successMessage = successMessageUpdate("Users");
+        $successMessage = successMessageUpdate("Peserta");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 

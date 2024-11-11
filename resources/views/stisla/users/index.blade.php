@@ -26,66 +26,51 @@
 </div> --}}
 
 {{-- gunakan jika mau ada filter --}}
-{{-- <div class="card">
-          <div class="card-header">
-            <h4><i class="fa fa-filter"></i> Filter Data</h4>
-            <div class="card-header-action">
-            </div>
-          </div>
-          <div class="card-body">
-
-            <form action="">
-              @csrf
-              <div class="row">
-                <div class="col-md-3">
-                  @include('stisla.includes.forms.inputs.input', [
-                      'type' => 'text',
-                      'id' => 'filter_text',
-                      'required' => false,
-                      'label' => __('Pilih Text'),
-                      'value' => request('filter_text'),
-                  ])
-                </div>
-                <div class="col-md-3">
-                  @include('stisla.includes.forms.inputs.input', [
-                      'type' => 'date',
-                      'id' => 'filter_date',
-                      'required' => true,
-                      'label' => __('Pilih Date'),
-                      'value' => request('filter_date', date('Y-m-d')),
-                  ])
-                </div>
-                <div class="col-md-3">
-                  @include('stisla.includes.forms.selects.select2', [
-                      'id' => 'filter_dropdown',
-                      'name' => 'filter_dropdown',
-                      'label' => __('Pilih Select2'),
-                      'options' => $dropdownOptions ?? [],
-                      'selected' => request('filter_dropdown'),
-                      'with_all' => true,
-                  ])
-                </div>
-              </div>
-              <button class="btn btn-primary icon"><i class="fa fa-search"></i> Cari Data</button>
-            </form>
-          </div>
-        </div> --}}
-
-@if ($data->count() > 0)
-@if ($canExport)
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
-    <h4><i class="fa fa-users"></i> {!! __('Aksi Ekspor <small>(Server Side)</small>') !!}</h4>
+    <h4><i class="fa fa-filter"></i> Filter Data</h4>
     <div class="card-header-action">
-      @include('stisla.includes.forms.buttons.btn-pdf-download', ['link' => $routePdf])
-      @include('stisla.includes.forms.buttons.btn-excel-download', ['link' => $routeExcel])
-      @include('stisla.includes.forms.buttons.btn-csv-download', ['link' => $routeCsv])
-      @include('stisla.includes.forms.buttons.btn-print', ['link' => $routePrint])
-      @include('stisla.includes.forms.buttons.btn-json-download', ['link' => $routeJson])
     </div>
   </div>
-</div>
-@endif
+  <div class="card-body">
+
+    <form action="">
+      @csrf
+      <div class="row">
+        <div class="col-md-3">
+          @include('stisla.includes.forms.inputs.input', [
+          'type' => 'text',
+          'id' => 'filter_text',
+          'required' => false,
+          'label' => __('Pilih Text'),
+          'value' => request('filter_text'),
+          ])
+        </div>
+        <div class="col-md-3">
+          @include('stisla.includes.forms.inputs.input', [
+          'type' => 'date',
+          'id' => 'filter_date',
+          'required' => true,
+          'label' => __('Pilih Date'),
+          'value' => request('filter_date', date('Y-m-d')),
+          ])
+        </div>
+        <div class="col-md-3">
+          @include('stisla.includes.forms.selects.select2', [
+          'id' => 'filter_dropdown',
+          'name' => 'filter_dropdown',
+          'label' => __('Pilih Select2'),
+          'options' => $dropdownOptions ?? [],
+          'selected' => request('filter_dropdown'),
+          'with_all' => true,
+          ])
+        </div>
+      </div>
+      <button class="btn btn-primary icon"><i class="fa fa-search"></i> Cari Data</button>
+    </form>
+  </div>
+</div> -->
+
 
 <div class="card">
   <div class="card-header">
@@ -118,6 +103,7 @@
             <th class="text-center">{{ __('NIK') }}</th>
             <th class="text-center">{{ __('Verifikasi') }}</th>
             <th class="text-center">{{ __('Status') }}</th>
+            <th class="text-center">{{ __('Dibuat') }}</th>
             <th>{{ __('Aksi') }}</th>
           </tr>
         </thead>
@@ -130,20 +116,21 @@
             <td>{{ $item->nik }}</td>
             <td class="text-center">
               @if ($item->verification_password_at == null)
-              <span class=" badge badge-danger">Belum</span>
+              <span class=" badge badge-secondary">Belum</span>
               @else
               <span class=" badge badge-success">Ya</span>
               @endif
             </td>
             <td class="text-center">
               @if ($item->approved_status == 0)
-              <span class=" badge badge-danger">Pending</span>
+              <span class=" badge badge-warning">Pending</span>
               @elseif ($item->approved_status == 1)
               <span class=" badge badge-success">Approved</span>
               @else
               <span class=" badge badge-danger">Rejected</span>
               @endif
             </td>
+            <td>{{ $item->created_at }}</td>
             <td>
               @if ($canUpdate)
               @include('stisla.includes.forms.buttons.btn-edit', ['link' => route('users.edit', [$item->id])])
@@ -163,6 +150,23 @@
     </div>
   </div>
 </div>
+
+
+@if ($data->count() > 0)
+@if ($canExport)
+<div class="card">
+  <div class="card-header">
+    <h4><i class="fa fa-users"></i> {!! __('Aksi Ekspor <small>(Server Side)</small>') !!}</h4>
+    <div class="card-header-action">
+      @include('stisla.includes.forms.buttons.btn-pdf-download', ['link' => $routePdf])
+      @include('stisla.includes.forms.buttons.btn-excel-download', ['link' => $routeExcel])
+      @include('stisla.includes.forms.buttons.btn-csv-download', ['link' => $routeCsv])
+      @include('stisla.includes.forms.buttons.btn-print', ['link' => $routePrint])
+      @include('stisla.includes.forms.buttons.btn-json-download', ['link' => $routeJson])
+    </div>
+  </div>
+</div>
+@endif
 @else
 @include('stisla.includes.others.empty-state', ['title' => 'Data ' . $title, 'icon' => 'users', 'link' => $routeCreate])
 @endif

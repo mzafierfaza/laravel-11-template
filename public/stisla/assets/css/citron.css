@@ -2005,6 +2005,7 @@ h6 .badge {
   box-shadow: 0 2px 6px #042e43;
   background-color: #004465;
   border-color: #042e43;
+  color: white;
 }
 
 .btn-primary:focus,

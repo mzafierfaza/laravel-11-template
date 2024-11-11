@@ -26,10 +26,19 @@ return [
                 ],
                 [
                     'menu_name' => 'Peserta',
-                    'route_name' => 'dashboard.index',
+                    'route_name' => 'users.index',
                     'icon' => 'fas fa-users',
                     'permission' => null,
-                    'is_active_if_url_includes' => 'dashboard*'
+                    'is_active_if_url_includes' => 'users*',
+                    'childs' => [
+                        [
+                            'menu_name' => 'Daftar Peserta',
+                            'route_name' => 'users.index',
+                            'icon' => 'fas fa-table',
+                            'permission' => null,
+                            'is_active_if_url_includes' => 'users*',
+                            'is_mockup' => true
+                        ],
                 ],
                 [
                     'menu_name' => 'Pengajar',
@@ -654,7 +663,7 @@ return [
         ['key' => 'stisla_login_template', 'value' => 'default'],
         ['key' => 'stisla_skin', 'value' => 'style'],
 
-        ['key' => 'mail_provider', 'value' => 'mailtrap'],
+        ['key' => 'mail_provider', 'value' => 'smtp'],
         ['key' => 'mail_from_address', 'value' => 'anamkun@laraveltemplate.com'],
         ['key' => 'mail_from_name', 'value' => 'Superadmin'],
 
@@ -664,8 +673,8 @@ return [
         ['key' => 'mail_mailtrap_password', 'value' => '11fd65a07d9f25'],
         ['key' => 'mail_mailtrap_encryption', 'value' => 'tls'],
 
-        ['key' => 'mail_host', 'value' => 'smtp'],
-        ['key' => 'mail_port', 'value' => '2525'],
+        ['key' => 'mail_host', 'value' => 'smtp.gmail.com'],
+        ['key' => 'mail_port', 'value' => '587'],
         ['key' => 'mail_username', 'value' => '809d58dfa23ade'],
         ['key' => 'mail_password', 'value' => 'e9d1aa54a61db1'],
         ['key' => 'mail_encryption', 'value' => 'tls'],
