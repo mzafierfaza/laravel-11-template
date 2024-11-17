@@ -1,0 +1,111 @@
+{
+    "title": "Competences",
+    "icon": "trophy",
+    "model": "Competence",
+    "columns": [
+        {
+            "name": "title",
+            "type": "string",
+            "label": "Judul",
+            "form": {
+                "type": "inputtext",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "level",
+            "type": "enum",
+            "label": "Level",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    {
+                        "label": "Pemula",
+                        "value": "beginner"
+                    },
+                    {
+                        "label": "Menengah",
+                        "value": "intermediate"
+                    },
+                    {
+                        "label": "Mahir",
+                        "value": "advance"
+                    }
+                ]
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": "beginner",
+            "enum": [
+                "beginner",
+                "intermediate",
+                "advance"
+            ]
+        },
+        {
+            "name": "certificate",
+            "type": "string",
+            "label": "Sertifikat",
+            "form": {
+                "type": "inputfile",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "certificate_can_download",
+            "type": "boolean",
+            "label": "Sertifikat Dapat Diunduh",
+            "form": {
+                "type": "checkbox",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "image",
+            "type": "string",
+            "label": "Gambar",
+            "form": {
+                "type": "inputfile",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

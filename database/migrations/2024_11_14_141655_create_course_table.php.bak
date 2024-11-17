@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCourseTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('courses', function (Blueprint $table) {
+            $table->string('title', 191)->nullable();
+			$table->text('description')->nullable();
+			$table->text('procedurs')->nullable();
+			$table->text('topic')->nullable();
+			$table->string('format', 191);
+			$table->string('is_random_material', 191);
+			$table->string('is_premium', 191);
+			$table->string('price', 191);
+			$table->string('created_by', 191);
+			$table->foreign('created_by')->on('dashin_users')->references('id')->onUpdate('cascade')->onDelete('cascade');
+			$table->string('is_active', 191);
+			$table->string('start_date', 191)->nullable();
+			$table->string('end_date', 191)->nullable();
+			$table->string('start_time', 191)->nullable();
+			$table->string('end_time', 191)->nullable();
+			$table->text('address')->nullable();
+			$table->string('is_repeat_enrollment', 191);
+			$table->string('max_repeat_enrollment', 191);
+			$table->string('max_enrollment', 191);
+			$table->string('is_class_test', 191);
+			$table->string('is_class_finish', 191);
+			$table->string('status', 191);
+			$table->string('approved_status', 191);
+			$table->string('approved_at', 191)->nullable();
+			$table->string('approved_by', 191);
+			$table->foreign('approved_by')->on('dashin_users')->references('id')->onUpdate('cascade')->onDelete('cascade');
+			$table->string('teacher_id', 191);
+			$table->foreign('teacher_id')->on('dashin_users')->references('id')->onUpdate('cascade')->onDelete('cascade');
+			$table->text('teacher_about')->nullable();
+			$table->text('image')->nullable();
+			$table->text('certificate')->nullable();
+			$table->string('certificate_can_download', 191);
+			$table->timestamps();
+			
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('courses');
+    }
+}

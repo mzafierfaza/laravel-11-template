@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Materials",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    },
+    {
+        "name": "Materials Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    },
+    {
+        "name": "Materials Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    },
+    {
+        "name": "Materials Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    },
+    {
+        "name": "Materials Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    },
+    {
+        "name": "Materials Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Materials"
+    }
+]

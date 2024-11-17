@@ -1,0 +1,60 @@
+{
+    "title": "Competence Courses",
+    "icon": "link",
+    "model": "CompetenceCourse",
+    "columns": [
+        {
+            "name": "competence_id",
+            "type": "bigint",
+            "label": "Kompetensi",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "competences",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "course_id",
+            "type": "bigint",
+            "label": "Kursus",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "courses",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

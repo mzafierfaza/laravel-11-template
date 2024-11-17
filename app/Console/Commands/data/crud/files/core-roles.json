@@ -1,0 +1,51 @@
+{
+    "title": "Roles",
+    "icon": "shield",
+    "model": "CoreRole",
+    "columns": [
+        {
+            "name": "name",
+            "type": "string",
+            "label": "Nama Role",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "group_id",
+            "type": "bigint",
+            "label": "Group",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "core_groups",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

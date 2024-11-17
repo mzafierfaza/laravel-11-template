@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Enrollments",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    },
+    {
+        "name": "Enrollments Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    },
+    {
+        "name": "Enrollments Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    },
+    {
+        "name": "Enrollments Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    },
+    {
+        "name": "Enrollments Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    },
+    {
+        "name": "Enrollments Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Enrollments"
+    }
+]

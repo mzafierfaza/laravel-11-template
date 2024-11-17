@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Modules",
+            "route_name": "modules.index",
+            "icon": "folder",
+            "permission": "Modules",
+            "is_active_if_url_includes": "modules*"
+        }
+    ]
+}

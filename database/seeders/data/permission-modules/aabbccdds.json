@@ -1,0 +1,50 @@
+[
+    {
+        "name": "AABBCCDD",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    },
+    {
+        "name": "AABBCCDD Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    },
+    {
+        "name": "AABBCCDD Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    },
+    {
+        "name": "AABBCCDD Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    },
+    {
+        "name": "AABBCCDD Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    },
+    {
+        "name": "AABBCCDD Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "AABBCCDD"
+    }
+]

@@ -1,0 +1,185 @@
+{
+    "title": "Groups",
+    "icon": "users",
+    "model": "CoreGroup",
+    "columns": [
+        {
+            "name": "name",
+            "type": "string",
+            "label": "Nama Group",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "jenis_badan_usaha",
+            "type": "enum",
+            "label": "Jenis Badan Usaha",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    {
+                        "label": "Perorangan",
+                        "value": "perorangan"
+                    },
+                    {
+                        "label": "Perusahaan",
+                        "value": "perusahaan"
+                    }
+                ]
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "enum": [
+                "perorangan",
+                "perusahaan"
+            ],
+            "default": "perorangan"
+        },
+        {
+            "name": "badan_usaha",
+            "type": "string",
+            "label": "Nama Badan Usaha",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "owner_name",
+            "type": "string",
+            "label": "Nama Pemilik",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "owner_ktp",
+            "type": "string",
+            "label": "No. KTP Pemilik",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "owner_npwp",
+            "type": "string",
+            "label": "NPWP Pemilik",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "address",
+            "type": "string",
+            "label": "Alamat",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "pic_name",
+            "type": "string",
+            "label": "Nama PIC",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "pic_phone",
+            "type": "string",
+            "label": "No. Telepon PIC",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "pic_email",
+            "type": "string",
+            "label": "Email PIC",
+            "form": {
+                "type": "input",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

@@ -1,0 +1,100 @@
+{
+    "title": "Modules",
+    "icon": "folder",
+    "model": "Module",
+    "columns": [
+        {
+            "name": "course_id",
+            "type": "bigint",
+            "label": "Kursus",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "courses",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "label": "Judul",
+            "form": {
+                "type": "inputtext",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "description",
+            "type": "text",
+            "label": "Deskripsi",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "order",
+            "type": "integer",
+            "label": "Urutan",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        }
+    ]
+}

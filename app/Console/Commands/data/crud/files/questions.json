@@ -1,0 +1,131 @@
+{
+    "title": "Questions",
+    "icon": "help-circle",
+    "model": "Question",
+    "columns": [
+        {
+            "name": "quiz_id",
+            "type": "bigint",
+            "label": "Quiz",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "quizzes",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "question_text",
+            "type": "text",
+            "label": "Pertanyaan",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "type",
+            "type": "enum",
+            "label": "Tipe Soal",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    {
+                        "label": "Pilihan Ganda",
+                        "value": "multiple_choice"
+                    },
+                    {
+                        "label": "Essay",
+                        "value": "essay"
+                    }
+                ]
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": "multiple_choice",
+            "enum": [
+                "multiple_choice",
+                "essay"
+            ]
+        },
+        {
+            "name": "points",
+            "type": "integer",
+            "label": "Poin",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "correct_essay_answer",
+            "type": "text",
+            "label": "Jawaban Essay yang Benar",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        }
+    ]
+}

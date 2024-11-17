@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Questions",
+            "route_name": "questions.index",
+            "icon": "help-circle",
+            "permission": "Questions",
+            "is_active_if_url_includes": "questions*"
+        }
+    ]
+}

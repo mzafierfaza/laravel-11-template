@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Competence Courses",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    },
+    {
+        "name": "Competence Courses Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    },
+    {
+        "name": "Competence Courses Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    },
+    {
+        "name": "Competence Courses Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    },
+    {
+        "name": "Competence Courses Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    },
+    {
+        "name": "Competence Courses Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competence Courses"
+    }
+]

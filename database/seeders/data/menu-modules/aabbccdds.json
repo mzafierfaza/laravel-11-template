@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "AABBCCDD",
+            "route_name": "aabbccdds.index",
+            "icon": "users",
+            "permission": "AABBCCDD",
+            "is_active_if_url_includes": "aabbccdds*"
+        }
+    ]
+}

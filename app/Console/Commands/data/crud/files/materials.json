@@ -1,0 +1,185 @@
+{
+    "title": "Materials",
+    "icon": "book",
+    "model": "Material",
+    "columns": [
+        {
+            "name": "module_id",
+            "type": "bigint",
+            "label": "Modul",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "modules",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "label": "Judul",
+            "form": {
+                "type": "inputtext",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "content",
+            "type": "text",
+            "label": "Konten",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "file_path",
+            "type": "string",
+            "label": "File",
+            "form": {
+                "type": "inputfile",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "duration_minutes",
+            "type": "integer",
+            "label": "Durasi (Menit)",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "type",
+            "type": "enum",
+            "label": "Tipe",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    {
+                        "label": "Dokumen",
+                        "value": "document"
+                    },
+                    {
+                        "label": "Video",
+                        "value": "video"
+                    },
+                    {
+                        "label": "Link",
+                        "value": "link"
+                    }
+                ]
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": "document",
+            "enum": [
+                "document",
+                "video",
+                "link"
+            ]
+        },
+        {
+            "name": "order",
+            "type": "integer",
+            "label": "Urutan",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "is_progress",
+            "type": "boolean",
+            "label": "Hitung Progress",
+            "form": {
+                "type": "checkbox",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": true
+        },
+        {
+            "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        }
+    ]
+}

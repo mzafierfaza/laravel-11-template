@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Competence Courses",
+            "route_name": "competence-courses.index",
+            "icon": "link",
+            "permission": "Competence Courses",
+            "is_active_if_url_includes": "competence-courses*"
+        }
+    ]
+}

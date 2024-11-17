@@ -1,0 +1,1 @@
+{"title":"AABBCCDD","icon":"users","model":"Aabbccdd","columns":[{"name":"name","type":"text","label":"Nama Lengkap","form":{"type":"inputtext","required":2},"validations":{"store":["required"],"update":["required"]},"nullable":false,"unique":false,"foreign":null},{"type":"timestamps"}]}

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Question Options",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    },
+    {
+        "name": "Question Options Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    },
+    {
+        "name": "Question Options Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    },
+    {
+        "name": "Question Options Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    },
+    {
+        "name": "Question Options Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    },
+    {
+        "name": "Question Options Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Question Options"
+    }
+]

@@ -1,0 +1,84 @@
+{
+    "title": "Question Options",
+    "icon": "list",
+    "model": "QuestionOption",
+    "columns": [
+        {
+            "name": "question_id",
+            "type": "bigint",
+            "label": "Pertanyaan",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "questions",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "option_text",
+            "type": "text",
+            "label": "Teks Pilihan",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "is_correct",
+            "type": "boolean",
+            "label": "Jawaban Benar",
+            "form": {
+                "type": "checkbox",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        }
+    ]
+}

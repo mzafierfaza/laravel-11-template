@@ -1,0 +1,131 @@
+{
+    "title": "Enrollments",
+    "icon": "user-plus",
+    "model": "Enrollment",
+    "columns": [
+        {
+            "name": "user_id",
+            "type": "bigint",
+            "label": "Pengguna",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "core_users",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "restrict"
+            }
+        },
+        {
+            "name": "competence_id",
+            "type": "bigint",
+            "label": "Kompetensi",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "competences",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "restrict"
+            }
+        },
+        {
+            "name": "enrolled_date",
+            "type": "timestamp",
+            "label": "Tanggal Pendaftaran",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "status",
+            "type": "enum",
+            "label": "Status",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    {
+                        "label": "Aktif",
+                        "value": "active"
+                    },
+                    {
+                        "label": "Selesai",
+                        "value": "completed"
+                    },
+                    {
+                        "label": "Diberhentikan",
+                        "value": "dropped"
+                    }
+                ]
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "enum": [
+                "active",
+                "completed",
+                "dropped"
+            ]
+        },
+        {
+            "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        }
+    ]
+}

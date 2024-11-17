@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Competences",
+            "route_name": "competences.index",
+            "icon": "trophy",
+            "permission": "Competences",
+            "is_active_if_url_includes": "competences*"
+        }
+    ]
+}

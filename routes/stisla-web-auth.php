@@ -3,6 +3,8 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\BackupDatabaseController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\CrudExampleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DropboxController;
@@ -11,8 +13,6 @@ use App\Http\Controllers\MenuManagementController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
-use App\Http\Controllers\PersonController;
-use App\Http\Controllers\ProdukController as ControllersProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestLogController;
 use App\Http\Controllers\RoleController;
@@ -182,15 +182,6 @@ Route::get('dropboxs', [DropboxController::class, 'index'])->name('dropboxs.inde
 Route::post('dropboxs', [DropboxController::class, 'upload'])->name('dropboxs.upload');
 Route::delete('dropboxs', [DropboxController::class, 'destroy'])->name('dropboxs.destroy');
 
-Route::resource('produks', ControllersProdukController::class);
-Route::get('produks/print', [ControllersProdukController::class, 'exportPrint'])->name('produks.print');
-Route::get('produks/pdf', [ControllersProdukController::class, 'pdf'])->name('produks.pdf');
-Route::get('produks/csv', [ControllersProdukController::class, 'csv'])->name('produks.csv');
-Route::get('produks/json', [ControllersProdukController::class, 'json'])->name('produks.json');
-Route::get('produks/excel', [ControllersProdukController::class, 'excel'])->name('produks.excel');
-Route::get('produks/import-excel-example', [ControllersProdukController::class, 'importExcelExample'])->name('produks.import-excel-example');
-Route::post('produks/import-excel', [ControllersProdukController::class, 'importExcel'])->name('produks.import-excel');
-
 Route::get('users/print', [UsersController::class, 'exportPrint'])->name('users.print');
 Route::get('users/pdf', [UsersController::class, 'pdf'])->name('users.pdf');
 Route::get('users/csv', [UsersController::class, 'csv'])->name('users.csv');
@@ -205,3 +196,14 @@ Route::resource('users', UsersController::class)->parameters([
 ]);
 Route::get('users/{users}/resend-activation', [UsersController::class, 'sendActivation'])->name('users.resendActivation');
 Route::put('users/{users}/approve', [UsersController::class, 'approve'])->name('users.approve');
+
+# WEB
+
+Route::get('courses/print', [CourseController::class, 'exportPrint'])->name('courses.print');
+Route::get('courses/pdf', [CourseController::class, 'pdf'])->name('courses.pdf');
+Route::get('courses/csv', [CourseController::class, 'csv'])->name('courses.csv');
+Route::get('courses/json', [CourseController::class, 'json'])->name('courses.json');
+Route::get('courses/excel', [CourseController::class, 'excel'])->name('courses.excel');
+Route::get('courses/import-excel-example', [CourseController::class, 'importExcelExample'])->name('courses.import-excel-example');
+Route::post('courses/import-excel', [CourseController::class, 'importExcel'])->name('courses.import-excel');
+Route::resource('courses', CourseController::class);

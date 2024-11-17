@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Student Answers",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    },
+    {
+        "name": "Student Answers Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    },
+    {
+        "name": "Student Answers Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    },
+    {
+        "name": "Student Answers Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    },
+    {
+        "name": "Student Answers Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    },
+    {
+        "name": "Student Answers Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Student Answers"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Quiz Attempts",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    },
+    {
+        "name": "Quiz Attempts Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    },
+    {
+        "name": "Quiz Attempts Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    },
+    {
+        "name": "Quiz Attempts Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    },
+    {
+        "name": "Quiz Attempts Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    },
+    {
+        "name": "Quiz Attempts Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Quiz Attempts"
+    }
+]

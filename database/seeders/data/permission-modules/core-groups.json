@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Groups",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    },
+    {
+        "name": "Groups Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    },
+    {
+        "name": "Groups Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    },
+    {
+        "name": "Groups Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    },
+    {
+        "name": "Groups Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    },
+    {
+        "name": "Groups Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Groups"
+    }
+]

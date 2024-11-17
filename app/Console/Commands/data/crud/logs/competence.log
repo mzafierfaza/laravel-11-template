@@ -1,0 +1,18 @@
+Created migration file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/migrations/2024_11_14_105003_create_competence_table.php
+Created seeder file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/CompetenceSeeder.php
+Created model file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Models/Competence.php
+Created controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/CompetenceController.php
+Created api controller file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Controllers/Api/CompetenceController.php
+Created repository file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Repositories/CompetenceRepository.php
+Created request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/CompetenceRequest.php
+Created api request file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Http/Requests/Api/CompetenceRequest.php
+Created export excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Exports/CompetenceExport.php
+Created import excel file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/app/Imports/CompetenceImport.php
+Created view index file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/competences/index.blade.php
+Created view form file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/competences/form.blade.php
+Created view export pdf file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/competences/export-pdf.blade.php
+Created view export excel example file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/resources/views/stisla/competences/export-excel-example.blade.php
+Created permission file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/permission-modules/competences.json
+Created routing file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/routes/modules/competence.php
+Created menu setting file => /Users/zafier/Documents/WORK/Project/Laravel/dashin_lms_kelaskita/database/seeders/data/menu-modules/competences.json
+Created 17 files

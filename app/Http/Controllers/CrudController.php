@@ -90,12 +90,14 @@ class CrudController extends Controller
                 'type' => 'timestamps'
             ];
         }
+
         $jsonData = [
             'title' => $request->title,
             'icon' => $request->icon,
             'model' => $request->modelName,
             'columns' => $columns
         ];
+
         $json = json_encode($jsonData);
         $filename = Str::slug($request->modelName);
         $fullpath = app_path('Console/Commands/data/crud/files/' . $filename . '.json');

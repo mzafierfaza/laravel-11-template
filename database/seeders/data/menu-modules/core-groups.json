@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Groups",
+            "route_name": "core-groups.index",
+            "icon": "users",
+            "permission": "Groups",
+            "is_active_if_url_includes": "core-groups*"
+        }
+    ]
+}

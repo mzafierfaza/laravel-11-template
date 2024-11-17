@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Student Answers",
+            "route_name": "student-answers.index",
+            "icon": "edit-3",
+            "permission": "Student Answers",
+            "is_active_if_url_includes": "student-answers*"
+        }
+    ]
+}

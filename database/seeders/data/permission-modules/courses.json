@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Courses",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    },
+    {
+        "name": "Courses Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    },
+    {
+        "name": "Courses Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    },
+    {
+        "name": "Courses Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    },
+    {
+        "name": "Courses Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    },
+    {
+        "name": "Courses Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Courses"
+    }
+]

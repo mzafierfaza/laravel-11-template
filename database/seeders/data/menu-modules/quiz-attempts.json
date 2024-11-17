@@ -1,0 +1,12 @@
+{
+    "group_name": "Navigasi",
+    "menus": [
+        {
+            "menu_name": "Quiz Attempts",
+            "route_name": "quiz-attempts.index",
+            "icon": "file-text",
+            "permission": "Quiz Attempts",
+            "is_active_if_url_includes": "quiz-attempts*"
+        }
+    ]
+}

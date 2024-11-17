@@ -1,0 +1,523 @@
+{
+    "title": "Courses",
+    "icon": "book",
+    "model": "Course",
+    "columns": [
+        {
+            "name": "title",
+            "type": "string",
+            "label": "Judul",
+            "form": {
+                "type": "inputtext",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "description",
+            "type": "text",
+            "label": "Deskripsi",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "procedurs",
+            "type": "text",
+            "label": "Prosedur",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "topic",
+            "type": "text",
+            "label": "Topik",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "format",
+            "type": "enum",
+            "label": "Format",
+            "form": {
+                "type": "select",
+                "required": 2,
+                "options": [
+                    "online",
+                    "offline",
+                    "webinar"
+                ]
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": "online"
+        },
+        {
+            "name": "is_random_material",
+            "type": "boolean",
+            "label": "Materi Acak",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "is_premium",
+            "type": "boolean",
+            "label": "Premium",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "price",
+            "type": "float",
+            "label": "Harga",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "created_by",
+            "type": "bigint",
+            "label": "Dibuat Oleh",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "dashin_users",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "is_active",
+            "type": "boolean",
+            "label": "Aktif",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": true
+        },
+        {
+            "name": "start_date",
+            "type": "timestamp",
+            "label": "Tanggal Mulai",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "end_date",
+            "type": "timestamp",
+            "label": "Tanggal Selesai",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "start_time",
+            "type": "timestamp",
+            "label": "Waktu Mulai",
+            "form": {
+                "type": "inputtime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "end_time",
+            "type": "timestamp",
+            "label": "Waktu Selesai",
+            "form": {
+                "type": "inputtime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "address",
+            "type": "text",
+            "label": "Alamat",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "is_repeat_enrollment",
+            "type": "boolean",
+            "label": "Pendaftaran Ulang",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "max_repeat_enrollment",
+            "type": "integer",
+            "label": "Maksimal Pendaftaran Ulang",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "max_enrollment",
+            "type": "integer",
+            "label": "Maksimal Pendaftaran",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "is_class_test",
+            "type": "boolean",
+            "label": "Tes Kelas",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "is_class_finish",
+            "type": "boolean",
+            "label": "Kelas Selesai",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
+        },
+        {
+            "name": "status",
+            "type": "boolean",
+            "label": "Status",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": true
+        },
+        {
+            "name": "approved_status",
+            "type": "integer",
+            "label": "Status Persetujuan",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "approved_at",
+            "type": "timestamp",
+            "label": "Waktu Persetujuan",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "approved_by",
+            "type": "bigint",
+            "label": "Disetujui Oleh",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "dashin_users",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "teacher_id",
+            "type": "bigint",
+            "label": "Pengajar",
+            "form": {
+                "type": "select",
+                "required": 2
+            },
+            "validations": {
+                "store": [
+                    "required"
+                ],
+                "update": [
+                    "required"
+                ]
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": {
+                "on": "dashin_users",
+                "references": "id",
+                "onUpdate": "cascade",
+                "onDelete": "cascade"
+            }
+        },
+        {
+            "name": "teacher_about",
+            "type": "text",
+            "label": "Tentang Pengajar",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "image",
+            "type": "text",
+            "label": "Gambar",
+            "form": {
+                "type": "inputfile",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "certificate",
+            "type": "text",
+            "label": "Sertifikat",
+            "form": {
+                "type": "inputfile",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "certificate_can_download",
+            "type": "boolean",
+            "label": "Sertifikat Dapat Diunduh",
+            "form": {
+                "type": "switch",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": true
+        },
+        {
+            "type": "timestamps"
+        }
+    ]
+}

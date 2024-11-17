@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Competences",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    },
+    {
+        "name": "Competences Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    },
+    {
+        "name": "Competences Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    },
+    {
+        "name": "Competences Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    },
+    {
+        "name": "Competences Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    },
+    {
+        "name": "Competences Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "Competences"
+    }
+]
