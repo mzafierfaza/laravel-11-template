@@ -53,7 +53,7 @@ class CoreGroupController extends Controller
      * @var FileService
      */
     private EmailService $emailService;
-    
+
     /**
      * exportable
      *
@@ -123,7 +123,13 @@ class CoreGroupController extends Controller
      */
     public function create()
     {
+        $filePath = public_path('assets/bidang_usaha.json');
+        $jsonContent = file_get_contents($filePath);
+        $data = json_decode($jsonContent, true); // true means array
+        $bidang_usaha = collect($data)->pluck('label', 'value')->toArray();
+
         return view('stisla.core-groups.form', [
+            'bidang_usaha' => $bidang_usaha,
             'title'         => __('Groups'),
             'fullTitle'     => __('Tambah Groups'),
             'routeIndex'    => route('core-groups.index'),
@@ -140,16 +146,16 @@ class CoreGroupController extends Controller
     public function store(CoreGroupRequest $request)
     {
         $data = $request->only([
-			'name',
-			'jenis_badan_usaha',
-			'badan_usaha',
-			'owner_name',
-			'owner_ktp',
-			'owner_npwp',
-			'address',
-			'pic_name',
-			'pic_phone',
-			'pic_email',
+            'name',
+            'jenis_badan_usaha',
+            'bidang_usaha',
+            'owner_name',
+            'owner_ktp',
+            'owner_npwp',
+            'address',
+            'pic_name',
+            'pic_phone',
+            'pic_email',
         ]);
 
         // gunakan jika ada file
@@ -185,7 +191,13 @@ class CoreGroupController extends Controller
      */
     public function edit(CoreGroup $coreGroup)
     {
+        $filePath = public_path('assets/bidang_usaha.json');
+        $jsonContent = file_get_contents($filePath);
+        $data = json_decode($jsonContent, true); // true means array
+        $bidang_usaha = collect($data)->pluck('label', 'value')->toArray();
+
         return view('stisla.core-groups.form', [
+            'bidang_usaha' => $bidang_usaha,
             'd'             => $coreGroup,
             'title'         => __('Groups'),
             'fullTitle'     => __('Ubah Groups'),
@@ -204,16 +216,16 @@ class CoreGroupController extends Controller
     public function update(CoreGroupRequest $request, CoreGroup $coreGroup)
     {
         $data = $request->only([
-			'name',
-			'jenis_badan_usaha',
-			'badan_usaha',
-			'owner_name',
-			'owner_ktp',
-			'owner_npwp',
-			'address',
-			'pic_name',
-			'pic_phone',
-			'pic_email',
+            'name',
+            'jenis_badan_usaha',
+            'badan_usaha',
+            'owner_name',
+            'owner_ktp',
+            'owner_npwp',
+            'address',
+            'pic_name',
+            'pic_phone',
+            'pic_email',
         ]);
 
         // gunakan jika ada file

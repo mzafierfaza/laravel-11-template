@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->enum('jenis_badan_usaha', ['perorangan', 'perusahaan'])->default('perorangan');
-            $table->string('badan_usaha')->nullable();
+            $table->string('bidang_usaha')->nullable();
             $table->string('owner_name')->nullable();
             $table->string('owner_ktp')->nullable();
             $table->string('owner_npwp')->nullable();

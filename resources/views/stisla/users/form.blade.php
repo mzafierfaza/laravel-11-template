@@ -76,6 +76,10 @@
               </div>
 
               <div class="col-md-6">
+                @include('stisla.includes.forms.selects.select2', ['required'=>true, 'type'=>'text', 'id'=>'role_id', 'name'=>'role_id', 'label'=>__('Divisi'), 'options'=>$roles, 'multiple'=>false])
+              </div>
+
+              <div class="col-md-6">
                 @include('stisla.includes.forms.inputs.input', ['required'=>true, 'type'=>'text', 'id'=>'phone', 'name'=>'phone', 'label'=>__('Nomor Telepon')])
               </div>
               <div class="col-md-6">

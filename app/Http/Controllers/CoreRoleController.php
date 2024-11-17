@@ -6,6 +6,7 @@ use App\Exports\CoreRoleExport;
 use App\Http\Requests\CoreRoleRequest;
 use App\Imports\CoreRoleImport;
 use App\Models\CoreRole;
+use App\Repositories\CoreGroupRepository;
 use App\Repositories\CoreRoleRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\UserRepository;
@@ -25,6 +26,7 @@ class CoreRoleController extends Controller
      * @var CoreRoleRepository
      */
     private CoreRoleRepository $coreRoleRepository;
+    private CoreGroupRepository $coreGroupRepository;
 
     /**
      * NotificationRepository
@@ -53,7 +55,7 @@ class CoreRoleController extends Controller
      * @var FileService
      */
     private EmailService $emailService;
-    
+
     /**
      * exportable
      *
@@ -76,6 +78,7 @@ class CoreRoleController extends Controller
     public function __construct()
     {
         $this->coreRoleRepository      = new CoreRoleRepository;
+        $this->coreGroupRepository = new CoreGroupRepository;
         $this->fileService            = new FileService;
         $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
@@ -123,7 +126,11 @@ class CoreRoleController extends Controller
      */
     public function create()
     {
+        $groups = $this->coreGroupRepository->all()
+            ->pluck('name', 'id')->toArray();
+
         return view('stisla.core-roles.form', [
+            'groups' => $groups,
             'title'         => __('Roles'),
             'fullTitle'     => __('Tambah Roles'),
             'routeIndex'    => route('core-roles.index'),
@@ -140,8 +147,8 @@ class CoreRoleController extends Controller
     public function store(CoreRoleRequest $request)
     {
         $data = $request->only([
-			'name',
-			'group_id',
+            'name',
+            'group_id',
         ]);
 
         // gunakan jika ada file
@@ -177,7 +184,10 @@ class CoreRoleController extends Controller
      */
     public function edit(CoreRole $coreRole)
     {
+        $groups = $this->coreGroupRepository->all()
+            ->pluck('name', 'id')->toArray();
         return view('stisla.core-roles.form', [
+            'groups'        => $groups,
             'd'             => $coreRole,
             'title'         => __('Roles'),
             'fullTitle'     => __('Ubah Roles'),
@@ -196,8 +206,8 @@ class CoreRoleController extends Controller
     public function update(CoreRoleRequest $request, CoreRole $coreRole)
     {
         $data = $request->only([
-			'name',
-			'group_id',
+            'name',
+            'group_id',
         ]);
 
         // gunakan jika ada file

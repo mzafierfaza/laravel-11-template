@@ -28,22 +28,25 @@ class UsersRequest extends FormRequest
                 'first_name' => ["required"],
                 'last_name' => [],
                 'email' => ["required", "email"],
+                'role_id' => ['required'],
                 'gender' => [],
                 'ktp' => [],
+                'nik' => [],
                 'npwp' => [],
                 'picture' => [],
                 'date_of_birth' => ["date"],
                 'region' => [],
                 'phone' => ["required"],
-
             ];
         }
         return [
             'first_name' => ["required"],
             'last_name' => [],
+            'role_id' => ['required'],
             'email' => ["required", "email"],
             'gender' => [],
             'ktp' => [],
+            'nik' => [],
             'npwp' => [],
             'picture' => [],
             'date_of_birth' => ["date"],

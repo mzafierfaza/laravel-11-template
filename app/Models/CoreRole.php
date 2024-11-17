@@ -7,51 +7,55 @@ use Illuminate\Database\Eloquent\Model;
 
 class CoreRole extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'core_roles';
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'core_roles';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'name',
-		'group_id',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name',
+    'group_id',
+  ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
+  public function group()
+  {
+    return $this->belongsTo(CoreGroup::class, 'group_id', 'id');
+  }
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
+  /**
+   * The attributes that should be cast to native types.
+   *
+   * @var array
+   */
+  protected $casts = [];
 
-    /**
-     * some columns model type
-     *
-     * @var array
-     */
-    const TYPES = [
-	];
+  /**
+   * Indicates if the model should be timestamped.
+   *
+   * @var bool
+   */
+  public $timestamps = true;
 
-    /**
-     * Default with relationship
-     *
-     * @var array
-     */
-    protected $with = [];
+  /**
+   * some columns model type
+   *
+   * @var array
+   */
+  const TYPES = [];
+
+  /**
+   * Default with relationship
+   *
+   * @var array
+   */
+  protected $with = [];
 }

@@ -17,6 +17,11 @@ class Repository extends RepositoryAbstract
      *
      * @return Collection
      */
+    public function with($relations)
+    {
+        return $this->model->with($relations);
+    }
+
     public function all()
     {
         return $this->model->all();
@@ -27,6 +32,8 @@ class Repository extends RepositoryAbstract
      *
      * @return Collection
      */
+
+
     public function getLatest()
     {
         return $this->model->latest()->get();
@@ -115,6 +122,8 @@ class Repository extends RepositoryAbstract
      * @param mixed $id
      * @return Model
      */
+
+
     public function findOrFail($id)
     {
         return $this->model->findOrFail($id);

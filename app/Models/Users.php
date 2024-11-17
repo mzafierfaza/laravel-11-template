@@ -11,25 +11,15 @@ class Users extends Model
 {
   use HasFactory;
 
-  protected $needApproval = true;
-  /**
-   * The table associated with the model.
-   *
-   * @var string
-   */
   protected $table = 'core_users';
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
   protected $fillable = [
     'id',
     'first_name',
     'last_name',
     'email',
     'gender',
+    'role_id',
     'ktp',
     'npwp',
     'picture',

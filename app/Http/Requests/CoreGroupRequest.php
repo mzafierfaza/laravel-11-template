@@ -25,30 +25,30 @@ class CoreGroupRequest extends FormRequest
     {
         if ($this->isMethod('put')) {
             return [
-				'name' => [],
-				'jenis_badan_usaha' => [],
-				'badan_usaha' => [],
-				'owner_name' => [],
-				'owner_ktp' => [],
-				'owner_npwp' => [],
-				'address' => [],
-				'pic_name' => [],
-				'pic_phone' => [],
-				'pic_email' => [],
+                'name' => [],
+                'jenis_badan_usaha' => [],
+                'bidang_usaha' => [],
+                'owner_name' => [],
+                'owner_ktp' => [],
+                'owner_npwp' => [],
+                'address' => [],
+                'pic_name' => [],
+                'pic_phone' => [],
+                'pic_email' => [],
 
             ];
         }
         return [
-			'name' => [],
-			'jenis_badan_usaha' => [],
-			'badan_usaha' => [],
-			'owner_name' => [],
-			'owner_ktp' => [],
-			'owner_npwp' => [],
-			'address' => [],
-			'pic_name' => [],
-			'pic_phone' => [],
-			'pic_email' => [],
+            'name' => [],
+            'jenis_badan_usaha' => [],
+            'bidang_usaha' => [],
+            'owner_name' => [],
+            'owner_ktp' => [],
+            'owner_npwp' => [],
+            'address' => [],
+            'pic_name' => [],
+            'pic_phone' => [],
+            'pic_email' => [],
 
         ];
     }

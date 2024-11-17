@@ -1,0 +1,306 @@
+[
+    {
+        "value": "PERDAGANGAN BESAR",
+        "label": "Perdagangan Besar"
+    },
+    {
+        "value": "PERDAGANGAN ECERAN",
+        "label": "Perdagangan Eceran"
+    },
+    {
+        "value": "E-COMMERCE",
+        "label": "E-Commerce"
+    },
+    {
+        "value": "EKSPOR-IMPOR",
+        "label": "Ekspor-Impor"
+    },
+    {
+        "value": "RETAIL MODERN",
+        "label": "Retail Modern"
+    },
+    {
+        "value": "TOKO KELONTONG",
+        "label": "Toko Kelontong"
+    },
+    {
+        "value": "INDUSTRI MAKANAN DAN MINUMAN",
+        "label": "Industri Makanan dan Minuman"
+    },
+    {
+        "value": "INDUSTRI TEKSTIL",
+        "label": "Industri Tekstil"
+    },
+    {
+        "value": "INDUSTRI OTOMOTIF",
+        "label": "Industri Otomotif"
+    },
+    {
+        "value": "INDUSTRI ELEKTRONIK",
+        "label": "Industri Elektronik"
+    },
+    {
+        "value": "INDUSTRI KIMIA",
+        "label": "Industri Kimia"
+    },
+    {
+        "value": "INDUSTRI FARMASI",
+        "label": "Industri Farmasi"
+    },
+    {
+        "value": "INDUSTRI LOGAM",
+        "label": "Industri Logam"
+    },
+    {
+        "value": "JASA KEUANGAN",
+        "label": "Jasa Keuangan"
+    },
+    {
+        "value": "JASA PENDIDIKAN",
+        "label": "Jasa Pendidikan"
+    },
+    {
+        "value": "JASA KESEHATAN",
+        "label": "Jasa Kesehatan"
+    },
+    {
+        "value": "JASA TRANSPORTASI",
+        "label": "Jasa Transportasi"
+    },
+    {
+        "value": "JASA KONSULTASI",
+        "label": "Jasa Konsultasi"
+    },
+    {
+        "value": "JASA PARIWISATA",
+        "label": "Jasa Pariwisata"
+    },
+    {
+        "value": "JASA PERHOTELAN",
+        "label": "Jasa Perhotelan"
+    },
+    {
+        "value": "JASA KONSTRUKSI",
+        "label": "Jasa Konstruksi"
+    },
+    {
+        "value": "PERTANIAN TANAMAN PANGAN",
+        "label": "Pertanian Tanaman Pangan"
+    },
+    {
+        "value": "PERKEBUNAN",
+        "label": "Perkebunan"
+    },
+    {
+        "value": "PETERNAKAN",
+        "label": "Peternakan"
+    },
+    {
+        "value": "PERIKANAN",
+        "label": "Perikanan"
+    },
+    {
+        "value": "KEHUTANAN",
+        "label": "Kehutanan"
+    },
+    {
+        "value": "AGRIBISNIS",
+        "label": "Agribisnis"
+    },
+    {
+        "value": "PENGEMBANGAN SOFTWARE",
+        "label": "Pengembangan Software"
+    },
+    {
+        "value": "STARTUP DIGITAL",
+        "label": "Startup Digital"
+    },
+    {
+        "value": "FINTECH",
+        "label": "Fintech"
+    },
+    {
+        "value": "CLOUD COMPUTING",
+        "label": "Cloud Computing"
+    },
+    {
+        "value": "CYBER SECURITY",
+        "label": "Cyber Security"
+    },
+    {
+        "value": "PENGEMBANG PERUMAHAN",
+        "label": "Pengembang Perumahan"
+    },
+    {
+        "value": "PROPERTI KOMERSIAL",
+        "label": "Properti Komersial"
+    },
+    {
+        "value": "AGEN PROPERTI",
+        "label": "Agen Properti"
+    },
+    {
+        "value": "PENGELOLAAN GEDUNG",
+        "label": "Pengelolaan Gedung"
+    },
+    {
+        "value": "ARSITEKTUR DAN DESAIN INTERIOR",
+        "label": "Arsitektur dan Desain Interior"
+    },
+    {
+        "value": "RESTORAN",
+        "label": "Restoran"
+    },
+    {
+        "value": "KAFE",
+        "label": "Kafe"
+    },
+    {
+        "value": "KATERING",
+        "label": "Katering"
+    },
+    {
+        "value": "WARUNG MAKAN",
+        "label": "Warung Makan"
+    },
+    {
+        "value": "FOOD TRUCK",
+        "label": "Food Truck"
+    },
+    {
+        "value": "BAKERY DAN PASTRY",
+        "label": "Bakery dan Pastry"
+    },
+    {
+        "value": "DESAIN GRAFIS",
+        "label": "Desain Grafis"
+    },
+    {
+        "value": "PERIKLANAN",
+        "label": "Periklanan"
+    },
+    {
+        "value": "FOTOGRAFI DAN VIDEOGRAFI",
+        "label": "Fotografi dan Videografi"
+    },
+    {
+        "value": "FASHION",
+        "label": "Fashion"
+    },
+    {
+        "value": "KERAJINAN TANGAN",
+        "label": "Kerajinan Tangan"
+    },
+    {
+        "value": "SENI DAN HIBURAN",
+        "label": "Seni dan Hiburan"
+    },
+    {
+        "value": "ENERGI TERBARUKAN",
+        "label": "Energi Terbarukan"
+    },
+    {
+        "value": "MINYAK DAN GAS",
+        "label": "Minyak dan Gas"
+    },
+    {
+        "value": "PERTAMBANGAN",
+        "label": "Pertambangan"
+    },
+    {
+        "value": "DISTRIBUSI ENERGI",
+        "label": "Distribusi Energi"
+    },
+    {
+        "value": "INDUSTRI RUMAHAN",
+        "label": "Industri Rumahan"
+    },
+    {
+        "value": "JASA LAUNDRY",
+        "label": "Jasa Laundry"
+    },
+    {
+        "value": "BENGKEL",
+        "label": "Bengkel"
+    },
+    {
+        "value": "SALON KECANTIKAN",
+        "label": "Salon Kecantikan"
+    },
+    {
+        "value": "APOTEK",
+        "label": "Apotek"
+    },
+    {
+        "value": "KLINIK KESEHATAN",
+        "label": "Klinik Kesehatan"
+    },
+    {
+        "value": "STUDIO MUSIK",
+        "label": "Studio Musik"
+    },
+    {
+        "value": "RENTAL MOBIL",
+        "label": "Rental Mobil"
+    },
+    {
+        "value": "BIMBINGAN BELAJAR",
+        "label": "Bimbingan Belajar"
+    },
+    {
+        "value": "TOKO BUKU",
+        "label": "Toko Buku"
+    },
+    {
+        "value": "PERCETAKAN",
+        "label": "Percetakan"
+    },
+    {
+        "value": "TOKO PAKAIAN",
+        "label": "Toko Pakaian"
+    },
+    {
+        "value": "TOKO ELEKTRONIK",
+        "label": "Toko Elektronik"
+    },
+    {
+        "value": "MINIMARKET",
+        "label": "Minimarket"
+    },
+    {
+        "value": "SUPERMARKET",
+        "label": "Supermarket"
+    },
+    {
+        "value": "TOKO BANGUNAN",
+        "label": "Toko Bangunan"
+    },
+    {
+        "value": "TOKO ALAT TULIS",
+        "label": "Toko Alat Tulis"
+    },
+    {
+        "value": "TOKO KOSMETIK",
+        "label": "Toko Kosmetik"
+    },
+    {
+        "value": "TOKO PERHIASAN",
+        "label": "Toko Perhiasan"
+    },
+    {
+        "value": "BARBERSHOP",
+        "label": "Barbershop"
+    },
+    {
+        "value": "PERAWATAN KECANTIKAN",
+        "label": "Perawatan Kecantikan"
+    },
+    {
+        "value": "STUDIO YOGA",
+        "label": "Studio Yoga"
+    },
+    {
+        "value": "GYM DAN PUSAT KEBUGARAN",
+        "label": "Gym dan Pusat Kebugaran"
+    }
+]

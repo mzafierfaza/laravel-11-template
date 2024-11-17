@@ -8,6 +8,7 @@ use App\Helpers\StringHelper;
 use App\Http\Requests\UsersRequest;
 use App\Imports\UsersImport;
 use App\Models\Users;
+use App\Repositories\CoreRoleRepository;
 use App\Repositories\UsersRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\RegisterLogRepository;
@@ -25,65 +26,24 @@ use Carbon\Carbon;
 class UsersController extends Controller
 {
 
-    /**
-     * usersRepository
-     *
-     * @var UsersRepository
-     */
+
     private UsersRepository $usersRepository;
-
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
+    private CoreRoleRepository $coreRoleRepository;
     private NotificationRepository $NotificationRepository;
-
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
-
     private RegisterLogRepository $registerLogRepository;
-
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
-
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
 
-    /**
-     * exportable
-     *
-     * @var bool
-     */
     private bool $exportable = true;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
+
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->usersRepository      = new UsersRepository;
+        $this->coreRoleRepository = new CoreRoleRepository;
         $this->registerLogRepository = new RegisterLogRepository;
         $this->fileService            = new FileService;
         $this->emailService           = new EmailService;
@@ -136,16 +96,25 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // dd('create');
-        // $d = new Users;
-        // dd($d);
+        $roles = $this->coreRoleRepository->query()->with('group')->get()->map(function ($role) {
+            // dd($role);
+            $groupName = $role->group ? $role->group->name : '-';
+
+            return [
+                'id' => $role->id,
+                'name' => $role->name . ' (' . $groupName . ')'
+            ];
+        })
+            ->pluck('name', 'id')->toArray();
+
+        // $roles = $this->coreRoleRepository->with('coreGroup')->all()->pluck('name', 'id')->toArray();
         $filePath = public_path('assets/region.json');
         $jsonContent = file_get_contents($filePath);
         $data = json_decode($jsonContent, true); // true means array
         $regions = collect($data)->pluck('alt_name', 'name')->toArray();
 
         return view('stisla.users.form', [
-            // 'd' => $d,
+            'roles' => $roles,
             'title'         => __('Peserta'),
             'fullTitle'     => __('Tambah Peserta'),
             'routeIndex'    => route('users.index'),
@@ -172,7 +141,9 @@ class UsersController extends Controller
             'last_name',
             'email',
             'gender',
+            'role_id',
             'ktp',
+            'nik',
             'npwp',
             'date_of_birth',
             'region',
@@ -245,6 +216,14 @@ class UsersController extends Controller
      */
     public function edit(Users $users)
     {
+        $roles = $this->coreRoleRepository->query()->with('group')->get()->map(function ($role) {
+            // dd($role);
+            $groupName = $role->group ? $role->group->name : '-';
+            return [
+                'id' => $role->id,
+                'name' => $role->name . ' (' . $groupName . ')'
+            ];
+        })->pluck('name', 'id')->toArray();
 
         $filePath = public_path('assets/region.json');
         $jsonContent = file_get_contents($filePath);
@@ -254,6 +233,7 @@ class UsersController extends Controller
 
         return view('stisla.users.form', [
             'd'             => $users,
+            'roles'         => $roles,
             'notyet'        => $notyet,
             'regions' => $regions,
             'title'         => __('Users'),
@@ -311,6 +291,7 @@ class UsersController extends Controller
             'ktp',
             'npwp',
             'date_of_birth',
+            'role_id',
             'region',
             'phone',
             'religion',
