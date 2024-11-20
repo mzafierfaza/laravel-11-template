@@ -1,0 +1,62 @@
+[
+    {
+        "value": "OLAHRAGA",
+        "label": "Olahraga"
+    },
+    {
+        "value": "TEKNOLOGI_INFORMASI",
+        "label": "Teknologi Informasi"
+    },
+    {
+        "value": "BAHASA_ASING",
+        "label": "Bahasa Asing"
+    },
+    {
+        "value": "KEUANGAN",
+        "label": "Keuangan"
+    },
+    {
+        "value": "KEWIRAUSAHAAN",
+        "label": "Kewirausahaan"
+    },
+    {
+        "value": "SENI_MUSIK",
+        "label": "Seni Musik"
+    },
+    {
+        "value": "FOTOGRAFI",
+        "label": "Fotografi"
+    },
+    {
+        "value": "MEMASAK",
+        "label": "Memasak"
+    },
+    {
+        "value": "DESAIN_GRAFIS",
+        "label": "Desain Grafis"
+    },
+    {
+        "value": "DIGITAL_MARKETING",
+        "label": "Digital Marketing"
+    },
+    {
+        "value": "PUBLIC_SPEAKING",
+        "label": "Public Speaking"
+    },
+    {
+        "value": "MANAJEMEN_PROYEK",
+        "label": "Manajemen Proyek"
+    },
+    {
+        "value": "YOGA_DAN_MEDITASI",
+        "label": "Yoga dan Meditasi"
+    },
+    {
+        "value": "KERAJINAN_TANGAN",
+        "label": "Kerajinan Tangan"
+    },
+    {
+        "value": "PENGEMBANGAN_DIRI",
+        "label": "Pengembangan Diri"
+    }
+]

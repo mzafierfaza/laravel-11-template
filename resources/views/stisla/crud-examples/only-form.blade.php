@@ -79,7 +79,6 @@
     'options' => $radioOptions,
     ])
   </div>
-
   <div class="col-md-6">
     @include('stisla.includes.forms.inputs.input-checkbox-custom', [
     'required' => true,

@@ -57,6 +57,15 @@ class UserRepository extends Repository
         return $this->model->where('email', $email)->first();
     }
 
+    public function getUsersByRolename(string $role_name)
+    {
+        return $this->model->with(['roles'])->whereHas('roles', function ($query) use ($role_name) {
+            $query->where('name', $role_name);
+        })->pluck('name', 'id');
+        // return $this->model->with(['roles'])->where('dashin_roles.name', $role_name)->get();
+        // return $this->model->where('name', $role_name)->first();
+    }
+
     /**
      * find user by twitter id
      *
@@ -146,7 +155,7 @@ class UserRepository extends Repository
     public function getRoleOptions()
     {
         return $this->getRoles()
-            ->pluck('name', 'id')
+            ->pluck('name', 'name')
             ->toArray();
     }
 

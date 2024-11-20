@@ -621,6 +621,7 @@ return [
     'roles' => [
         'superadmin',
         'admin',
+        'pengajar',
         'user'
     ],
 

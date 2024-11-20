@@ -36,6 +36,11 @@ class Users extends Model
     'approved_desc',
   ];
 
+  public function role()
+  {
+    return $this->belongsTo(CoreRole::class, 'role_id', 'id');
+  }
+
   /**
    * The attributes that should be cast to native types.
    *

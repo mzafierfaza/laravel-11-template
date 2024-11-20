@@ -49,7 +49,7 @@
               </div>
 
               <div class="col-md-6">
-                @include('stisla.includes.forms.inputs.input', ['required'=>true, 'type'=>'email', 'id'=>'email', 'name'=>'email', 'label'=>__('Email')])
+                @include('stisla.includes.forms.inputs.input-email', ['required'=>true, 'type'=>'email', 'id'=>'email', 'name'=>'email', 'label'=>__('Email')])
               </div>
 
               <div class="col-md-6">

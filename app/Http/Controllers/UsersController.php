@@ -108,10 +108,12 @@ class UsersController extends Controller
             ->pluck('name', 'id')->toArray();
 
         // $roles = $this->coreRoleRepository->with('coreGroup')->all()->pluck('name', 'id')->toArray();
-        $filePath = public_path('assets/region.json');
-        $jsonContent = file_get_contents($filePath);
-        $data = json_decode($jsonContent, true); // true means array
-        $regions = collect($data)->pluck('alt_name', 'name')->toArray();
+        // $filePath = public_path('assets/region.json');
+        // $jsonContent = file_get_contents($filePath);
+        // $data = json_decode($jsonContent, true); // true means array
+        // $regions = collect($data)->pluck('alt_name', 'name')->toArray();
+        $regions = $this->getDropdownOptions('region.json');
+
 
         return view('stisla.users.form', [
             'roles' => $roles,
@@ -225,7 +227,7 @@ class UsersController extends Controller
             ];
         })->pluck('name', 'id')->toArray();
 
-        $filePath = public_path('assets/region.json');
+        $filePath = public_path('assets/dropdown/region.json');
         $jsonContent = file_get_contents($filePath);
         $data = json_decode($jsonContent, true); // true means array
         $regions = collect($data)->pluck('alt_name', 'name')->toArray();
@@ -289,6 +291,7 @@ class UsersController extends Controller
             'email',
             'gender',
             'ktp',
+            'nik',
             'npwp',
             'date_of_birth',
             'role_id',

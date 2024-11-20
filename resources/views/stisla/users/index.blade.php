@@ -100,7 +100,8 @@
             <th class="text-center">#</th>
             <th class="text-center">{{ __('Nama Lengkap') }}</th>
             <th class="text-center">{{ __('Email') }}</th>
-            <th class="text-center">{{ __('NIK') }}</th>
+            <th class="text-center">{{ __('Divisi') }}</th>
+            <th class="text-center">{{ __('Unit') }}</th>
             <th class="text-center">{{ __('Verifikasi') }}</th>
             <th class="text-center">{{ __('Status') }}</th>
             <th class="text-center">{{ __('Dibuat') }}</th>
@@ -113,7 +114,8 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item->first_name . ' ' . $item->last_name }}</td>
             <td>{{ $item->email }}</td>
-            <td>{{ $item->nik }}</td>
+            <td>{{ $item->role->name ?? '-' }}</td>
+            <td>{{ $item->role->group->name ?? '-' }}</td>
             <td class="text-center">
               @if ($item->verification_password_at == null)
               <span class=" badge badge-secondary">Belum</span>

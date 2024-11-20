@@ -123,10 +123,7 @@ class CoreGroupController extends Controller
      */
     public function create()
     {
-        $filePath = public_path('assets/bidang_usaha.json');
-        $jsonContent = file_get_contents($filePath);
-        $data = json_decode($jsonContent, true); // true means array
-        $bidang_usaha = collect($data)->pluck('label', 'value')->toArray();
+        $bidang_usaha = $this->getDropdownOptions('bidang_usaha.json');
 
         return view('stisla.core-groups.form', [
             'bidang_usaha' => $bidang_usaha,

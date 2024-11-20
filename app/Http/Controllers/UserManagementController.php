@@ -76,7 +76,7 @@ class UserManagementController extends StislaController
     {
         $roleOptions = $this->userRepository->getRoleOptions();
         if ($user->roles->count() > 1)
-            $user->role = $user->roles->pluck('id')->toArray();
+            $user->role = $user->roles->pluck('name')->toArray();
         else
             $user->role = $user->roles->first()->id ?? null;
         $defaultData = $this->getDefaultDataDetail(__('Pengguna'), 'user-management.users', $user, $isDetail);
@@ -167,7 +167,7 @@ class UserManagementController extends StislaController
     public function update(UserRequest $request, User $user)
     {
         $data = $this->getStoreData($request);
-
+        // dd($request->role);
         $userNew = $this->userRepository->update($data, $user->id);
         $this->userRepository->syncRoles($userNew, $request->role);
         logUpdate('Pengguna', $user, $userNew);

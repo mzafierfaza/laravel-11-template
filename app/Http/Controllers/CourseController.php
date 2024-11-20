@@ -53,13 +53,13 @@ class CourseController extends Controller
      * @var FileService
      */
     private EmailService $emailService;
-    
+
     /**
      * exportable
      *
      * @var bool
      */
-    private bool $exportable = false;
+    private bool $exportable = true;
 
     /**
      * importable
@@ -116,14 +116,21 @@ class CourseController extends Controller
         ]);
     }
 
-    /**
-     * showing add new data form page
-     *
-     * @return Response
-     */
+    public function show(Course $course)
+    {
+        //
+    }
+
     public function create()
     {
+        $topik = $this->getDropdownOptions('topik.json');
+        // get pengajar
+        $pengajars = $this->UserRepository->getUsersByRolename('pengajar');
+        // dd($pengajars);
+
         return view('stisla.courses.form', [
+            'topik' => $topik,
+            'pengajars' => $pengajars,
             'title'         => __('Courses'),
             'fullTitle'     => __('Tambah Courses'),
             'routeIndex'    => route('courses.index'),
@@ -139,42 +146,41 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
+        // dd($request);
         $data = $request->only([
-			'title',
-			'description',
-			'procedurs',
-			'topic',
-			'format',
-			'is_random_material',
-			'is_premium',
-			'price',
-			'created_by',
-			'is_active',
-			'start_date',
-			'end_date',
-			'start_time',
-			'end_time',
-			'address',
-			'is_repeat_enrollment',
-			'max_repeat_enrollment',
-			'max_enrollment',
-			'is_class_test',
-			'is_class_finish',
-			'status',
-			'approved_status',
-			'approved_at',
-			'approved_by',
-			'teacher_id',
-			'teacher_about',
-			'image',
-			'certificate',
-			'certificate_can_download',
+            'title',
+            'description',
+            'procedurs',
+            'topic',
+            'format',
+            'is_random_material',
+            'max_repeat_enrollment',
+            'max_enrollment',
+            'is_premium',
+            'price',
+            'is_active',
+            'start_date',
+            'end_date',
+            'is_active',
+            'address',
+            'is_repeat_enrollment',
+            'max_enrollment',
+            'is_class_test',
+            'is_class_finish',
+            'teacher_id',
+            'teacher_about',
+            'image',
+            'certificate',
         ]);
 
         // gunakan jika ada file
         // if ($request->hasFile('file')) {
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
+        $data["created_by"] = auth()->user()->id;
+        $data["approved_status"] = 0;
+        $data["start_time"] = $request->start_date . " " . $request->start_time;
+        $data["end_time"] = $request->end_date . " " . $request->end_time;
 
         $result = $this->courseRepository->create($data);
 
@@ -204,7 +210,13 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+
+        $topik = $this->getDropdownOptions('topik.json');
+        // get pengajar
+        $pengajars = $this->UserRepository->getUsersByRolename('pengajar');
         return view('stisla.courses.form', [
+            'topik' => $topik,
+            'pengajars' => $pengajars,
             'd'             => $course,
             'title'         => __('Courses'),
             'fullTitle'     => __('Ubah Courses'),
@@ -223,36 +235,33 @@ class CourseController extends Controller
     public function update(CourseRequest $request, Course $course)
     {
         $data = $request->only([
-			'title',
-			'description',
-			'procedurs',
-			'topic',
-			'format',
-			'is_random_material',
-			'is_premium',
-			'price',
-			'created_by',
-			'is_active',
-			'start_date',
-			'end_date',
-			'start_time',
-			'end_time',
-			'address',
-			'is_repeat_enrollment',
-			'max_repeat_enrollment',
-			'max_enrollment',
-			'is_class_test',
-			'is_class_finish',
-			'status',
-			'approved_status',
-			'approved_at',
-			'approved_by',
-			'teacher_id',
-			'teacher_about',
-			'image',
-			'certificate',
-			'certificate_can_download',
+            'title',
+            'description',
+            'procedurs',
+            'topic',
+            'format',
+            'is_random_material',
+            'max_repeat_enrollment',
+            'max_enrollment',
+            'is_premium',
+            'price',
+            'is_active',
+            'start_date',
+            'end_date',
+            'is_active',
+            'address',
+            'is_repeat_enrollment',
+            'max_enrollment',
+            'is_class_test',
+            'is_class_finish',
+            'teacher_id',
+            'teacher_about',
+            'image',
+            'certificate',
         ]);
+        $data["approved_status"] = 0;
+        $data["start_time"] = $request->start_date . " " . $request->start_time;
+        $data["end_time"] = $request->end_date . " " . $request->end_time;
 
         // gunakan jika ada file
         // if ($request->hasFile('file')) {
