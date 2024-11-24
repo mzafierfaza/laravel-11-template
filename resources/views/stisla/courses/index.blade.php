@@ -147,6 +147,7 @@
             <td>
               @if ($canUpdate)
               @include('stisla.includes.forms.buttons.btn-edit', ['link' => route('courses.edit', [$item->id])])
+              @include('stisla.includes.forms.buttons.btn-view', ['link' => route('courses.show', [$item->id])])
               @endif
               @if ($canDelete)
               @include('stisla.includes.forms.buttons.btn-delete', ['link' => route('courses.destroy', [$item->id])])

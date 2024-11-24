@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->string('file_path')->nullable();
             $table->integer('duration_minutes')->nullable();
-            $table->enum('type', ['document', 'video', 'link'])->default('document');
+            $table->string('type')->nullable();
             $table->integer('order')->default(0);
             $table->boolean('is_progress')->default(true);
             $table->timestamps();

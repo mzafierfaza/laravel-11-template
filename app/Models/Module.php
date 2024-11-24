@@ -7,54 +7,62 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'modules';
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'modules';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'course_id',
-		'title',
-		'description',
-		'order',
-		'deleted_at',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'course_id',
+    'title',
+    'description',
+    'order',
+    'deleted_at',
+  ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
+  protected $casts = [];
 
-    /**
-     * some columns model type
-     *
-     * @var array
-     */
-    const TYPES = [
-	];
 
-    /**
-     * Default with relationship
-     *
-     * @var array
-     */
-    protected $with = [];
+  public $timestamps = true;
+
+  const TYPES = [];
+  protected $with = [];
+
+  public function materials()
+  {
+    return $this->hasMany(Material::class);
+  }
+
+  // public function countVideo(int $id)
+  // {
+  //   return Material::where('module_id', $id)->where('type', 'video')->count();
+  // }
+
+  // public function countTest(int $id)
+  // {
+  //   return Material::where('module_id', $id)->where('type', 'test')->count();
+  // }
+
+  public function countVideo()
+  {
+    return Material::where('module_id', $this->id)->where('type', 'video')->count();
+  }
+  public function countText()
+  {
+    return Material::where('module_id', $this->id)->where('type', 'text')->count();
+  }
+  public function countTest()
+  {
+    return Material::where('module_id', $this->id)->where('type', 'test')->count();
+  }
 }

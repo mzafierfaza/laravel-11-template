@@ -1,0 +1,50 @@
+[
+    {
+        "name": "MODULENAME",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    },
+    {
+        "name": "MODULENAME Tambah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    },
+    {
+        "name": "MODULENAME Impor Excel",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    },
+    {
+        "name": "MODULENAME Ubah",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    },
+    {
+        "name": "MODULENAME Hapus",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    },
+    {
+        "name": "MODULENAME Ekspor",
+        "roles": [
+            "superadmin",
+            "admin"
+        ],
+        "group": "MODULENAME"
+    }
+]

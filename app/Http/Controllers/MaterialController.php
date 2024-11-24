@@ -19,65 +19,23 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class MaterialController extends Controller
 {
-    /**
-     * materialRepository
-     *
-     * @var MaterialRepository
-     */
     private MaterialRepository $materialRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
 
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
 
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
 
-    /**
-     * email service
-     *
-     * @var FileService
-     */
-    private EmailService $emailService;
-    
-    /**
-     * exportable
-     *
-     * @var bool
-     */
+
     private bool $exportable = false;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->materialRepository      = new MaterialRepository;
         $this->fileService            = new FileService;
-        $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
         $this->UserRepository         = new UserRepository;
 
@@ -140,21 +98,26 @@ class MaterialController extends Controller
     public function store(MaterialRequest $request)
     {
         $data = $request->only([
-			'module_id',
-			'title',
-			'content',
-			'file_path',
-			'duration_minutes',
-			'type',
-			'order',
-			'is_progress',
-			'deleted_at',
+            'module_id',
+            'title',
+            'content',
+            'file_path',
+            'duration_minutes',
+            'type',
+            'order',
+            'is_progress',
+            'deleted_at',
         ]);
 
         // gunakan jika ada file
-        // if ($request->hasFile('file')) {
-        //     $data['file'] = $this->fileService->methodName($request->file('file'));
-        // }
+        if ($request->hasFile('file_path')) {
+            $file = $request->file('file_path');
+            $upload = $this->fileService->uploadMinio($file, 'materials/documents/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['file_path'] = $res->url;
+            }
+        }
 
         $result = $this->materialRepository->create($data);
 
@@ -171,6 +134,13 @@ class MaterialController extends Controller
         // $this->emailService->methodName($result);
 
         logCreate("Materials", $result);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'success menambahkan Materi',
+            ]);
+        }
 
         $successMessage = successMessageCreate("Materials");
         return redirect()->back()->with('successMessage', $successMessage);
@@ -203,15 +173,15 @@ class MaterialController extends Controller
     public function update(MaterialRequest $request, Material $material)
     {
         $data = $request->only([
-			'module_id',
-			'title',
-			'content',
-			'file_path',
-			'duration_minutes',
-			'type',
-			'order',
-			'is_progress',
-			'deleted_at',
+            'module_id',
+            'title',
+            'content',
+            'file_path',
+            'duration_minutes',
+            'type',
+            'order',
+            'is_progress',
+            'deleted_at',
         ]);
 
         // gunakan jika ada file
@@ -234,6 +204,12 @@ class MaterialController extends Controller
         // $this->emailService->methodName($newData);
 
         logUpdate("Materials", $material, $newData);
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'success update Materi',
+            ]);
+        }
 
         $successMessage = successMessageUpdate("Materials");
         return redirect()->back()->with('successMessage', $successMessage);

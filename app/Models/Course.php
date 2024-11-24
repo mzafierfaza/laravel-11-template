@@ -7,78 +7,62 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'courses';
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'courses';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'title',
-		'description',
-		'procedurs',
-		'topic',
-		'format',
-		'is_random_material',
-		'is_premium',
-		'price',
-		'created_by',
-		'is_active',
-		'start_date',
-		'end_date',
-		'start_time',
-		'end_time',
-		'address',
-		'is_repeat_enrollment',
-		'max_repeat_enrollment',
-		'max_enrollment',
-		'is_class_test',
-		'is_class_finish',
-		'status',
-		'approved_status',
-		'approved_at',
-		'approved_by',
-		'teacher_id',
-		'teacher_about',
-		'image',
-		'certificate',
-		'certificate_can_download',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'title',
+    'description',
+    'procedurs',
+    'topic',
+    'format',
+    'is_random_material',
+    'is_premium',
+    'price',
+    'created_by',
+    'is_active',
+    'start_date',
+    'end_date',
+    'start_time',
+    'end_time',
+    'address',
+    'is_repeat_enrollment',
+    'max_repeat_enrollment',
+    'max_enrollment',
+    'is_class_test',
+    'is_class_finish',
+    'status',
+    'approved_status',
+    'approved_at',
+    'approved_by',
+    'teacher_id',
+    'teacher_about',
+    'image',
+    'certificate',
+    'certificate_can_download',
+  ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
+  protected $casts = [];
 
-    /**
-     * some columns model type
-     *
-     * @var array
-     */
-    const TYPES = [
-	];
 
-    /**
-     * Default with relationship
-     *
-     * @var array
-     */
-    protected $with = [];
+  public $timestamps = true;
+  const TYPES = [];
+  protected $with = [];
+
+  public function modules()
+  {
+    return $this->hasMany(Module::class);
+  }
 }

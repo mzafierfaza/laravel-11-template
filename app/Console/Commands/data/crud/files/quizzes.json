@@ -1,12 +1,12 @@
 {
-    "title": "Competence Courses",
-    "icon": "link",
-    "model": "CompetenceCourse",
+    "title": "Quizzes",
+    "icon": "check-square",
+    "model": "Quiz",
     "columns": [
         {
-            "name": "competence_id",
+            "name": "module_id",
             "type": "bigint",
-            "label": "Kompetensi",
+            "label": "Modul",
             "form": {
                 "type": "select",
                 "required": 2
@@ -22,39 +22,145 @@
             "nullable": false,
             "unique": false,
             "foreign": {
-                "on": "competences",
+                "on": "modules",
                 "references": "id",
                 "onUpdate": "cascade",
                 "onDelete": "cascade"
             }
         },
         {
-            "name": "course_id",
-            "type": "bigint",
-            "label": "Kursus",
+            "name": "title",
+            "type": "string",
+            "label": "Judul",
             "form": {
-                "type": "select",
+                "type": "inputtext",
                 "required": 2
             },
             "validations": {
-                "store": [
-                    "required"
-                ],
-                "update": [
-                    "required"
-                ]
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "description",
+            "type": "text",
+            "label": "Deskripsi",
+            "form": {
+                "type": "textarea",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "duration_minutes",
+            "type": "integer",
+            "label": "Durasi (Menit)",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
             },
             "nullable": false,
             "unique": false,
-            "foreign": {
-                "on": "courses",
-                "references": "id",
-                "onUpdate": "cascade",
-                "onDelete": "cascade"
-            }
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "passing_score",
+            "type": "integer",
+            "label": "Nilai Kelulusan",
+            "form": {
+                "type": "inputnumber",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": 0
+        },
+        {
+            "name": "start_time",
+            "type": "timestamp",
+            "label": "Waktu Mulai",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "end_time",
+            "type": "timestamp",
+            "label": "Waktu Selesai",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
+        },
+        {
+            "name": "is_randomize",
+            "type": "boolean",
+            "label": "Acak Soal",
+            "form": {
+                "type": "checkbox",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": false,
+            "unique": false,
+            "foreign": null,
+            "default": false
         },
         {
             "type": "timestamps"
+        },
+        {
+            "name": "deleted_at",
+            "type": "timestamp",
+            "label": "Dihapus Pada",
+            "form": {
+                "type": "inputdatetime",
+                "required": 2
+            },
+            "validations": {
+                "store": [],
+                "update": []
+            },
+            "nullable": true,
+            "unique": false,
+            "foreign": null
         }
     ]
 }

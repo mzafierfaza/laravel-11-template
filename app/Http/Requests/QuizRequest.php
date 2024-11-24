@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ModuleRequest extends FormRequest
+class QuizRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +25,28 @@ class ModuleRequest extends FormRequest
     {
         if ($this->isMethod('put')) {
             return [
-                'course_id' => [],
-                'title' => [],
-                'description' => [],
-                'order' => [],
-                'deleted_at' => [],
+				'module_id' => ["required"],
+				'title' => [],
+				'description' => [],
+				'duration_minutes' => [],
+				'passing_score' => [],
+				'start_time' => [],
+				'end_time' => [],
+				'is_randomize' => [],
+				'deleted_at' => [],
 
             ];
         }
         return [
-            'course_id' => [],
-            'title' => [],
-            'description' => [],
-            'order' => [],
-            'deleted_at' => [],
+			'module_id' => ["required"],
+			'title' => [],
+			'description' => [],
+			'duration_minutes' => [],
+			'passing_score' => [],
+			'start_time' => [],
+			'end_time' => [],
+			'is_randomize' => [],
+			'deleted_at' => [],
 
         ];
     }

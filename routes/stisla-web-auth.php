@@ -1,17 +1,18 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\Api\ProdukController;
+use App\Http\Controllers\Api\QuizController;
 use App\Http\Controllers\BackupDatabaseController;
 use App\Http\Controllers\CoreGroupController;
 use App\Http\Controllers\CoreRoleController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\CrudExampleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DropboxController;
 use App\Http\Controllers\GroupMenuController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MenuManagementController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
@@ -199,28 +200,9 @@ Route::resource('users', UsersController::class)->parameters([
 Route::get('users/{users}/resend-activation', [UsersController::class, 'sendActivation'])->name('users.resendActivation');
 Route::put('users/{users}/approve', [UsersController::class, 'approve'])->name('users.approve');
 
-Route::get('core-groups/print', [CoreGroupController::class, 'exportPrint'])->name('core-groups.print');
-Route::get('core-groups/pdf', [CoreGroupController::class, 'pdf'])->name('core-groups.pdf');
-Route::get('core-groups/csv', [CoreGroupController::class, 'csv'])->name('core-groups.csv');
-Route::get('core-groups/json', [CoreGroupController::class, 'json'])->name('core-groups.json');
-Route::get('core-groups/excel', [CoreGroupController::class, 'excel'])->name('core-groups.excel');
-Route::get('core-groups/import-excel-example', [CoreGroupController::class, 'importExcelExample'])->name('core-groups.import-excel-example');
-Route::post('core-groups/import-excel', [CoreGroupController::class, 'importExcel'])->name('core-groups.import-excel');
 Route::resource('core-groups', CoreGroupController::class);
-Route::get('core-roles/print', [CoreRoleController::class, 'exportPrint'])->name('core-roles.print');
-Route::get('core-roles/pdf', [CoreRoleController::class, 'pdf'])->name('core-roles.pdf');
-Route::get('core-roles/csv', [CoreRoleController::class, 'csv'])->name('core-roles.csv');
-Route::get('core-roles/json', [CoreRoleController::class, 'json'])->name('core-roles.json');
-Route::get('core-roles/excel', [CoreRoleController::class, 'excel'])->name('core-roles.excel');
-Route::get('core-roles/import-excel-example', [CoreRoleController::class, 'importExcelExample'])->name('core-roles.import-excel-example');
-Route::post('core-roles/import-excel', [CoreRoleController::class, 'importExcel'])->name('core-roles.import-excel');
 Route::resource('core-roles', CoreRoleController::class);
-
-Route::get('courses/print', [CourseController::class, 'exportPrint'])->name('courses.print');
-Route::get('courses/pdf', [CourseController::class, 'pdf'])->name('courses.pdf');
-Route::get('courses/csv', [CourseController::class, 'csv'])->name('courses.csv');
-Route::get('courses/json', [CourseController::class, 'json'])->name('courses.json');
-Route::get('courses/excel', [CourseController::class, 'excel'])->name('courses.excel');
-Route::get('courses/import-excel-example', [CourseController::class, 'importExcelExample'])->name('courses.import-excel-example');
-Route::post('courses/import-excel', [CourseController::class, 'importExcel'])->name('courses.import-excel');
 Route::resource('courses', CourseController::class);
+Route::resource('modules', ModuleController::class);
+Route::resource('materials', MaterialController::class);
+Route::resource('quizzes', QuizController::class);

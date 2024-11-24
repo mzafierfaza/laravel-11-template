@@ -19,6 +19,32 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 class FileService
 {
 
+    public function uploadMinio(\Illuminate\Http\UploadedFile $file, string $folderName)
+    {
+
+        // ubah nama file nya dengan random string
+        // $filename = Str::random(32) . '.' . $file->getClientOriginalExtension();
+        // $url = $folderName . $filename;
+
+
+        try {
+            $result = Storage::disk('s3')->put($folderName, $file);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'url' => '',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $url = $folderName . basename($result);
+
+        return response()->json([
+            'error' => '',
+            'url' =>  $url,
+        ], Response::HTTP_OK);
+    }
+
+
     /**
      * execute upload
      *
@@ -36,6 +62,7 @@ class FileService
 
         // vps
         $file->storeAs('public/' . $folderName, $filename);
+        // dd($file->getRealPath());
         return asset('storage/' . $folderName . '/' . $filename);
 
         // shared hosting

@@ -632,6 +632,7 @@ function showModalForm(e, action, link) {
   var title = 'Tambah Data';
   if (action === 'edit') title = 'Ubah Data';
   else if (action === 'detail') title = 'Detail Data';
+  console.log(link, 'link');
 
   $('#modalForm').find('.modal-title').html(title);
   window.axios.get(link).then(function (response) {
@@ -883,11 +884,13 @@ function onSubmitForm(e) {
   var form = e.target;
   var formData = new FormData(form);
   var action = form.getAttribute('action');
+  console.log(action, ' action');
   $('#modalForm').find('button[type="submit"]').attr('disabled', true).html('Menyimpan...');
   window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   window.axios
     .post(action, formData)
     .then(function (response) {
+      console.log(response);
       $('#modalForm').find('button[type="submit"]').attr('disabled', false).html('Simpan');
       successMsg(response.data.message).then(function () {
         // window.location.reload();

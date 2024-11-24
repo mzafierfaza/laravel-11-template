@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Route;
 
 # DASHBOARD
 Route::get('/', [DashboardController::class, 'home'])->name('home');
+Route::get('/env', function () {
+    $appEnv = env('AWS_ACCESS_KEY_ID', 'asdf');
+    $appDebug = env('AWS_SECRET_ACCESS_KEY', 'sad');
+    return response()->json([
+        'AWS_ACCESS_KEY_ID' => $appEnv,
+        'AWS_SECRET_ACCESS_KEY' => $appDebug,
+        // Tambahkan variabel lain yang ingin Anda tampilkan
+    ]);
+});
 
 # AUTH
 Route::get('auth/login', [AuthController::class, 'loginForm'])->name('login');

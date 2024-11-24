@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ModuleExport;
-use App\Http\Requests\ModuleRequest;
-use App\Imports\ModuleImport;
-use App\Models\Module;
-use App\Repositories\ModuleRepository;
+use App\Exports\QuizExport;
+use App\Http\Requests\QuizRequest;
+use App\Imports\QuizImport;
+use App\Models\Quiz;
+use App\Repositories\QuizRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\UserRepository;
 use App\Services\EmailService;
@@ -17,104 +17,137 @@ use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Barryvdh\DomPDF\Facade as PDF;
 
-class ModuleController extends Controller
+class QuizController extends Controller
 {
-    private ModuleRepository $moduleRepository;
+    /**
+     * quizRepository
+     *
+     * @var QuizRepository
+     */
+    private QuizRepository $quizRepository;
 
-
+    /**
+     * NotificationRepository
+     *
+     * @var NotificationRepository
+     */
     private NotificationRepository $NotificationRepository;
 
+    /**
+     * UserRepository
+     *
+     * @var UserRepository
+     */
     private UserRepository $UserRepository;
 
+    /**
+     * file service
+     *
+     * @var FileService
+     */
     private FileService $fileService;
 
-
+    /**
+     * email service
+     *
+     * @var FileService
+     */
     private EmailService $emailService;
 
+    /**
+     * exportable
+     *
+     * @var bool
+     */
     private bool $exportable = false;
 
+    /**
+     * importable
+     *
+     * @var bool
+     */
     private bool $importable = false;
 
+    /**
+     * constructor method
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->moduleRepository      = new ModuleRepository;
+        $this->quizRepository      = new QuizRepository;
         $this->fileService            = new FileService;
         $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
         $this->UserRepository         = new UserRepository;
 
-        $this->middleware('can:Modules');
-        $this->middleware('can:Modules Tambah')->only(['create', 'store']);
-        $this->middleware('can:Modules Ubah')->only(['edit', 'update']);
-        $this->middleware('can:Modules Hapus')->only(['destroy']);
-        $this->middleware('can:Modules Ekspor')->only(['json', 'excel', 'csv', 'pdf']);
-        $this->middleware('can:Modules Impor Excel')->only(['importExcel', 'importExcelExample']);
+        $this->middleware('can:Quizzes');
+        $this->middleware('can:Quizzes Tambah')->only(['create', 'store']);
+        $this->middleware('can:Quizzes Ubah')->only(['edit', 'update']);
+        $this->middleware('can:Quizzes Hapus')->only(['destroy']);
+        $this->middleware('can:Quizzes Ekspor')->only(['json', 'excel', 'csv', 'pdf']);
+        $this->middleware('can:Quizzes Impor Excel')->only(['importExcel', 'importExcelExample']);
     }
 
+    /**
+     * showing data page
+     *
+     * @return Response
+     */
     public function index()
     {
         $user = auth()->user();
-        return view('stisla.modules.index', [
-            'data'             => $this->moduleRepository->getLatest(),
-            'canCreate'        => $user->can('Modules Tambah'),
-            'canUpdate'        => $user->can('Modules Ubah'),
-            'canDelete'        => $user->can('Modules Hapus'),
+        return view('stisla.quizzes.index', [
+            'data'             => $this->quizRepository->getLatest(),
+            'canCreate'        => $user->can('Quizzes Tambah'),
+            'canUpdate'        => $user->can('Quizzes Ubah'),
+            'canDelete'        => $user->can('Quizzes Hapus'),
             'canImportExcel'   => $user->can('Order Impor Excel') && $this->importable,
             'canExport'        => $user->can('Order Ekspor') && $this->exportable,
-            'title'            => __('Modules'),
-            'routeCreate'      => route('modules.create'),
-            'routePdf'         => route('modules.pdf'),
-            'routePrint'       => route('modules.print'),
-            'routeExcel'       => route('modules.excel'),
-            'routeCsv'         => route('modules.csv'),
-            'routeJson'        => route('modules.json'),
-            'routeImportExcel' => route('modules.import-excel'),
-            'excelExampleLink' => route('modules.import-excel-example'),
+            'title'            => __('Quizzes'),
+            'routeCreate'      => route('quizzes.create'),
+            'routePdf'         => route('quizzes.pdf'),
+            'routePrint'       => route('quizzes.print'),
+            'routeExcel'       => route('quizzes.excel'),
+            'routeCsv'         => route('quizzes.csv'),
+            'routeJson'        => route('quizzes.json'),
+            'routeImportExcel' => route('quizzes.import-excel'),
+            'excelExampleLink' => route('quizzes.import-excel-example'),
         ]);
     }
 
-
-    public function show(Module $module)
-    {
-        $user = auth()->user();
-        $materials = $module->materials()->orderBy('order')->get();
-
-        return view('stisla.modules.show', [
-            'module' => $module,
-            'materials' => $materials,
-            'isAjaxYajra' => true,
-            'routeCreateMaterial' => route(name: 'materials.create', parameters: ['module_id' => $module->id]),
-            'routeCreateQuiz' => route(name: 'quizzes.create', parameters: ['module_id' => $module->id]),
-            'routeIndex'    => route(name: 'courses.show', parameters: ['course' => $module->course_id]),
-            'fullTitle'     => $module->title,
-            'title' => 'Setting Module'
-        ]);
-    }
-
+    /**
+     * showing add new data form page
+     *
+     * @return Response
+     */
     public function create()
     {
-        return view('stisla.modules.form', [
-            'title'         => __('Modules'),
-            'fullTitle'     => __('Tambah Modules'),
-            'routeIndex'    => route('modules.index'),
-            'action'        => route('modules.store')
+        return view('stisla.quizzes.form', [
+            'title'         => __('Quizzes'),
+            'fullTitle'     => __('Tambah Quizzes'),
+            'routeIndex'    => route('quizzes.index'),
+            'action'        => route('quizzes.store')
         ]);
     }
 
     /**
      * save new data to db
      *
-     * @param ModuleRequest $request
+     * @param QuizRequest $request
      * @return Response
      */
-    public function store(ModuleRequest $request)
+    public function store(QuizRequest $request)
     {
-        // dd($request->all());
         $data = $request->only([
-            'course_id',
+            'module_id',
             'title',
             'description',
-            'order',
+            'duration_minutes',
+            'passing_score',
+            'start_time',
+            'end_time',
+            'is_randomize',
             'deleted_at',
         ]);
 
@@ -123,7 +156,7 @@ class ModuleController extends Controller
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
 
-        $result = $this->moduleRepository->create($data);
+        $result = $this->quizRepository->create($data);
 
         // use this if you want to create notification data
         // $title = 'Notify Title';
@@ -137,54 +170,56 @@ class ModuleController extends Controller
         // gunakan jika mau kirim email
         // $this->emailService->methodName($result);
 
-        logCreate("Modules", $result);
+        logCreate("Quizzes", $result);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'success menambahkan Bab',
-            ]);
-        }
-
-        $successMessage = successMessageCreate("Modules");
+        $successMessage = successMessageCreate("Quizzes");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
     /**
      * showing edit page
      *
-     * @param Module $module
+     * @param Quiz $quiz
      * @return Response
      */
-    public function edit(Module $module)
+    public function edit(Quiz $quiz)
     {
-        return view('stisla.modules.form', [
-            'd'             => $module,
-            'title'         => __('Modules'),
-            'fullTitle'     => __('Ubah Modules'),
-            'routeIndex'    => route('modules.index'),
-            'action'        => route('modules.update', [$module->id])
+        return view('stisla.quizzes.form', [
+            'd'             => $quiz,
+            'title'         => __('Quizzes'),
+            'fullTitle'     => __('Ubah Quizzes'),
+            'routeIndex'    => route('quizzes.index'),
+            'action'        => route('quizzes.update', [$quiz->id])
         ]);
     }
 
     /**
      * update data to db
      *
-     * @param ModuleRequest $request
-     * @param Module $module
+     * @param QuizRequest $request
+     * @param Quiz $quiz
      * @return Response
      */
-    public function update(ModuleRequest $request, Module $module)
+    public function update(QuizRequest $request, Quiz $quiz)
     {
         $data = $request->only([
-            'course_id',
+            'module_id',
             'title',
             'description',
-            'order',
+            'duration_minutes',
+            'passing_score',
+            'start_time',
+            'end_time',
+            'is_randomize',
             'deleted_at',
         ]);
 
-        $newData = $this->moduleRepository->update($data, $module->id);
+        // gunakan jika ada file
+        // if ($request->hasFile('file')) {
+        //     $data['file'] = $this->fileService->methodName($request->file('file'));
+        // }
+
+        $newData = $this->quizRepository->update($data, $quiz->id);
 
         // use this if you want to create notification data
         // $title = 'Notify Title';
@@ -198,29 +233,22 @@ class ModuleController extends Controller
         // gunakan jika mau kirim email
         // $this->emailService->methodName($newData);
 
-        logUpdate("Modules", $module, $newData);
+        logUpdate("Quizzes", $quiz, $newData);
 
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'success update Bab',
-            ]);
-        }
-
-        $successMessage = successMessageUpdate("Modules");
+        $successMessage = successMessageUpdate("Quizzes");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
     /**
      * delete user from db
      *
-     * @param Module $module
+     * @param Quiz $quiz
      * @return Response
      */
-    public function destroy(Module $module)
+    public function destroy(Quiz $quiz)
     {
         // delete file from storage if exists
-        // $this->fileService->methodName($module);
+        // $this->fileService->methodName($quiz);
 
         // use this if you want to create notification data
         // $title = 'Notify Title';
@@ -232,12 +260,12 @@ class ModuleController extends Controller
         // $this->NotificationRepository->createNotif($title,  $content, $userId,  $notificationType, $icon, $bgColor);
 
         // gunakan jika mau kirim email
-        // $this->emailService->methodName($module);
+        // $this->emailService->methodName($quiz);
 
-        $this->moduleRepository->delete($module->id);
-        logDelete("Modules", $module);
+        $this->quizRepository->delete($quiz->id);
+        logDelete("Quizzes", $quiz);
 
-        $successMessage = successMessageDelete("Modules");
+        $successMessage = successMessageDelete("Quizzes");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
@@ -252,8 +280,8 @@ class ModuleController extends Controller
         // $filepath = public_path('example.xlsx');
         // return response()->download($filepath);
 
-        $data = $this->moduleRepository->getLatest();
-        return Excel::download(new ModuleExport($data), 'modules.xlsx');
+        $data = $this->quizRepository->getLatest();
+        return Excel::download(new QuizExport($data), 'quizzes.xlsx');
     }
 
     /**
@@ -264,8 +292,8 @@ class ModuleController extends Controller
      */
     public function importExcel(\App\Http\Requests\ImportExcelRequest $request)
     {
-        Excel::import(new ModuleImport, $request->file('import_file'));
-        $successMessage = successMessageImportExcel("Modules");
+        Excel::import(new QuizImport, $request->file('import_file'));
+        $successMessage = successMessageImportExcel("Quizzes");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
@@ -276,8 +304,8 @@ class ModuleController extends Controller
      */
     public function json()
     {
-        $data = $this->moduleRepository->getLatest();
-        return $this->fileService->downloadJson($data, 'modules.json');
+        $data = $this->quizRepository->getLatest();
+        return $this->fileService->downloadJson($data, 'quizzes.json');
     }
 
     /**
@@ -287,8 +315,8 @@ class ModuleController extends Controller
      */
     public function excel()
     {
-        $data = $this->moduleRepository->getLatest();
-        return (new ModuleExport($data))->download('modules.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        $data = $this->quizRepository->getLatest();
+        return (new QuizExport($data))->download('quizzes.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     /**
@@ -298,8 +326,8 @@ class ModuleController extends Controller
      */
     public function csv()
     {
-        $data = $this->moduleRepository->getLatest();
-        return (new ModuleExport($data))->download('modules.csv', \Maatwebsite\Excel\Excel::CSV);
+        $data = $this->quizRepository->getLatest();
+        return (new QuizExport($data))->download('quizzes.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     /**
@@ -309,13 +337,13 @@ class ModuleController extends Controller
      */
     public function pdf()
     {
-        $data = $this->moduleRepository->getLatest();
+        $data = $this->quizRepository->getLatest();
         return PDF::setPaper('Letter', 'landscape')
-            ->loadView('stisla.modules.export-pdf', [
+            ->loadView('stisla.quizzes.export-pdf', [
                 'data'    => $data,
                 'isPrint' => false
             ])
-            ->download('modules.pdf');
+            ->download('quizzes.pdf');
     }
 
     /**
@@ -325,8 +353,8 @@ class ModuleController extends Controller
      */
     public function exportPrint()
     {
-        $data = $this->moduleRepository->getLatest();
-        return view('stisla.modules.export-pdf', [
+        $data = $this->quizRepository->getLatest();
+        return view('stisla.quizzes.export-pdf', [
             'data'    => $data,
             'isPrint' => true
         ]);

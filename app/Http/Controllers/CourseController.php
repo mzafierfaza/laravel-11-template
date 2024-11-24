@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\CourseExport;
 use App\Http\Requests\CourseRequest;
+use App\Http\Requests\ModuleRequest;
 use App\Imports\CourseImport;
 use App\Models\Course;
 use App\Repositories\CourseRepository;
@@ -19,60 +20,22 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class CourseController extends Controller
 {
-    /**
-     * courseRepository
-     *
-     * @var CourseRepository
-     */
     private CourseRepository $courseRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
 
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
 
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
 
-    /**
-     * email service
-     *
-     * @var FileService
-     */
+
     private EmailService $emailService;
 
-    /**
-     * exportable
-     *
-     * @var bool
-     */
+
     private bool $exportable = true;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->courseRepository      = new CourseRepository;
@@ -89,11 +52,7 @@ class CourseController extends Controller
         $this->middleware('can:Courses Impor Excel')->only(['importExcel', 'importExcelExample']);
     }
 
-    /**
-     * showing data page
-     *
-     * @return Response
-     */
+
     public function index()
     {
         $user = auth()->user();
@@ -106,20 +65,62 @@ class CourseController extends Controller
             'canExport'        => $user->can('Order Ekspor') && $this->exportable,
             'title'            => __('Courses'),
             'routeCreate'      => route('courses.create'),
-            'routePdf'         => route('courses.pdf'),
-            'routePrint'       => route('courses.print'),
-            'routeExcel'       => route('courses.excel'),
-            'routeCsv'         => route('courses.csv'),
-            'routeJson'        => route('courses.json'),
-            'routeImportExcel' => route('courses.import-excel'),
-            'excelExampleLink' => route('courses.import-excel-example'),
+            // 'routePdf'         => route('courses.pdf'),
+            // 'routePrint'       => route('courses.print'),
+            // 'routeExcel'       => route('courses.excel'),
+            // 'routeCsv'         => route('courses.csv'),
+            // 'routeJson'        => route('courses.json'),
+            // 'routeImportExcel' => route('courses.import-excel'),
+            // 'excelExampleLink' => route('courses.import-excel-example'),
         ]);
     }
 
     public function show(Course $course)
     {
-        //
+        $user = auth()->user();
+        $babs = $course->modules()->orderBy('order')->get();
+
+        return view('stisla.courses.show', [
+            'course' => $course,
+            'babs' => $babs,
+            'isAjaxYajra' => true,
+            'routeCreateModule' => route(name: 'modules.create', parameters: ['course_id' => $course->id]),
+            'routeIndex'    => route(name: 'courses.index'),
+            'fullTitle'     => $course->title,
+            'title' => 'Setting Materi'
+        ]);
     }
+
+    // public function createModule(Course $course)
+    // {
+    //     $user = auth()->user();
+    //     return view('stisla.courses.show', [
+    //         'course' => $course,
+    //         'isAjaxYajra' => true,
+    //         'routeCreateModule' => route(name: 'courses.createModule', parameters: ['course' => $course->id]),
+    //         'routeActionModule' => route(name: 'courses.storeModule', parameters: ['course' => $course->id]),
+    //         'routeIndex'    => route(name: 'courses.index'),
+    //         'fullTitle'     => $course->title,
+    //         'title' => 'Setting Materi'
+    //     ]);
+    // }
+
+    // public function storeModule(ModuleRequest $request)
+    // {
+    //     $data   = $this->getStoreData($request);
+    //     // $result = $this->crudExampleRepository->create($data);
+    //     // logCreate("Contoh CRUD", $result);
+    //     $successMessage = successMessageCreate("Contoh CRUD");
+
+    //     // if ($request->ajax()) {
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => $successMessage,
+    //     ]);
+    //     // }
+
+    //     // return back()->with('successMessage', $successMessage);
+    // }
 
     public function create()
     {
@@ -133,8 +134,8 @@ class CourseController extends Controller
             'pengajars' => $pengajars,
             'title'         => __('Courses'),
             'fullTitle'     => __('Tambah Courses'),
-            'routeIndex'    => route('courses.index'),
-            'action'        => route('courses.store')
+            'routeIndex'    => route(name: 'courses.index'),
+            'action'        => route(name: 'courses.store')
         ]);
     }
 
@@ -174,9 +175,15 @@ class CourseController extends Controller
         ]);
 
         // gunakan jika ada file
-        // if ($request->hasFile('file')) {
-        //     $data['file'] = $this->fileService->methodName($request->file('file'));
-        // }
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $upload = $this->fileService->uploadMinio($file, 'courses/images/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['image'] = $res->url;
+            }
+        }
+
         $data["created_by"] = auth()->user()->id;
         $data["approved_status"] = 0;
         $data["start_time"] = $request->start_date . " " . $request->start_time;
