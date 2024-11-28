@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\QuizExport;
 use App\Http\Requests\QuizRequest;
+use App\Imports\QuestionImport;
 use App\Imports\QuizImport;
 use App\Models\Quiz;
 use App\Repositories\QuizRepository;
@@ -19,60 +20,21 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class QuizController extends Controller
 {
-    /**
-     * quizRepository
-     *
-     * @var QuizRepository
-     */
     private QuizRepository $quizRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
 
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
+
     private UserRepository $UserRepository;
 
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
-
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
 
-    /**
-     * exportable
-     *
-     * @var bool
-     */
     private bool $exportable = false;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
+
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->quizRepository      = new QuizRepository;
@@ -116,11 +78,18 @@ class QuizController extends Controller
         ]);
     }
 
-    /**
-     * showing add new data form page
-     *
-     * @return Response
-     */
+    public function formImportQuestions(Request $request)
+    {
+        // dd($request->all());
+        return view('stisla.quizzes.import-form', [
+            'title'         => __('Soal'),
+            'quiz_id' => $request->get('quiz_id'),
+            'fullTitle'     => __('Import Soal'),
+            'routeIndex'    => route('quizzes.show', $request->get('quiz_id')),
+            'action'        => route('questions.import-excel')
+        ]);
+    }
+
     public function create()
     {
         return view('stisla.quizzes.form', [
@@ -130,13 +99,6 @@ class QuizController extends Controller
             'action'        => route('quizzes.store')
         ]);
     }
-
-    /**
-     * save new data to db
-     *
-     * @param QuizRequest $request
-     * @return Response
-     */
     public function store(QuizRequest $request)
     {
         $data = $request->only([
@@ -151,10 +113,7 @@ class QuizController extends Controller
             'deleted_at',
         ]);
 
-        // gunakan jika ada file
-        // if ($request->hasFile('file')) {
-        //     $data['file'] = $this->fileService->methodName($request->file('file'));
-        // }
+
 
         $result = $this->quizRepository->create($data);
 
@@ -169,19 +128,53 @@ class QuizController extends Controller
 
         // gunakan jika mau kirim email
         // $this->emailService->methodName($result);
+        // gunakan jika ada file
+        // dd('id nya = ' . $result->id);
+
+        // if ($request->hasFile('questions')) {
+        //     $file = $request->file(key: 'questions');
+        //     $upload = $this->fileService->uploadMinio($file, 'questions/documents/');
+        //     if ($upload) {
+        //         $res = $upload->getData();
+        //         $data['file_path'] = $res->url;
+        //     }
+
+        //     Excel::import(new QuestionImport($result->id), $file);
+        // }
+
 
         logCreate("Quizzes", $result);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'success menambahkan Materi',
+            ]);
+        }
 
         $successMessage = successMessageCreate("Quizzes");
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * showing edit page
-     *
-     * @param Quiz $quiz
-     * @return Response
-     */
+    public function show(Quiz $quiz)
+    {
+        $user = auth()->user();
+        $questions = $quiz->questions()->orderBy('order')->get();
+
+        return view('stisla.quizzes.show', [
+            'quizzes' => $quiz,
+            'questions' => $questions,
+            // 'isAjaxYajra' => true,
+            'routeImportQuestion' => route(name: 'quizzes.form-import-excel', parameters: ['quiz_id' => $quiz->id]),
+            'routeIndex'    => route(name: 'modules.show', parameters: ['module' => $quiz->module_id]),
+            'fullTitle'     => $quiz->title,
+            'title' => 'Setting Module'
+        ]);
+    }
+
+
+
+
     public function edit(Quiz $quiz)
     {
         return view('stisla.quizzes.form', [
@@ -277,19 +270,11 @@ class QuizController extends Controller
     public function importExcelExample(): BinaryFileResponse
     {
         // bisa gunakan file excel langsung sebagai contoh
-        // $filepath = public_path('example.xlsx');
-        // return response()->download($filepath);
+        $filepath = public_path('excel_examples/import_quiz.xlsx');
 
-        $data = $this->quizRepository->getLatest();
-        return Excel::download(new QuizExport($data), 'quizzes.xlsx');
+        return response()->download($filepath);
     }
 
-    /**
-     * import excel file to db
-     *
-     * @param \App\Http\Requests\ImportExcelRequest $request
-     * @return Response
-     */
     public function importExcel(\App\Http\Requests\ImportExcelRequest $request)
     {
         Excel::import(new QuizImport, $request->file('import_file'));

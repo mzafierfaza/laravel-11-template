@@ -7,58 +7,40 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'quizzes';
+  /**
+   * The table associated with the model.
+   *
+   * @var string
+   */
+  protected $table = 'quizzes';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'module_id',
-		'title',
-		'description',
-		'duration_minutes',
-		'passing_score',
-		'start_time',
-		'end_time',
-		'is_randomize',
-		'deleted_at',
-    ];
+  protected $fillable = [
+    'module_id',
+    'title',
+    'type',
+    'description',
+    'order',
+    'duration_minutes',
+    'passing_score',
+    'file_path',
+    'start_time',
+    'end_time',
+    'is_randomize',
+    'deleted_at',
+  ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
+  public function questions()
+  {
+    return $this->hasMany(Question::class);
+  }
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
+  protected $casts = [];
 
-    /**
-     * some columns model type
-     *
-     * @var array
-     */
-    const TYPES = [
-	];
+  public $timestamps = true;
 
-    /**
-     * Default with relationship
-     *
-     * @var array
-     */
-    protected $with = [];
+  const TYPES = [];
+
+  protected $with = [];
 }

@@ -78,10 +78,12 @@ class ModuleController extends Controller
     {
         $user = auth()->user();
         $materials = $module->materials()->orderBy('order')->get();
+        $quizzes = $module->quizzes()->orderBy('order')->get();
 
         return view('stisla.modules.show', [
             'module' => $module,
             'materials' => $materials,
+            'quizzes' => $quizzes,
             'isAjaxYajra' => true,
             'routeCreateMaterial' => route(name: 'materials.create', parameters: ['module_id' => $module->id]),
             'routeCreateQuiz' => route(name: 'quizzes.create', parameters: ['module_id' => $module->id]),

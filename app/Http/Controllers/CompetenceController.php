@@ -6,9 +6,13 @@ use App\Exports\CompetenceExport;
 use App\Http\Requests\CompetenceRequest;
 use App\Imports\CompetenceImport;
 use App\Models\Competence;
+use App\Repositories\CompetenceCourseRepository;
 use App\Repositories\CompetenceRepository;
+use App\Repositories\CourseRepository;
+use App\Repositories\EnrollmentRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\UsersRepository;
 use App\Services\EmailService;
 use App\Services\FileService;
 use Illuminate\Http\Request;
@@ -19,67 +23,31 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class CompetenceController extends Controller
 {
-    /**
-     * competenceRepository
-     *
-     * @var CompetenceRepository
-     */
     private CompetenceRepository $competenceRepository;
-
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
+    private CompetenceCourseRepository $competenceCourseRepository;
+    private EnrollmentRepository $enrollmentRepository;
+    private UsersRepository $usersRepository;
+    private CourseRepository $courseRepository;
     private NotificationRepository $NotificationRepository;
-
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
-
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
-
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
-    
-    /**
-     * exportable
-     *
-     * @var bool
-     */
+
     private bool $exportable = false;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->competenceRepository      = new CompetenceRepository;
+        $this->usersRepository      = new UsersRepository;
+        $this->courseRepository      = new CourseRepository;
         $this->fileService            = new FileService;
         $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
         $this->UserRepository         = new UserRepository;
+        $this->enrollmentRepository = new EnrollmentRepository;
+        $this->competenceCourseRepository = new CompetenceCourseRepository;
 
         $this->middleware('can:Competences');
         $this->middleware('can:Competences Tambah')->only(['create', 'store']);
@@ -89,11 +57,6 @@ class CompetenceController extends Controller
         $this->middleware('can:Competences Impor Excel')->only(['importExcel', 'importExcelExample']);
     }
 
-    /**
-     * showing data page
-     *
-     * @return Response
-     */
     public function index()
     {
         $user = auth()->user();
@@ -116,14 +79,16 @@ class CompetenceController extends Controller
         ]);
     }
 
-    /**
-     * showing add new data form page
-     *
-     * @return Response
-     */
     public function create()
     {
+        $trainings = $this->courseRepository->getAll();
+        $persons = $this->usersRepository->getAll();
+
+        // dd('trainings', $trainings, $persons);
+
         return view('stisla.competences.form', [
+            'trainings' => $trainings,
+            'persons' => $persons,
             'title'         => __('Competences'),
             'fullTitle'     => __('Tambah Competences'),
             'routeIndex'    => route('competences.index'),
@@ -131,26 +96,42 @@ class CompetenceController extends Controller
         ]);
     }
 
-    /**
-     * save new data to db
-     *
-     * @param CompetenceRequest $request
-     * @return Response
-     */
     public function store(CompetenceRequest $request)
     {
         $data = $request->only([
-			'title',
-			'level',
-			'certificate',
-			'certificate_can_download',
-			'image',
+            'title',
+            'level',
+            'start_date',
+            'end_date',
+            'description',
+            'benefit',
+            'image',
+            'certificate',
         ]);
 
         // gunakan jika ada file
-        // if ($request->hasFile('file')) {
-        //     $data['file'] = $this->fileService->methodName($request->file('file'));
-        // }
+        if ($request->hasFile('image')) {
+            $file = $request->file(key: 'image');
+            $upload = $this->fileService->uploadMinio($file, 'competence/images/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['image'] = $res->url;
+            }
+        }
+
+        if ($request->hasFile('certificate')) {
+            $file = $request->file(key: 'certificate');
+            $upload = $this->fileService->uploadMinio($file, 'competence/certificates/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['certificate'] = $res->url;
+            }
+        }
+
+
+
+        $data["created_by"] = auth()->user()->id;
+        $data["approved_status"] = 0;
 
         $result = $this->competenceRepository->create($data);
 
@@ -163,10 +144,29 @@ class CompetenceController extends Controller
         // $bgColor = 'primary'; // primary, danger, success, warning
         // $this->NotificationRepository->createNotif($title,  $content, $userId,  $notificationType, $icon, $bgColor);
 
-        // gunakan jika mau kirim email
-        // $this->emailService->methodName($result);
-
         logCreate("Competences", $result);
+
+        $courses = $request->courses;
+        $persons = $request->persons;
+
+        foreach ($courses as $course) {
+            // dd($courses);
+            $data = [
+                "course_id" => $course,
+                "competence_id" => $result->id
+            ];
+            $this->competenceCourseRepository->create($data);
+        }
+
+        foreach ($persons as $person) {
+            $data = [
+                "user_id" => $person,
+                "competence_id" => $result->id,
+                "enrolled_date" => date("Y-m-d H:i:s"),
+                "enrollment_status" => 'Enrolled',
+            ];
+            $this->enrollmentRepository->create($data);
+        }
 
         $successMessage = successMessageCreate("Competences");
         return redirect()->back()->with('successMessage', $successMessage);
@@ -199,11 +199,11 @@ class CompetenceController extends Controller
     public function update(CompetenceRequest $request, Competence $competence)
     {
         $data = $request->only([
-			'title',
-			'level',
-			'certificate',
-			'certificate_can_download',
-			'image',
+            'title',
+            'level',
+            'certificate',
+            'certificate_can_download',
+            'image',
         ]);
 
         // gunakan jika ada file

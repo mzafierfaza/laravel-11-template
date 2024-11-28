@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\Api\QuizController;
 use App\Http\Controllers\BackupDatabaseController;
+use App\Http\Controllers\CompetenceController;
 use App\Http\Controllers\CoreGroupController;
 use App\Http\Controllers\CoreRoleController;
 use App\Http\Controllers\CourseController;
@@ -17,6 +17,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RequestLogController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
@@ -205,4 +207,18 @@ Route::resource('core-roles', CoreRoleController::class);
 Route::resource('courses', CourseController::class);
 Route::resource('modules', ModuleController::class);
 Route::resource('materials', MaterialController::class);
+Route::get('quizzes/import-excel-example', [QuizController::class, 'importExcelExample'])->name('quizzes.import_example');
+Route::get('quizzes/import-questions', [QuizController::class, 'formImportQuestions'])->name('quizzes.form-import-excel');
 Route::resource('quizzes', QuizController::class);
+Route::get('questions/import-excel-example', [QuestionController::class, 'importExcelExample'])->name('questions.import-excel-example');
+Route::post('questions/import-excel', [QuestionController::class, 'importExcel'])->name('questions.import-excel');
+Route::resource('questions', QuestionController::class);
+
+Route::get('competences/print', [CompetenceController::class, 'exportPrint'])->name('competences.print');
+Route::get('competences/pdf', [CompetenceController::class, 'pdf'])->name('competences.pdf');
+Route::get('competences/csv', [CompetenceController::class, 'csv'])->name('competences.csv');
+Route::get('competences/json', [CompetenceController::class, 'json'])->name('competences.json');
+Route::get('competences/excel', [CompetenceController::class, 'excel'])->name('competences.excel');
+Route::get('competences/import-excel-example', [CompetenceController::class, 'importExcelExample'])->name('competences.import-excel-example');
+Route::post('competences/import-excel', [CompetenceController::class, 'importExcel'])->name('competences.import-excel');
+Route::resource('competences', CompetenceController::class);

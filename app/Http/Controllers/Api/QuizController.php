@@ -13,39 +13,13 @@ use App\Services\FileService;
 
 class QuizController extends Controller
 {
-    /**
-     * quizRepository
-     *
-     * @var QuizRepository
-     */
     private QuizRepository $quizRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
-
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
 
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->quizRepository      = new QuizRepository;
@@ -92,15 +66,15 @@ class QuizController extends Controller
     public function store(QuizRequest $request)
     {
         $data = $request->only([
-			'module_id',
-			'title',
-			'description',
-			'duration_minutes',
-			'passing_score',
-			'start_time',
-			'end_time',
-			'is_randomize',
-			'deleted_at',
+            'module_id',
+            'title',
+            'description',
+            'duration_minutes',
+            'passing_score',
+            'start_time',
+            'end_time',
+            'is_randomize',
+            'deleted_at',
         ]);
 
         // bisa digunakan jika ada upload file dan ganti methodnya
@@ -137,15 +111,15 @@ class QuizController extends Controller
     public function update(QuizRequest $request, Quiz $quiz)
     {
         $data = $request->only([
-			'module_id',
-			'title',
-			'description',
-			'duration_minutes',
-			'passing_score',
-			'start_time',
-			'end_time',
-			'is_randomize',
-			'deleted_at',
+            'module_id',
+            'title',
+            'description',
+            'duration_minutes',
+            'passing_score',
+            'start_time',
+            'end_time',
+            'is_randomize',
+            'deleted_at',
         ]);
 
         // bisa digunakan jika ada upload file dan ganti methodnya

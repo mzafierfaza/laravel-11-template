@@ -54,9 +54,6 @@
                 ],
                 ])
               </div>
-              <!-- <div class="col-md-6">
-              @include('stisla.includes.forms.editors.textarea', ['required'=>true, 'type'=>'textarea', 'id'=>'description', 'name'=>'description', 'label'=>__('Deskripsi')])
-            </div> -->
               <div class="col-md-12">
                 @include('stisla.includes.forms.editors.summernote', [
                 'required' => true,

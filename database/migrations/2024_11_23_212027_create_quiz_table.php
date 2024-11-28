@@ -18,11 +18,15 @@ class CreateQuizTable extends Migration
             $table->foreign('module_id')->on('modules')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('title', 191)->nullable();
             $table->text('description')->nullable();
+            $table->integer('order', 191)->nullable();
             $table->integer('duration_minutes', 191)->nullable();
             $table->integer('passing_score', 191)->nullable();
-            $table->string('start_time', 191)->nullable();
-            $table->string('end_time', 191)->nullable();
-            $table->string('is_randomize', 191);
+            $table->timestamp('start_time', 191)->nullable();
+            $table->timestamp('end_time', 191)->nullable();
+            $table->bool('is_randomize')->nullable();
+            $table->bool('is_essay')->nullable();
+            $table->string('type', 191)->nullable();
+            $table->string('file_path', 191)->nullable();
             $table->timestamps();
             $table->string('deleted_at', 191)->nullable();
         });

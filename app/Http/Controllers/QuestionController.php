@@ -19,60 +19,19 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class QuestionController extends Controller
 {
-    /**
-     * questionRepository
-     *
-     * @var QuestionRepository
-     */
     private QuestionRepository $questionRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
 
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
 
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
-
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
-    
-    /**
-     * exportable
-     *
-     * @var bool
-     */
+
     private bool $exportable = false;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->questionRepository      = new QuestionRepository;
@@ -140,12 +99,12 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request)
     {
         $data = $request->only([
-			'quiz_id',
-			'question_text',
-			'type',
-			'points',
-			'correct_essay_answer',
-			'deleted_at',
+            'quiz_id',
+            'question_text',
+            'type',
+            'points',
+            'correct_essay_answer',
+            'deleted_at',
         ]);
 
         // gunakan jika ada file
@@ -173,12 +132,7 @@ class QuestionController extends Controller
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * showing edit page
-     *
-     * @param Question $question
-     * @return Response
-     */
+
     public function edit(Question $question)
     {
         return view('stisla.questions.form', [
@@ -189,23 +143,15 @@ class QuestionController extends Controller
             'action'        => route('questions.update', [$question->id])
         ]);
     }
-
-    /**
-     * update data to db
-     *
-     * @param QuestionRequest $request
-     * @param Question $question
-     * @return Response
-     */
     public function update(QuestionRequest $request, Question $question)
     {
         $data = $request->only([
-			'quiz_id',
-			'question_text',
-			'type',
-			'points',
-			'correct_essay_answer',
-			'deleted_at',
+            'quiz_id',
+            'question_text',
+            'type',
+            'points',
+            'correct_essay_answer',
+            'deleted_at',
         ]);
 
         // gunakan jika ada file
@@ -233,12 +179,6 @@ class QuestionController extends Controller
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * delete user from db
-     *
-     * @param Question $question
-     * @return Response
-     */
     public function destroy(Question $question)
     {
         // delete file from storage if exists
@@ -286,7 +226,9 @@ class QuestionController extends Controller
      */
     public function importExcel(\App\Http\Requests\ImportExcelRequest $request)
     {
-        Excel::import(new QuestionImport, $request->file('import_file'));
+        // dd($request->all());
+        // dd($request->get('quiz_id'));
+        Excel::import(new QuestionImport($request->quiz_id, $request->is_essay), $request->file('import_file'));
         $successMessage = successMessageImportExcel("Questions");
         return redirect()->back()->with('successMessage', $successMessage);
     }

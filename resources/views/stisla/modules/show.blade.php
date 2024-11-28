@@ -74,6 +74,36 @@
                     </tbody>
                 </table>
             </div>
+            @if ($quizzes->count() > 0)
+            <h2 class="section-title">Quiz</h2>
+            <div class="table-responsive mt-4">
+                <table class="table table-striped table-hovered" id="datatable" data-title="Bab" @endif>
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">{{ __('Urutan') }}</th>
+                            <th class="text-center">{{ __('Type') }}</th>
+                            <th class="text-center">{{ __('Judul') }}</th>
+                            <th>{{ __('Aksi') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($quizzes as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->order ?? '-' }}</td>
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>
+                                @include('stisla.includes.forms.buttons.btn-view', ['link' => route('quizzes.show', [$item->id])])
+                                @include('stisla.includes.forms.buttons.btn-edit', ['link' => route('quizzes.edit', $item->id)])
+                                @include('stisla.includes.forms.buttons.btn-delete', ['link' => route('quizzes.destroy', [$item->id])])
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     @endsection

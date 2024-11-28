@@ -36,9 +36,6 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(true);
             $table->integer(('approved_status'))->nullable()->default(0);
             $table->timestamp('approved_at')->nullable();
-            // $table->foreign('user_id')->references('id')->on('dashin_users')->onUpdate('cascade')->onDelete('cascade');
-            // $table->foreign('approved_by')->references(columns: 'id')->on('dashin_users')->onUpdate('cascade')->onDelete('cascade');
-            // $table->foreign('teacher_id')->references(columns: 'id')->on('dashin_users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('approved_by')->nullable()->constrained('dashin_users');
             $table->foreignId('teacher_id')->constrained('dashin_users');
             $table->text('teacher_about')->nullable();

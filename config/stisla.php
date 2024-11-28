@@ -54,6 +54,13 @@ return [
                         'permission' => null,
                         'is_active_if_url_includes' => 'dashboard*'
                     ],
+                    [
+                        'menu_name' => 'Kompetensi',
+                        'route_name' => 'competences.index',
+                        'icon' => 'fas fa-fire',
+                        'permission' => null,
+                        'is_active_if_url_includes' => 'compteneces*'
+                    ],
                 ]
             ],
             [

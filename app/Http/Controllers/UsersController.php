@@ -57,12 +57,6 @@ class UsersController extends Controller
         $this->middleware('can:Users Ekspor')->only(['json', 'excel', 'csv', 'pdf']);
         $this->middleware('can:Users Impor Excel')->only(['importExcel', 'importExcelExample']);
     }
-
-    /**
-     * showing data page
-     *
-     * @return Response
-     */
     public function index()
     {
         // dd($this->exportable);
@@ -88,12 +82,6 @@ class UsersController extends Controller
             'excelExampleLink' => route('users.import-excel-example'),
         ]);
     }
-
-    /**
-     * showing add new data form page
-     *
-     * @return Response
-     */
     public function create()
     {
         $roles = $this->coreRoleRepository->query()->with('group')->get()->map(function ($role) {

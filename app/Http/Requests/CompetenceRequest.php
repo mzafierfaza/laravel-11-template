@@ -25,21 +25,19 @@ class CompetenceRequest extends FormRequest
     {
         if ($this->isMethod('put')) {
             return [
-				'title' => [],
-				'level' => [],
-				'certificate' => [],
-				'certificate_can_download' => [],
-				'image' => [],
-
+                'title' => [],
+                'level' => [],
+                'certificate' => [],
+                'certificate_can_download' => [],
+                'image' => [],
             ];
         }
         return [
-			'title' => [],
-			'level' => [],
-			'certificate' => [],
-			'certificate_can_download' => [],
-			'image' => [],
-
+            'title' => [],
+            'level' => [],
+            'certificate' => [],
+            'certificate_can_download' => [],
+            'image' => [],
         ];
     }
 }

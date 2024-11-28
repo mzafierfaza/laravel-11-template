@@ -41,7 +41,7 @@ class Repository extends RepositoryAbstract
 
     public function getApprovedLatest()
     {
-        return $this->model->latest()->includeNotApprove()->get();
+        return $this->model->latest()->where("approved_status", "==", 1)->get();
     }
 
     /**

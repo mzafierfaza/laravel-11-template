@@ -24,10 +24,18 @@ class Competence extends Model
   protected $fillable = [
     'title',
     'level',
+    'description',
+    'benefits',
+    'start_date',
+    'end_date',
     'certificate',
     'certificate_can_download',
     'is_random_course',
     'image',
+    'status',
+    'approved_status',
+    'approved_at',
+    'approved_by',
   ];
 
   /**

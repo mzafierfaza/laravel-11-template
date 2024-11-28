@@ -43,6 +43,10 @@ class Module extends Model
     return $this->hasMany(Material::class);
   }
 
+  public function quizzes()
+  {
+    return $this->hasMany(Quiz::class);
+  }
   // public function countVideo(int $id)
   // {
   //   return Material::where('module_id', $id)->where('type', 'video')->count();

@@ -176,7 +176,7 @@ class CourseController extends Controller
 
         // gunakan jika ada file
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
+            $file = $request->file(key: 'image');
             $upload = $this->fileService->uploadMinio($file, 'courses/images/');
             if ($upload) {
                 $res = $upload->getData();
