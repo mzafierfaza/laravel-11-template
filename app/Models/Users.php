@@ -41,31 +41,15 @@ class Users extends Model
     return $this->belongsTo(CoreRole::class, 'role_id', 'id');
   }
 
-  /**
-   * The attributes that should be cast to native types.
-   *
-   * @var array
-   */
+  public function getName()
+  {
+    return $this->first_name . ' ' . $this->last_name;
+  }
+
   protected $casts = [];
 
-  /**
-   * Indicates if the model should be timestamped.
-   *
-   * @var bool
-   */
   public $timestamps = true;
-
-  /**
-   * some columns model type
-   *
-   * @var array
-   */
   const TYPES = [];
 
-  /**
-   * Default with relationship
-   *
-   * @var array
-   */
   protected $with = [];
 }

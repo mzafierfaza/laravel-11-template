@@ -90,38 +90,6 @@ class CourseController extends Controller
             'title' => 'Setting Materi'
         ]);
     }
-
-    // public function createModule(Course $course)
-    // {
-    //     $user = auth()->user();
-    //     return view('stisla.courses.show', [
-    //         'course' => $course,
-    //         'isAjaxYajra' => true,
-    //         'routeCreateModule' => route(name: 'courses.createModule', parameters: ['course' => $course->id]),
-    //         'routeActionModule' => route(name: 'courses.storeModule', parameters: ['course' => $course->id]),
-    //         'routeIndex'    => route(name: 'courses.index'),
-    //         'fullTitle'     => $course->title,
-    //         'title' => 'Setting Materi'
-    //     ]);
-    // }
-
-    // public function storeModule(ModuleRequest $request)
-    // {
-    //     $data   = $this->getStoreData($request);
-    //     // $result = $this->crudExampleRepository->create($data);
-    //     // logCreate("Contoh CRUD", $result);
-    //     $successMessage = successMessageCreate("Contoh CRUD");
-
-    //     // if ($request->ajax()) {
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => $successMessage,
-    //     ]);
-    //     // }
-
-    //     // return back()->with('successMessage', $successMessage);
-    // }
-
     public function create()
     {
         $topik = $this->getDropdownOptions('topik.json');
@@ -209,12 +177,6 @@ class CourseController extends Controller
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * showing edit page
-     *
-     * @param Course $course
-     * @return Response
-     */
     public function edit(Course $course)
     {
 

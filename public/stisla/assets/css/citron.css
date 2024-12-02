@@ -615,6 +615,15 @@ select.form-control:not([size]):not([multiple]) {
   opacity: 1;
 }
 
+.course-stats {
+  font-size: 0.9rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+}
+
 .imagecheck-caption {
   text-align: center;
   padding: .25rem .25rem;
@@ -831,6 +840,16 @@ select.form-control:not([size]):not([multiple]) {
   border: none;
   position: relative;
   margin-bottom: 30px;
+  transition: transform 0.2s;
+
+}
+
+.course-stats {
+  font-size: 0.9rem;
+}
+
+.card:hover {
+  transform: translateY(-2px);
 }
 
 .card .card-header,

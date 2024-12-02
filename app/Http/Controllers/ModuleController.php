@@ -21,15 +21,12 @@ class ModuleController extends Controller
 {
     private ModuleRepository $moduleRepository;
 
-
     private NotificationRepository $NotificationRepository;
 
     private UserRepository $UserRepository;
 
     private FileService $fileService;
 
-
-    private EmailService $emailService;
 
     private bool $exportable = false;
 
@@ -39,7 +36,6 @@ class ModuleController extends Controller
     {
         $this->moduleRepository      = new ModuleRepository;
         $this->fileService            = new FileService;
-        $this->emailService           = new EmailService;
         $this->NotificationRepository = new NotificationRepository;
         $this->UserRepository         = new UserRepository;
 
@@ -102,13 +98,6 @@ class ModuleController extends Controller
             'action'        => route('modules.store')
         ]);
     }
-
-    /**
-     * save new data to db
-     *
-     * @param ModuleRequest $request
-     * @return Response
-     */
     public function store(ModuleRequest $request)
     {
         // dd($request->all());

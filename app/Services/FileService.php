@@ -22,13 +22,9 @@ class FileService
     public function uploadMinio(\Illuminate\Http\UploadedFile $file, string $folderName)
     {
 
-        // ubah nama file nya dengan random string
-        // $filename = Str::random(32) . '.' . $file->getClientOriginalExtension();
-        // $url = $folderName . $filename;
-
-
         try {
             $result = Storage::disk('s3')->put($folderName, $file);
+            // dd($result);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

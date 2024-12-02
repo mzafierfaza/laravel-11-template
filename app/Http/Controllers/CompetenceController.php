@@ -67,7 +67,7 @@ class CompetenceController extends Controller
             'canDelete'        => $user->can('Competences Hapus'),
             'canImportExcel'   => $user->can('Order Impor Excel') && $this->importable,
             'canExport'        => $user->can('Order Ekspor') && $this->exportable,
-            'title'            => __('Competences'),
+            'title'            => __('Kompetensi'),
             'routeCreate'      => route('competences.create'),
             'routePdf'         => route('competences.pdf'),
             'routePrint'       => route('competences.print'),
@@ -76,7 +76,26 @@ class CompetenceController extends Controller
             'routeJson'        => route('competences.json'),
             'routeImportExcel' => route('competences.import-excel'),
             'excelExampleLink' => route('competences.import-excel-example'),
+            'canApprove'       => $user->canApprove(),
+            'canBypass'       => $user->canBypass(),
         ]);
+    }
+
+    public function approve(Competence $competence, Request $request)
+    {
+        $old = $competence;
+        $competence->approved_at = now();
+        $competence->approved_status = $request->get('approved_status');
+        $competence->approved_by = auth()->user()->id;
+        $competence->save();
+        $successMessage = "Berhasil reject peserta";
+
+        if ($request->get('approved_status') == 1) {
+            $successMessage = "Berhasil approve user ";
+        }
+
+        logUpdate("Approve Users", $old, $competence);
+        return redirect()->back()->with('successMessage', $successMessage);
     }
 
     public function create()
@@ -105,30 +124,31 @@ class CompetenceController extends Controller
             'end_date',
             'description',
             'benefit',
+            'level',
             'image',
             'certificate',
         ]);
 
         // gunakan jika ada file
+        // dd($request->hasFile('image'));
         if ($request->hasFile('image')) {
             $file = $request->file(key: 'image');
-            $upload = $this->fileService->uploadMinio($file, 'competence/images/');
+            $upload = $this->fileService->uploadMinio($file, 'competences/images/');
             if ($upload) {
                 $res = $upload->getData();
                 $data['image'] = $res->url;
             }
         }
+        // dd($data);
 
         if ($request->hasFile('certificate')) {
             $file = $request->file(key: 'certificate');
-            $upload = $this->fileService->uploadMinio($file, 'competence/certificates/');
+            $upload = $this->fileService->uploadMinio($file, 'competences/certificates/');
             if ($upload) {
                 $res = $upload->getData();
                 $data['certificate'] = $res->url;
             }
         }
-
-
 
         $data["created_by"] = auth()->user()->id;
         $data["approved_status"] = 0;
@@ -172,16 +192,33 @@ class CompetenceController extends Controller
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * showing edit page
-     *
-     * @param Competence $competence
-     * @return Response
-     */
+
+    public function show(Competence $competence)
+    {
+        $user = auth()->user();
+        $enrollments = $competence->enrollments()->get();
+        $competence_courses = $competence->courses()->orderBy('order')->get();
+
+        return view('stisla.competences.show', [
+            'competence' => $competence,
+            'competence_courses' => $competence_courses,
+            'enrollmentsCounts' => $enrollments->count(),
+            'coursesCounts' => $competence_courses->count(),
+            'isAjaxYajra' => true,
+            'routeCreateCourses' => route(name: 'competence-courses.create', parameters: ['competence_id' => $competence->id]),
+            'routeIndex'    => route(name: 'competences.index'),
+            'fullTitle'     => $competence->title,
+            'title' => 'Kompetensi'
+        ]);
+    }
+
     public function edit(Competence $competence)
     {
+        $trainings = $this->courseRepository->getAll();
+
         return view('stisla.competences.form', [
             'd'             => $competence,
+            'trainings' => $trainings,
             'title'         => __('Competences'),
             'fullTitle'     => __('Ubah Competences'),
             'routeIndex'    => route('competences.index'),
@@ -189,27 +226,46 @@ class CompetenceController extends Controller
         ]);
     }
 
-    /**
-     * update data to db
-     *
-     * @param CompetenceRequest $request
-     * @param Competence $competence
-     * @return Response
-     */
     public function update(CompetenceRequest $request, Competence $competence)
     {
         $data = $request->only([
             'title',
             'level',
-            'certificate',
-            'certificate_can_download',
+            'start_date',
+            'end_date',
+            'description',
+            'benefit',
             'image',
+            'certificate',
         ]);
 
         // gunakan jika ada file
         // if ($request->hasFile('file')) {
         //     $data['file'] = $this->fileService->methodName($request->file('file'));
         // }
+        $data["approved_status"] = 0;
+
+        // gunakan jika ada file
+        // dd($request->hasFile('image'));
+        if ($request->hasFile('image')) {
+            $file = $request->file(key: 'image');
+            $upload = $this->fileService->uploadMinio($file, 'competences/images/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['image'] = $res->url;
+            }
+        }
+        // dd($data);
+
+        if ($request->hasFile('certificate')) {
+            $file = $request->file(key: 'certificate');
+            $upload = $this->fileService->uploadMinio($file, 'competences/certificates/');
+            if ($upload) {
+                $res = $upload->getData();
+                $data['certificate'] = $res->url;
+            }
+        }
+
 
         $newData = $this->competenceRepository->update($data, $competence->id);
 
@@ -231,12 +287,6 @@ class CompetenceController extends Controller
         return redirect()->back()->with('successMessage', $successMessage);
     }
 
-    /**
-     * delete user from db
-     *
-     * @param Competence $competence
-     * @return Response
-     */
     public function destroy(Competence $competence)
     {
         // delete file from storage if exists

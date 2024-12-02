@@ -9,18 +9,8 @@ class Competence extends Model
 {
   use HasFactory;
 
-  /**
-   * The table associated with the model.
-   *
-   * @var string
-   */
   protected $table = 'competences';
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
   protected $fillable = [
     'title',
     'level',
@@ -33,36 +23,57 @@ class Competence extends Model
     'is_random_course',
     'image',
     'status',
+    'is_forever',
     'approved_status',
     'approved_at',
     'approved_by',
   ];
 
-  /**
-   * The attributes that should be cast to native types.
-   *
-   * @var array
-   */
   protected $casts = [];
 
-  /**
-   * Indicates if the model should be timestamped.
-   *
-   * @var bool
-   */
   public $timestamps = true;
 
-  /**
-   * some columns model type
-   *
-   * @var array
-   */
   const TYPES = [];
 
-  /**
-   * Default with relationship
-   *
-   * @var array
-   */
   protected $with = [];
+
+  public function enrollments()
+  {
+    return $this->hasMany(Enrollment::class);
+  }
+
+  public function courses()
+  {
+    return $this->hasMany(CompetenceCourse::class);
+  }
+
+  public function countEnrollments()
+  {
+    return $this->enrollments()->count();
+  }
+
+  public function getImage()
+  {
+    $url = config('app.minio_url') . '/' . config('app.minio_bucket') . '/';
+
+    return $url . $this->image;
+  }
+  public function getDocument()
+  {
+    $url = config('app.minio_url') . '/' . config('app.minio_bucket') . '/';
+
+    return $url . $this->certificate;
+  }
+
+  public function periode()
+  {
+    if ($this->start_date == null || $this->end_date == null) {
+      return "Belum di setting";
+    }
+    // make periode with $this->start_date and $this->end_date
+    $start = date('d F Y', strtotime($this->start_date));
+    $end = date('d F Y', strtotime($this->end_date));
+
+    return $start . ' - ' . $end;
+  }
 }

@@ -112,7 +112,7 @@
           @foreach ($data as $item)
           <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $item->first_name . ' ' . $item->last_name }}</td>
+            <td>{{ $item->getName() }}</td>
             <td>{{ $item->email }}</td>
             <td>{{ $item->role->name ?? '-' }}</td>
             <td>{{ $item->role->group->name ?? '-' }}</td>

@@ -14,7 +14,7 @@ class CompetenceCourse extends Model
   protected $fillable = [
     'competence_id',
     'course_id',
-    'urutan',
+    'order',
   ];
 
   protected $casts = [];
@@ -22,4 +22,9 @@ class CompetenceCourse extends Model
 
   const TYPES = [];
   protected $with = [];
+
+  public function course()
+  {
+    return $this->belongsTo(Course::class);
+  }
 }

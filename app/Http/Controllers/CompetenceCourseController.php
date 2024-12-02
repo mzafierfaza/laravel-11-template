@@ -19,60 +19,19 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class CompetenceCourseController extends Controller
 {
-    /**
-     * competenceCourseRepository
-     *
-     * @var CompetenceCourseRepository
-     */
     private CompetenceCourseRepository $competenceCourseRepository;
 
-    /**
-     * NotificationRepository
-     *
-     * @var NotificationRepository
-     */
     private NotificationRepository $NotificationRepository;
 
-    /**
-     * UserRepository
-     *
-     * @var UserRepository
-     */
     private UserRepository $UserRepository;
 
-    /**
-     * file service
-     *
-     * @var FileService
-     */
     private FileService $fileService;
-
-    /**
-     * email service
-     *
-     * @var FileService
-     */
     private EmailService $emailService;
-    
-    /**
-     * exportable
-     *
-     * @var bool
-     */
+
     private bool $exportable = false;
 
-    /**
-     * importable
-     *
-     * @var bool
-     */
     private bool $importable = false;
 
-    /**
-     * constructor method
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->competenceCourseRepository      = new CompetenceCourseRepository;
@@ -115,41 +74,33 @@ class CompetenceCourseController extends Controller
             'excelExampleLink' => route('competence-courses.import-excel-example'),
         ]);
     }
-
-    /**
-     * showing add new data form page
-     *
-     * @return Response
-     */
     public function create()
     {
+        $competence_id = request('competence_id');
+        // dd($competence_id);
+        $courses = $this->competenceCourseRepository->getAllExcept($competence_id);
+
         return view('stisla.competence-courses.form', [
             'title'         => __('Competence Courses'),
+            'competence_id' => $competence_id,
+            'courses' => $courses,
             'fullTitle'     => __('Tambah Competence Courses'),
             'routeIndex'    => route('competence-courses.index'),
             'action'        => route('competence-courses.store')
         ]);
     }
 
-    /**
-     * save new data to db
-     *
-     * @param CompetenceCourseRequest $request
-     * @return Response
-     */
     public function store(CompetenceCourseRequest $request)
     {
-        $data = $request->only([
-			'competence_id',
-			'course_id',
-        ]);
-
-        // gunakan jika ada file
-        // if ($request->hasFile('file')) {
-        //     $data['file'] = $this->fileService->methodName($request->file('file'));
-        // }
-
-        $result = $this->competenceCourseRepository->create($data);
+        // $competence_id = $request->get('competence_id');
+        foreach ($request->courses as $c) {
+            $data = [
+                'course_id' => $c,
+                'competence_id' => $request->competence_id,
+            ];
+            $result = $this->competenceCourseRepository->create($data);
+            logCreate("Competence Courses", $result);
+        }
 
         // use this if you want to create notification data
         // $title = 'Notify Title';
@@ -163,7 +114,12 @@ class CompetenceCourseController extends Controller
         // gunakan jika mau kirim email
         // $this->emailService->methodName($result);
 
-        logCreate("Competence Courses", $result);
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'success menambahkan Trainings',
+            ]);
+        }
 
         $successMessage = successMessageCreate("Competence Courses");
         return redirect()->back()->with('successMessage', $successMessage);
@@ -196,8 +152,8 @@ class CompetenceCourseController extends Controller
     public function update(CompetenceCourseRequest $request, CompetenceCourse $competenceCourse)
     {
         $data = $request->only([
-			'competence_id',
-			'course_id',
+            'competence_id',
+            'course_id',
         ]);
 
         // gunakan jika ada file

@@ -23,17 +23,9 @@ class CompetenceCourseRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('put')) {
-            return [
-				'competence_id' => ["required"],
-				'course_id' => ["required"],
-
-            ];
-        }
         return [
-			'competence_id' => ["required"],
-			'course_id' => ["required"],
-
+            'competence_id' => [],
+            'course_id' => [],
         ];
     }
 }

@@ -3,12 +3,14 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\BackupDatabaseController;
 use App\Http\Controllers\CompetenceController;
+use App\Http\Controllers\CompetenceCourseController;
 use App\Http\Controllers\CoreGroupController;
 use App\Http\Controllers\CoreRoleController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CrudExampleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DropboxController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\GroupMenuController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MenuManagementController;
@@ -28,6 +30,8 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Middleware\FileManagerPermission;
+
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Route;
 
 # DASHBOARD
@@ -221,4 +225,23 @@ Route::get('competences/json', [CompetenceController::class, 'json'])->name('com
 Route::get('competences/excel', [CompetenceController::class, 'excel'])->name('competences.excel');
 Route::get('competences/import-excel-example', [CompetenceController::class, 'importExcelExample'])->name('competences.import-excel-example');
 Route::post('competences/import-excel', [CompetenceController::class, 'importExcel'])->name('competences.import-excel');
+Route::put('competence/{competence}/approve', [CompetenceController::class, 'approve'])->name('competence.approve');
 Route::resource('competences', CompetenceController::class);
+
+Route::get('enrollments/print', [EnrollmentController::class, 'exportPrint'])->name('enrollments.print');
+Route::get('enrollments/pdf', [EnrollmentController::class, 'pdf'])->name('enrollments.pdf');
+Route::get('enrollments/csv', [EnrollmentController::class, 'csv'])->name('enrollments.csv');
+Route::get('enrollments/json', [EnrollmentController::class, 'json'])->name('enrollments.json');
+Route::get('enrollments/excel', [EnrollmentController::class, 'excel'])->name('enrollments.excel');
+Route::get('enrollments/import-excel-example', [EnrollmentController::class, 'importExcelExample'])->name('enrollments.import-excel-example');
+Route::post('enrollments/import-excel', [EnrollmentController::class, 'importExcel'])->name('enrollments.import-excel');
+Route::resource('enrollments', EnrollmentController::class);
+
+Route::get('competence-courses/print', [CompetenceCourseController::class, 'exportPrint'])->name('competence-courses.print');
+Route::get('competence-courses/pdf', [CompetenceCourseController::class, 'pdf'])->name('competence-courses.pdf');
+Route::get('competence-courses/csv', [CompetenceCourseController::class, 'csv'])->name('competence-courses.csv');
+Route::get('competence-courses/json', [CompetenceCourseController::class, 'json'])->name('competence-courses.json');
+Route::get('competence-courses/excel', [CompetenceCourseController::class, 'excel'])->name('competence-courses.excel');
+Route::get('competence-courses/import-excel-example', [CompetenceCourseController::class, 'importExcelExample'])->name('competence-courses.import-excel-example');
+Route::post('competence-courses/import-excel', [CompetenceCourseController::class, 'importExcel'])->name('competence-courses.import-excel');
+Route::resource('competence-courses', CompetenceCourseController::class);

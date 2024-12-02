@@ -15,14 +15,17 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
         using: function () {
-            Route::prefix('api')
-                ->middleware([OverrideConfig::class, 'api', LogRequestMiddleware::class,  EnsureAppKey::class,])
-                ->group(base_path('routes/api.php'));
+            // Route::prefix('api')
+            //     ->middleware([OverrideConfig::class, 'api', LogRequestMiddleware::class,  EnsureAppKey::class,])
+            //     ->group(base_path('routes/api.php'));
 
             Route::middleware([OverrideConfig::class, 'web', LogRequestMiddleware::class,  ViewShare::class,])
                 ->group(base_path('routes/stisla-web.php'));
 
-            Route::middleware([OverrideConfig::class, 'web', LogRequestMiddleware::class, ViewShare::class, 'auth',])
+            // Route::middleware([OverrideConfig::class, 'web', LogRequestMiddleware::class, ViewShare::class, 'auth',])
+            //     ->group(base_path('routes/stisla-web-auth.php'));
+
+            Route::middleware(['web', LogRequestMiddleware::class, ViewShare::class, 'auth',])
                 ->group(base_path('routes/stisla-web-auth.php'));
         }
     )

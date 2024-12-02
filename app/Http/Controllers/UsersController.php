@@ -176,7 +176,7 @@ class UsersController extends Controller
 
         $now = Carbon::now();
         $session_id = StringHelper::generateRandomString(length: 16);
-        $url = config('app.url_lms') . '/confirm-password?session_id=' . $session_id;
+        $url = config('app.url_lms') . '/create-password?session=' . $session_id;
 
         $registerLog = [
             'user_id' => $users->id,
@@ -264,12 +264,6 @@ class UsersController extends Controller
         logUpdate("Approve Users", $old, $users);
         return redirect()->back()->with('successMessage', $successMessage);
     }
-    // public function reject(Users $users)
-    // {
-    //     $users->approved_at = now();
-    //     $users->approved_status = 2;
-    //     $users->save();
-    // }
 
     public function update(UsersRequest $request, Users $users)
     {

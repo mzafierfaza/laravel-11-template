@@ -57,7 +57,7 @@
                         @foreach ($babs as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $loop->order ?? '-' }}</td>
+                            <td>{{ $item->order ?? '-' }}</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->countText() }}</td>
                             <td>{{ $item->countVideo() }}</td>

@@ -25,6 +25,7 @@ class CreateCompetenceTable extends Migration
             $table->boolean('certificate_can_download')->default(false);
             $table->string('image', 191)->nullable();
             $table->boolean('status')->nullable()->default(true);
+            $table->boolean('is_forever')->nullable()->default(true);
             $table->integer(('approved_status'))->nullable()->default(0);
             $table->timestamp('approved_at')->nullable();
             $table->foreignId('approved_by')->nullable()->constrained('dashin_users');

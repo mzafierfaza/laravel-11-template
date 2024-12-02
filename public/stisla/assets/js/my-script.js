@@ -893,8 +893,8 @@ function onSubmitForm(e) {
       console.log(response);
       $('#modalForm').find('button[type="submit"]').attr('disabled', false).html('Simpan');
       successMsg(response.data.message).then(function () {
-        // window.location.reload();
         if ($('#isAjaxYajra').val() === '1') {
+          window.location.reload();
           setTimeout(function () {
             reloadDataTable();
           }, 1000);

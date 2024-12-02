@@ -47,9 +47,9 @@ This is a info alert.
             <div class="col-md-4">
               @include('stisla.includes.forms.selects.select2', ['required'=>true, 'id'=>'format', 'name'=>'format', 'label'=>__('Level'),
               'options'=>[
-              "begineer" => "Begineer",
-              "intermediate" => "Intermediate",
-              "advance" => "Advance"
+              "Begineer" => "Begineer",
+              "Intermediate" => "Intermediate",
+              "Advance" => "Advance"
               ],
               'multiple'=>false])
             </div>
@@ -77,16 +77,19 @@ This is a info alert.
               Setting
             </div>
 
+            @if (!isset($d))
             <div class="col-md-12">
               @include('stisla.includes.forms.selects.select2', ['required'=>true, 'id'=>'courses', 'name'=>'courses', 'label'=>__('Training'),
               'options'=>$trainings,
               'multiple'=>true])
             </div>
+
             <div class="col-md-12">
               @include('stisla.includes.forms.selects.select2', ['required'=>true, 'id'=>'persons', 'name'=>'persons', 'label'=>__('Peserta'),
               'options'=>$persons,
               'multiple'=>true])
             </div>
+            @endif
 
             <div class="col-md-6">
               @include('stisla.includes.forms.inputs.input', ['name' => 'image', 'type' => 'file', 'label' => 'Cover Image', 'accept' => '*'])
